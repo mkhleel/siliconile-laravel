@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Block access to admin area
+Disallow: /admin/
+Disallow: /admin
+Disallow: /api/admin/
+
+# Block common sensitive paths
+Disallow: /login
+Disallow: /dashboard
+Disallow: /.well-known/
+Disallow: /api/
+
+# Allow important pages
+Allow: /
+Allow: /about
+Allow: /contact
+Allow: /events
+Allow: /programs
+Allow: /startups
+
+Sitemap: https://siliconile.com/sitemap.xml

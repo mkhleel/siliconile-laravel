@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programs | Siliconile</title>
+  <meta name="description" content="Discover Siliconile's comprehensive startup incubation and acceleration programs.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="assets/js/app.js"></script>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+  <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur" x-data="mobileMenu">
+    <div class="container flex h-16 items-center justify-between px-4 md:px-6">
+      <a href="index.html"><img src="assets/images/logo.svg" alt="Siliconile Logo" class="h-12 w-auto"></a>
+      <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+        <a href="index.html" class="hover:text-primary transition-colors">Home</a>
+        <a href="about.html" class="hover:text-primary transition-colors">About</a>
+        <a href="programs.html" class="hover:text-primary transition-colors">Programs</a>
+        <a href="startups.html" class="hover:text-primary transition-colors">Startups</a>
+        <a href="events.html" class="hover:text-primary transition-colors">Events</a>
+        <a href="co-working.html" class="hover:text-primary transition-colors">Co-working space</a>
+        <a href="contact.html" class="hover:text-primary transition-colors">Contact</a>
+      </nav>
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="contact.html" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">Apply Now</a>
+        <a href="contact.html" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-9 rounded-md px-3">Join Community</a>
+      </div>
+      <button @click="toggle" class="md:hidden inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground h-10 w-10">
+        <svg x-show="!isOpen" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg x-show="isOpen" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div x-show="isOpen" class="md:hidden border-t bg-background">
+      <nav class="flex flex-col space-y-2 p-4">
+        <a href="index.html" @click="close" class="block py-2 hover:text-primary transition-colors">Home</a>
+        <a href="about.html" @click="close" class="block py-2 hover:text-primary transition-colors">About</a>
+        <a href="programs.html" @click="close" class="block py-2 hover:text-primary transition-colors">Programs</a>
+        <a href="startups.html" @click="close" class="block py-2 hover:text-primary transition-colors">Startups</a>
+        <a href="events.html" @click="close" class="block py-2 hover:text-primary transition-colors">Events</a>
+        <a href="co-working.html" @click="close" class="block py-2 hover:text-primary transition-colors">Co-working space</a>
+        <a href="contact.html" @click="close" class="block py-2 hover:text-primary transition-colors">Contact</a>
+        <div class="flex flex-col space-y-2 pt-4">
+          <a href="contact.html" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">Apply Now</a>
+          <a href="contact.html" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-9 rounded-md px-3">Join Community</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main class="flex-1">
+    <section class="py-20 md:py-32 bg-gradient-to-br from-primary/5 to-secondary/10">
+      <div class="container px-4 md:px-6">
+        <div class="max-w-4xl mx-auto text-center space-y-8">
+          <h1 class="text-4xl md:text-6xl font-bold tracking-tight">Our <span class="text-primary">Programs</span></h1>
+          <p class="text-xl md:text-2xl text-muted-foreground">Comprehensive support programs designed to take your startup from idea to scale, with world-class resources and expert guidance every step of the way.</p>
+        </div>
+      </div>
+    </section>
+    <section class="py-20 md:py-32">
+      <div class="container px-4 md:px-6">
+        <div class="space-y-20">
+          <div class="grid gap-8 lg:grid-cols-2 items-center">
+            <div class="space-y-6">
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <div class="text-primary font-semibold text-sm uppercase tracking-wide">Flagship Program</div>
+              </div>
+              <h2 class="text-3xl md:text-4xl font-bold">Startup Incubation Program</h2>
+              <p class="text-lg text-muted-foreground">Our flagship 6-month intensive program for early-stage startups. Get everything you need to validate your idea, build your MVP, and secure your first customers.</p>
+              <div class="space-y-2">
+                <h3 class="text-xl font-semibold">What You Get:</h3>
+                <ul class="space-y-2">
+                  <li class="flex items-center space-x-3"><svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Dedicated office space for 6 months</span></li>
+                  <li class="flex items-center space-x-3"><svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>$10,000 seed funding</span></li>
+                  <li class="flex items-center space-x-3"><svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Weekly 1-on-1 mentorship sessions</span></li>
+                  <li class="flex items-center space-x-3"><svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Demo Day presentation to investors</span></li>
+                </ul>
+              </div>
+              <a href="contact.html" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-md px-8">Apply for Incubation</a>
+            </div>
+            <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-8 bg-gradient-to-br from-primary/5 to-secondary/10">
+              <h3 class="text-2xl font-bold mb-4">Success Stories</h3>
+              <div class="space-y-4">
+                <div><div class="font-semibold">TechFlow Solutions</div><div class="text-sm text-muted-foreground">Graduated 2023 • Raised $500K Series A</div></div>
+                <div><div class="font-semibold">EduTech Egypt</div><div class="text-sm text-muted-foreground">Graduated 2022 • Serving 10K+ students</div></div>
+                <div><div class="font-semibold">AgriSmart</div><div class="text-sm text-muted-foreground">Winner of Egypt Startup Awards 2024</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>  </main>
+  <footer class="border-t bg-muted/50">
+    <div class="container px-4 py-12 md:px-6">
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div class="space-y-4">
+          <a href="index.html"><img src="assets/images/logo.svg" alt="Siliconile Logo" class="h-12 w-auto"></a>
+          <p class="text-sm text-muted-foreground">Empowering Egypt's next generation of tech startups with innovative solutions, mentorship, and funding opportunities.</p>
+        </div>
+        <div class="space-y-4">
+          <h3 class="text-lg font-semibold">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="about.html" class="text-sm text-muted-foreground hover:text-primary transition-colors">About Us</a></li>
+            <li><a href="programs.html" class="text-sm text-muted-foreground hover:text-primary transition-colors">Programs</a></li>
+            <li><a href="startups.html" class="text-sm text-muted-foreground hover:text-primary transition-colors">Our Startups</a></li>
+            <li><a href="events.html" class="text-sm text-muted-foreground hover:text-primary transition-colors">Events</a></li>
+            <li><a href="contact.html" class="text-sm text-muted-foreground hover:text-primary transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        <div class="space-y-4">
+          <h3 class="text-lg font-semibold">Services</h3>
+          <ul class="space-y-2">
+            <li class="text-sm text-muted-foreground">Coworking Spaces</li>
+            <li class="text-sm text-muted-foreground">Startup Funding</li>
+            <li class="text-sm text-muted-foreground">Technical Support</li>
+            <li class="text-sm text-muted-foreground">Mentorship</li>
+            <li class="text-sm text-muted-foreground">Workshops & Training</li>
+          </ul>
+        </div>
+        <div class="space-y-4">
+          <h3 class="text-lg font-semibold">Contact Info</h3>
+          <div class="space-y-2">
+            <div class="flex items-center space-x-2 text-sm text-muted-foreground">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <span>Luxor, Egypt</span>
+            </div>
+            <div class="flex items-center space-x-2 text-sm text-muted-foreground">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              <span>info@siliconile.com</span>
+            </div>
+            <div class="flex items-center space-x-2 text-sm text-muted-foreground">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+              <span>+20 111 765 0004</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 border-t pt-8 text-center">
+        <p class="text-sm text-muted-foreground">© 2025 Siliconile. All rights reserved. Built with ❤️ in Egypt.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

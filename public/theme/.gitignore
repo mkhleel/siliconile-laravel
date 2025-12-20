@@ -1,0 +1,4 @@
+node_modules/
+package-lock.json
+create_pages.sh
+.DS_Store
