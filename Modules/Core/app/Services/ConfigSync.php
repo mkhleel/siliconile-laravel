@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Core\Services;
 
 use Nwidart\Modules\Facades\Module;
 use ReflectionClass;
 use ReflectionProperty;
-use Schema;
+use Illuminate\Support\Facades\Schema;
 use Spatie\LaravelSettings\Settings;
 
 class ConfigSync

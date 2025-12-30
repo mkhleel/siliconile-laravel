@@ -1,3 +1,8 @@
 {
-    "Core": true
+    "Core": true,
+    "Billing": true,
+    "Cms": true,
+    "Payment": true,
+    "Membership": true,
+    "SpaceBooking": true
 }

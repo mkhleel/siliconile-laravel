@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Core\Services;
 
 use GuzzleHttp\Client;
@@ -14,9 +16,9 @@ class CloudflareStreamService
 
     public function __construct()
     {
-        $this->client = new Client;
-        $this->accountId = config('services.cloudflare.account_id');
-        $this->apiToken = config('services.cloudflare.api_token');
+        $this->client = new Client();
+        $this->accountId = (string) config('services.cloudflare.account_id');
+        $this->apiToken = (string) config('services.cloudflare.api_token');
     }
 
     public function performVod(string $videoUriPath, $original_name = null): array

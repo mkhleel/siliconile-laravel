@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Core\Filament\Resources\Users\Schemas;
 
+use App\Enums\UserType;
 use App\Models\User;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
@@ -14,8 +17,6 @@ use Illuminate\Validation\Rules\Password;
 use Modules\Core\Models\Localization\Area;
 use Modules\Core\Models\Localization\City;
 use Modules\Core\Models\Localization\Country;
-use Modules\Institute\Concerns\UserTypes;
-use Modules\Institute\Models\Institute;
 
 class UserForm
 {
@@ -38,15 +39,14 @@ class UserForm
                                     ->email()
                                     ->required()
                                     ->unique(User::class, 'email', fn (?User $record) => $record),
-                                Select::make('type')->options(UserTypes::class),
+                                Select::make('type')
+                                    ->options(UserType::class)
+                                    ->native(false),
                                 TextInput::make('phone')
                                     ->required()
                                     ->label('Contact No.')
                                     ->tel()
                                     ->maxLength(255),
-                                Select::make('institute_id')
-                                    ->placeholder('Not associated with any institute')
-                                    ->options(Institute::pluck('name', 'id')),
                             ]),
                     ]),
                 Section::make('Authentication')
@@ -73,20 +73,20 @@ class UserForm
                             // ->label('Account Details')
                             ->schema([
                                 Select::make('country')
-                                    ->reactive()
+                                    ->live()
                                     ->dehydrated()
                                     ->options(Country::all()->pluck('name', 'id')->toArray())
                                     ->afterStateUpdated(fn (callable $set) => $set('parent_id', null))
                                     ->searchable(),
 
                                 Select::make('state_id')
-                                    ->reactive()
+                                    ->live()
                                     ->dehydrated()
                                     ->options(fn (callable $get) => City::whereCountryId($get('country'))?->pluck('name', 'id')->toArray())
                                     ->disabled(fn (callable $get) => ! $get('country')),
 
                                 Select::make('city_id')
-                                    ->reactive()
+                                    ->live()
                                     ->options(fn (callable $get) => Area::whereCityId($get('state_id'))?->pluck('name', 'id')->toArray())
                                     ->disabled(fn (callable $get) => ! $get('state_id')),
                                 TextInput::make('about_me')

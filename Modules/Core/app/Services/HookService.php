@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Core\Services;
 
 use Illuminate\Support\Collection;
@@ -7,6 +9,9 @@ use Illuminate\Support\Str;
 
 class HookService
 {
+    /**
+     * @var Collection<int, array{hook: string|array<string>, callback: callable, priority: int}>
+     */
     protected Collection $items;
 
     public function __construct()

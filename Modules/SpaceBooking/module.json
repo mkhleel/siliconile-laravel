@@ -1,0 +1,12 @@
+{
+    "name": "SpaceBooking",
+    "alias": "spacebooking",
+    "description": "Coworking space and resource booking module with conflict-free scheduling",
+    "keywords": ["booking", "rooms", "desks", "scheduling", "coworking"],
+    "priority": 0,
+    "providers": [
+        "Modules\\SpaceBooking\\Providers\\SpaceBookingServiceProvider",
+        "Modules\\SpaceBooking\\Providers\\EventServiceProvider"
+    ],
+    "files": []
+}

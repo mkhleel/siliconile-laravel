@@ -1,0 +1,28 @@
+{
+    "name": "modules/spacebooking",
+    "description": "Space Booking module for coworking space management",
+    "keywords": ["laravel", "module", "booking", "coworking"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Siliconile",
+            "email": "dev@siliconile.com"
+        }
+    ],
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\SpaceBooking\\Providers\\SpaceBookingServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\SpaceBooking\\": "app/",
+            "Modules\\SpaceBooking\\Database\\Factories\\": "database/factories/",
+            "Modules\\SpaceBooking\\Database\\Seeders\\": "database/seeders/"
+        }
+    }
+}
