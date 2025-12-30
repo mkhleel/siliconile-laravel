@@ -1,0 +1,44 @@
+{
+    "name": "tenchology/core",
+    "description": "",
+    "authors": [
+        {
+            "name": "Mahmoud Khalil",
+            "email": "info@tenchology.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "require": {
+        "filament/filament": "^4.0",
+        "filament/spatie-laravel-media-library-plugin": "^4.0",
+        "filament/spatie-laravel-settings-plugin": "^4.0",
+        "filament/spatie-laravel-tags-plugin": "^4.0",
+        "lara-zeus/spatie-translatable": "^1.0",
+        "stichoza/google-translate-php": "*",
+        "spatie/laravel-permission": "^6.18",
+        "prism-php/prism": "^0.82.0",
+        "calebporzio/sushi": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Core\\": "app/",
+            "Modules\\Core\\Database\\Factories\\": "database/factories/",
+            "Modules\\Core\\Database\\Seeders\\": "database/seeders/"
+        },
+        "files": [
+            "app/Helpers/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Core\\Tests\\": "tests/"
+        }
+    }
+}

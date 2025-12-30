@@ -1,0 +1,120 @@
+[
+    {
+        "id":"1",
+        "iso":"ar",
+        "name":"Arabic",
+        "created_at":null,
+        "updated_at":null,
+        "translations":"{\"en\":\"Arabic\",\"fr\":\"Arabe\",\"es\":\"Árabe\",\"de\":\"Arabisch\",\"it\":\"Arabo\",\"pt\":\"Árabe\",\"ru\":\"Арабский\",\"ja\":\"アラビア語\",\"zh\":\"阿拉伯语\",\"nl\":\"Arabisch\",\"pl\":\"arabski\",\"hi\":\"अरबी\",\"fa\":\"عربی\", \"ar\":\"العربية\"}",
+        "is_activated":"0"
+    },
+    {
+        "id":"2",
+        "iso":"en",
+        "name":"English",
+        "created_at":null,
+        "updated_at":null,
+        "translations":"{\"en\":\"English\",\"fr\":\"Anglais\",\"es\":\"Inglés\",\"de\":\"Englisch\",\"it\":\"Inglese\",\"pt\":\"Inglês\",\"ru\":\"Английский\",\"ja\":\"英語\",\"zh\":\"英语\",\"nl\":\"Engels\",\"pl\":\"angielski\",\"hi\":\"अंग्रेज़ी\",\"fa\":\"انگلیسی\"}",
+        "is_activated":"1"
+    },
+    {
+        "id":"3",
+        "iso":"fr",
+        "name":"French",
+        "created_at":null,
+        "updated_at":null,
+        "translations":"{\"en\":\"French\",\"fr\":\"Français\",\"es\":\"Francés\",\"de\":\"Französisch\",\"it\":\"Francese\",\"pt\":\"Francês\",\"ru\":\"Французский\",\"ja\":\"フランス語\",\"zh\":\"法语\",\"nl\":\"Frans\",\"pl\":\"francuski\",\"hi\":\"फ़्रांसीसी\",\"fa\":\"فرانسوی\", \"ar\":\"الفرنسية\"}",
+        "is_activated":"0"
+    },
+    {
+        "id":"4",
+        "iso":"es",
+        "name":"Spanish",
+        "created_at":null,
+        "updated_at":null,
+        "translations":"{\"en\":\"Spanish\",\"fr\":\"Espagnol\",\"es\":\"Español\",\"de\":\"Spanisch\",\"it\":\"Spagnolo\",\"pt\":\"Espanhol\",\"ru\":\"Испанский\",\"ja\":\"スペイン語\",\"zh\":\"西班牙语\",\"nl\":\"Spaans\",\"pl\":\"hiszpański\",\"hi\":\"स्पेनिश\",\"fa\":\"اسپانیایی\", \"ar\":\"الإسبانية\"}",
+        "is_activated":"0"
+    },
+    {
+        "id":"5",
+        "iso":"de",
+        "name":"German",
+        "created_at":null,
+        "updated_at":null,
+        "translations":"{\"en\":\"German\",\"fr\":\"Allemand\",\"es\":\"Alemán\",\"de\":\"Deutsch\",\"it\":\"Tedesco\",\"pt\":\"Alemão\",\"ru\":\"Немецкий\",\"ja\":\"ドイツ語\",\"zh\":\"德语\",\"nl\":\"Duits\",\"pl\":\"niemiecki\",\"hi\":\"जर्मन\",\"fa\":\"آلمانی\", \"ar\":\"الألمانية\"}",
+        "is_activated":"0"
+    },
+    {
+        "id":"6",
+        "iso":"it",
+        "name":"Italian",
+        "created_at":null,
+        "updated_at":null,
+        "translations":"{\"en\":\"Italian\",\"fr\":\"Italien\",\"es\":\"Italiano\",\"de\":\"Italienisch\",\"it\":\"Italiano\",\"pt\":\"Italiano\",\"ru\":\"Итальянский\",\"ja\":\"イタリア語\",\"zh\":\"意大利语\",\"nl\":\"Italiaans\",\"pl\":\"włoski\",\"hi\":\"इतालवी\",\"fa\":\"ایتالیایی\", \"ar\":\"الإيطالية\"}",
+        "is_activated":"0"
+    },
+    {
+        "id":"7",
+        "iso":"pt",
+        "name":"Portuguese",
+        "created_at":null,
+        "updated_at":null,
+        "translations":"{\"en\":\"Portuguese\",\"fr\":\"Portugais\",\"es\":\"Portugués\",\"de\":\"Portugiesisch\",\"it\":\"Portoghese\",\"pt\":\"Português\",\"ru\":\"Португальский\",\"ja\":\"ポルトガル語\",\"zh\":\"葡萄牙语\",\"nl\":\"Portugees\",\"pl\":\"portugalski\",\"hi\":\"पुर्तगाली\",\"fa\":\"پرتغالی\", \"ar\":\"البرتغالية\"}",
+        "is_activated":"0"
+    },
+    {
+        "id":"8",
+        "iso":"ru",
+        "name":"Russian",
+        "created_at":null,
+        "updated_at":null,
+        "translations":"{\"en\":\"Russian\",\"fr\":\"Russe\",\"es\":\"Ruso\",\"de\":\"Russisch\",\"it\":\"Russo\",\"pt\":\"Russo\",\"ru\":\"Русский\",\"ja\":\"ロシア語\",\"zh\":\"俄语\",\"nl\":\"Russisch\",\"pl\":\"rosyjski\",\"hi\":\"रूसी\",\"fa\":\"روسی\", \"ar\":\"الروسية\"}",
+        "is_activated":"0"
+    },
+    {
+        "id":"9",
+        "iso":"ja",
+        "name":"Japanese",
+        "created_at":null,
+        "updated_at":null,
+        "translations":"{\"en\":\"Japanese\",\"fr\":\"Japonais\",\"es\":\"Japonés\",\"de\":\"Japanisch\",\"it\":\"Giapponese\",\"pt\":\"Japonês\",\"ru\":\"Японский\",\"ja\":\"日本語\",\"zh\":\"日语\",\"nl\":\"Japans\",\"pl\":\"japoński\",\"hi\":\"जापानी\",\"fa\":\"ژاپنی\", \"ar\":\"اليابانية\"}",
+        "is_activated":"0"
+    },
+    {
+        "id":"10",
+        "iso":"zh",
+        "name":"Chinese",
+        "created_at":null,
+        "updated_at":null,
+        "translations":"{\"en\":\"Chinese\",\"fr\":\"Chinois\",\"es\":\"Chino\",\"de\":\"Chinesisch\",\"it\":\"Cinese\",\"pt\":\"Chinês\",\"ru\":\"Китайский\",\"ja\":\"中国語\",\"zh\":\"中文\",\"nl\":\"Chinees\",\"pl\":\"chiński\",\"hi\":\"चीनी\",\"fa\":\"چینی\", \"ar\":\"الصينية\"}",
+        "is_activated":"0"
+    },
+    {
+        "id":"11",
+        "iso":"nl",
+        "name":"Dutch",
+        "created_at":null,
+        "updated_at":null,
+        "translations":"{\"en\":\"Dutch\",\"fr\":\"Néerlandais\",\"es\":\"Holandés\",\"de\":\"Niederländisch\",\"it\":\"Olandese\",\"pt\":\"Holandês\",\"ru\":\"Голландский\",\"ja\":\"オランダ語\",\"zh\":\"荷兰语\",\"nl\":\"Nederlands\",\"pl\":\"holenderski\",\"hi\":\"डच\",\"fa\":\"هلندی\", \"ar\":\"الهولندية\"}",
+        "is_activated":"0"
+    },
+    {
+        "id":"12",
+        "iso":"pl",
+        "name":"Polish",
+        "created_at":null,
+        "updated_at":null,
+        "translations":"{\"en\":\"Polish\",\"fr\":\"Polonais\",\"es\":\"Polaco\",\"de\":\"Polnisch\",\"it\":\"Polacco\",\"pt\":\"Polonês\",\"ru\":\"Польский\",\"ja\":\"ポーランド語\",\"zh\":\"波兰语\",\"nl\":\"Pools\",\"pl\":\"polski\",\"hi\":\"पोलिश\",\"fa\":\"لهستانی\", \"ar\":\"البولندية\"}",
+        "is_activated":"0"
+    },
+    {
+        "id":"13",
+        "iso":"tr",
+        "name":"Turkish",
+        "created_at":null,
+        "updated_at":null,
+        "translations":"{\"en\":\"Turkish\",\"fr\":\"Turc\",\"es\":\"Turco\",\"de\":\"Türkisch\",\"it\":\"Turco\",\"pt\":\"Turco\",\"ru\":\"Турецкий\",\"ja\":\"トルコ語\",\"zh\":\"土耳其语\",\"nl\":\"Turks\",\"pl\":\"turecki\",\"hi\":\"तुर्की\",\"fa\":\"ترکی\", \"ar\":\"التركية\"}",
+        "is_activated":"0"
+    }
+
+]

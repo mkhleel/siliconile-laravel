@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Siliconile | Empowering Egypt\'s Next Generation of Tech Startups' }}</title>
-    <meta name="description" content="{{ $description ?? 'Leading startup incubator in Luxor, Egypt. We provide coworking spaces, funding, technical support, mentorship, and workshops to help tech startups grow and succeed.' }}">
-    <meta name="keywords" content="{{ $keywords ?? 'startup incubator, Egypt, Luxor, tech startups, coworking, funding, mentorship' }}">
+    {{-- SEO Meta Tags --}}
+    <x-seo-meta 
+        :title="$title ?? null"
+        :description="$description ?? null"
+        :keywords="$keywords ?? null"
+        :image="$image ?? null"
+        :canonical="$canonical ?? null"
+        :type="$type ?? 'website'"
+        :noindex="$noindex ?? false"
+    />
+    
+    {{-- JSON-LD Structured Data --}}
+    <x-schema-org :schemas="$schemas ?? []" />
+    
     <link rel="icon" type="image/svg+xml" href="{{ asset('theme/assets/images/favicon.svg') }}">
     
     @vite(['resources/css/theme.css', 'resources/js/theme.js'])

@@ -10,11 +10,21 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "calebporzio/sushi": "*",
+        "filament/filament": "^4.0",
+        "filament/spatie-laravel-media-library-plugin": "^4.0",
+        "filament/spatie-laravel-settings-plugin": "^4.0",
+        "filament/spatie-laravel-tags-plugin": "^4.0",
+        "lara-zeus/spatie-translatable": "^1.0",
         "laravel/fortify": "^1.30",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "livewire/flux": "^2.9.0",
-        "livewire/volt": "^1.7.0"
+        "livewire/volt": "^1.7.0",
+        "nwidart/laravel-modules": "^12.0",
+        "prism-php/prism": "^0.82.0",
+        "spatie/laravel-permission": "^6.18",
+        "stichoza/google-translate-php": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -77,6 +87,11 @@
     "extra": {
         "laravel": {
             "dont-discover": []
+        },
+        "merge-plugin": {
+            "include": [
+                "Modules/*/composer.json"
+            ]
         }
     },
     "config": {
@@ -85,7 +100,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "wikimedia/composer-merge-plugin": true
         }
     },
     "minimum-stability": "stable",

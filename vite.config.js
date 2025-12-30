@@ -11,7 +11,8 @@ export default defineConfig({
                 'resources/css/app.css', 
                 'resources/js/app.js',
                 'resources/css/theme.css', 
-                'resources/js/theme.js'
+                'resources/js/theme.js',
+                'resources/css/filament/admin/theme.css'
             ],
             refresh: true,
         }),

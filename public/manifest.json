@@ -1,0 +1,36 @@
+{
+  "name": "Siliconile",
+  "short_name": "Siliconile",
+  "description": "Technological Business Incubator & Software Development Hub in Luxor.",
+  "start_url": "/",
+  "id": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#005582",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": [
+    "business",
+    "technology",
+    "productivity"
+  ],
+  "lang": "en-US",
+  "dir": "ltr"
+}

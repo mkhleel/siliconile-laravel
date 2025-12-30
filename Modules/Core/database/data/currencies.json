@@ -1,0 +1,111 @@
+[
+    {
+        "id":"1",
+        "name":"Ryal Saudi",
+        "iso":"SAR",
+        "created_at":null,
+        "updated_at":null,
+        "exchange_rate":null,
+        "symbol":"﷼",
+        "position":"after",
+        "translations":"{\"en\":\"\",\"fr\":\"Riyal saoudien\",\"es\":\"Riyal saudí\",\"de\":\"Saudi-Riyal\",\"it\":\"Riyal saudita\",\"pt\":\"Riyal saudita\",\"ru\":\"Саудовский риял\",\"ja\":\"サウジリヤル\",\"zh\":\"沙特里亚尔\",\"nl\":\"Saoedi-Riyal\",\"pl\":\"Rial saudyjski\",\"hi\":\"सऊदी रियाल\",\"fa\":\"ریال سعودی\"}",
+        "is_activated":"1"
+    },
+    {
+        "id":"2",
+        "name":"United States Dollar",
+        "iso":"USD",
+        "created_at":null,
+        "updated_at":null,
+        "exchange_rate":null,
+        "symbol":"$",
+        "position":"before",
+        "translations":"{\"en\":\"United States Dollar\",\"fr\":\"Dollar américain\",\"es\":\"Dólar estadounidense\",\"de\":\"US-Dollar\",\"it\":\"Dollaro statunitense\",\"pt\":\"Dólar americano\",\"ru\":\"Доллар США\",\"ja\":\"アメリカドル\",\"zh\":\"美元\",\"nl\":\"Amerikaanse dollar\",\"pl\":\"Dolar amerykański\",\"hi\":\"संयुक्त राज्य अमेरिकी डॉलर\",\"fa\":\"دلار ایالات متحده\"}",
+        "is_activated":"1"
+    },
+    {
+        "id":"3",
+        "name":"Euro",
+        "iso":"EUR",
+        "created_at":null,
+        "updated_at":null,
+        "exchange_rate":null,
+        "symbol":"€",
+        "position":"after",
+        "translations":"{\"en\":\"Euro\",\"fr\":\"Euro\",\"es\":\"Euro\",\"de\":\"Euro\",\"it\":\"Euro\",\"pt\":\"Euro\",\"ru\":\"Евро\",\"ja\":\"ユーロ\",\"zh\":\"欧元\",\"nl\":\"Euro\",\"pl\":\"Euro\",\"hi\":\"यूरो\",\"fa\":\"یورو\"}",
+        "is_activated":"1"
+    },
+    {
+        "id":"4",
+        "name":"British Pound",
+        "iso":"GBP",
+        "created_at":null,
+        "updated_at":null,
+        "exchange_rate":null,
+        "symbol":"£",
+        "position":"before",
+        "translations":"{\"en\":\"British Pound\",\"fr\":\"Livre sterling\",\"es\":\"Libra esterlina\",\"de\":\"Britisches Pfund\",\"it\":\"Sterlina britannica\",\"pt\":\"Libra esterlina\",\"ru\":\"Фунт стерлингов\",\"ja\":\"英国ポンド\",\"zh\":\"英镑\",\"nl\":\"Britse pond\",\"pl\":\"Funt szterling\",\"hi\":\"ब्रिटिश पाउंड\",\"fa\":\"پوند بریتانیا\"}",
+        "is_activated":"1"
+    },
+    {
+        "id":"5",
+        "name":"Japanese Yen",
+        "iso":"JPY",
+        "created_at":null,
+        "updated_at":null,
+        "exchange_rate":null,
+        "symbol":"¥",
+        "position":"before",
+        "translations":"{\"en\":\"Japanese Yen\",\"fr\":\"Yen japonais\",\"es\":\"Yen japonés\",\"de\":\"Japanischer Yen\",\"it\":\"Yen giapponese\",\"pt\":\"Iene japonês\",\"ru\":\"Японская иена\",\"ja\":\"日本円\",\"zh\":\"日元\",\"nl\":\"Japanse Yen\",\"pl\":\"Jen japoński\",\"hi\":\"जापानी येन\",\"fa\":\"ین ژاپنی\"}",
+        "is_activated":"1"
+    },
+    {
+        "id":"6",
+        "name":"Australian Dollar",
+        "iso":"AUD",
+        "created_at":null,
+        "updated_at":null,
+        "exchange_rate":null,
+        "symbol":"$",
+        "position":"before",
+        "translations":"{\"en\":\"Australian Dollar\",\"fr\":\"Dollar australien\",\"es\":\"Dólar australiano\",\"de\":\"Australischer Dollar\",\"it\":\"Dollaro australiano\",\"pt\":\"Dólar australiano\",\"ru\":\"Австралийский доллар\",\"ja\":\"オーストラリアドル\",\"zh\":\"澳大利亚元\",\"nl\":\"Australische dollar\",\"pl\":\"Dolar australijski\",\"hi\":\"ऑस्ट्रेलियाई डॉलर\",\"fa\":\"دلار استرالیا\"}",
+        "is_activated":"1"
+    },
+    {
+        "id":"7",
+        "name":"Canadian Dollar",
+        "iso":"CAD",
+        "created_at":null,
+        "updated_at":null,
+        "exchange_rate":null,
+        "symbol":"$",
+        "position":"before",
+        "translations":"{\"en\":\"Canadian Dollar\",\"fr\":\"Dollar canadien\",\"es\":\"Dólar canadiense\",\"de\":\"Kanadischer Dollar\",\"it\":\"Dollaro canadese\",\"pt\":\"Dólar canadense\",\"ru\":\"Канадский доллар\",\"ja\":\"カナダドル\",\"zh\":\"加拿大元\",\"nl\":\"Canadese dollar\",\"pl\":\"Dolar kanadyjski\",\"hi\":\"कनेडियन डॉलर\",\"fa\":\"دلار کانادا\"}",
+        "is_activated":"1"
+    },
+    {
+        "id":"8",
+        "name":"Swiss Franc",
+        "iso":"CHF",
+        "created_at":null,
+        "updated_at":null,
+        "exchange_rate":null,
+        "symbol":"₣",
+        "position":"before",
+        "translations":"{\"en\":\"Swiss Franc\",\"fr\":\"Franc suisse\",\"es\":\"Franco suizo\",\"de\":\"Schweizer Franken\",\"it\":\"Franco svizzero\",\"pt\":\"Franco suíço\",\"ru\":\"Швейцарский франк\",\"ja\":\"スイスフラン\",\"zh\":\"瑞士法郎\",\"nl\":\"Zwitserse frank\",\"pl\":\"Frank szwajcarski\",\"hi\":\"स्विस फ्रैंक\",\"fa\":\"فرانک سوئیس\"}",
+        "is_activated":"1"
+    },
+    {
+        "id":"9",
+        "name":"Chinese Yuan",
+        "iso":"CNY",
+        "created_at":null,
+        "updated_at":null,
+        "exchange_rate":null,
+        "symbol":"¥",
+        "position":"before",
+        "translations":"{\"en\":\"Chinese Yuan\",\"fr\":\"Yuan chinois\",\"es\":\"Yuan chino\",\"de\":\"Chinesischer Yuan\",\"it\":\"Yuan cinese\",\"pt\":\"Yuan chinês\",\"ru\":\"Китайский юань\",\"ja\":\"中国元\",\"zh\":\"人民币\",\"nl\":\"Chinese Yuan\",\"pl\":\"Juan chiński\",\"hi\":\"चीनी युआन\",\"fa\":\"یوان چین\"}",
+        "is_activated":"1"
+    }
+]
+
