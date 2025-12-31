@@ -5,7 +5,7 @@ return [
 
     'localization' => [
         'base_currency' => env('APP_BASE_CURRENCY', 'USD'),
-        'preferred_currency' => env('APP_PREFERRED_CURRENCY', 'SAR'),
+        'preferred_currency' => env('APP_PREFERRED_CURRENCY', 'EGP'),
         'languages' => explode(',', env('APP_LOCALIZATION_LANGUAGES', 'en')),
         'driver' => env('APP_LOCALIZATION_DRIVER', 'json'),
     ],

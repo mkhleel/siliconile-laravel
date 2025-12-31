@@ -16,10 +16,10 @@ readonly class CurrencyService
     public function formatPrice(float $amount, string $fromCurrency = 'USD'): HtmlString|string
     {
         $fromCurrency = generalSetting()->currency ?? config('core.localization.base_currency') ?? $fromCurrency;
-        
+
         // Use currentCurrency() helper which checks session for user preference first
         $targetCurrency = currentCurrency();
-        
+
         $convertedAmount = $this->convertCurrency(
             $amount,
             $fromCurrency,
@@ -41,7 +41,7 @@ readonly class CurrencyService
             return null;
         }
 
-        return ($amount / $rates[$toCurrency]['crate']);
+        return $amount / $rates[$toCurrency]['crate'];
     }
 
     /**
@@ -54,8 +54,8 @@ readonly class CurrencyService
     public function format(float $amount, string $currency): HtmlString|string
     {
         $format = Currency::where('iso', $currency)->first();
-        
-        if ($currency === 'SAR') {
+
+        if ($currency === 'EGP') {
             $format->symbol = '<svg class="inline-block w-5 h-5" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124.14 1256.39">
                         <defs>
                             <style>
@@ -69,10 +69,9 @@ readonly class CurrencyService
                         </svg>';
         }
 
-
-        if (!$format) {
+        if (! $format) {
             // Fallback if currency not found
-            return number_format($amount, 2) . ' ' . $currency;
+            return number_format($amount, 2).' '.$currency;
         }
 
         $formatted = number_format($amount, 2);
@@ -104,7 +103,7 @@ readonly class CurrencyService
     {
         $currency = $currency ?? $this->getCurrentCurrency();
         $currencyModel = Currency::where('iso', $currency)->first();
-        
+
         return $currencyModel?->symbol ?? $currency;
     }
 

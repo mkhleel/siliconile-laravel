@@ -21,7 +21,7 @@ class SetCurrencyMiddleware
         $availableCurrencies = Currency::where('is_activated', true)
             ->pluck('iso')
             ->toArray();
-        
+
         // If currency is provided in request, validate and store it
         if ($request->has('currency') && in_array($request->get('currency'), $availableCurrencies)) {
             $currency = $request->get('currency');
@@ -29,9 +29,9 @@ class SetCurrencyMiddleware
         }
 
         // If no session currency is set, use the site default
-        if (!Session::has('preferred_currency')) {
-            $defaultCurrency = generalSetting()->preferred_currency ?? config('core.localization.preferred_currency', 'SAR');
-            
+        if (! Session::has('preferred_currency')) {
+            $defaultCurrency = generalSetting()->preferred_currency ?? config('core.localization.preferred_currency', 'EGP');
+
             // Ensure the default currency is available
             if (in_array($defaultCurrency, $availableCurrencies)) {
                 Session::put('preferred_currency', $defaultCurrency);

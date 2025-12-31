@@ -2,6 +2,7 @@
 
 @source '../views';
 /* @source "../assets/js/*.js"; */
+@source '../../Modules/**/resources/views/**/*.blade.php';
 
 @theme {
   /* Colors */

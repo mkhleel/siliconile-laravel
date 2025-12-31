@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Modules\Billing\Filament\Resources\Invoices\Schemas;
 
 use Filament\Forms;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Modules\Billing\Enums\InvoiceStatus;
 use Modules\Membership\Models\Member;
 
@@ -107,7 +106,7 @@ class InvoiceSchema
                                                     ->label(__('Unit Price'))
                                                     ->numeric()
                                                     ->required()
-                                                    ->prefix('SAR')
+                                                    ->prefix('EGP')
                                                     ->columnSpan(2)
                                                     ->live()
                                                     ->afterStateUpdated(fn (Set $set, Get $get) => self::calculateItemTotal($set, $get)),
@@ -116,7 +115,7 @@ class InvoiceSchema
                                                     ->label(__('Discount'))
                                                     ->numeric()
                                                     ->default(0)
-                                                    ->prefix('SAR')
+                                                    ->prefix('EGP')
                                                     ->columnSpan(2)
                                                     ->live()
                                                     ->afterStateUpdated(fn (Set $set, Get $get) => self::calculateItemTotal($set, $get)),
@@ -126,7 +125,7 @@ class InvoiceSchema
                                                     ->numeric()
                                                     ->disabled()
                                                     ->dehydrated(true)
-                                                    ->prefix('SAR')
+                                                    ->prefix('EGP')
                                                     ->columnSpan(2),
                                             ])
                                             ->columns(11)
@@ -194,11 +193,11 @@ class InvoiceSchema
                                         Forms\Components\Select::make('currency')
                                             ->label(__('Currency'))
                                             ->options([
-                                                'SAR' => 'SAR - Saudi Riyal',
+                                                'EGP' => 'EGP - Saudi Riyal',
                                                 'USD' => 'USD - US Dollar',
                                                 'EUR' => 'EUR - Euro',
                                             ])
-                                            ->default('SAR')
+                                            ->default('EGP')
                                             ->required()
                                             ->native(false),
                                     ]),
@@ -211,7 +210,7 @@ class InvoiceSchema
                                             ->label(__('Invoice Discount'))
                                             ->numeric()
                                             ->default(0)
-                                            ->prefix('SAR')
+                                            ->prefix('EGP')
                                             ->live(),
 
                                         Forms\Components\Textarea::make('discount_description')
@@ -228,15 +227,15 @@ class InvoiceSchema
 
                                         Forms\Components\Placeholder::make('subtotal_display')
                                             ->label(__('Subtotal'))
-                                            ->content(fn (Get $get) => 'SAR ' . number_format(self::calculateSubtotal($get), 2)),
+                                            ->content(fn (Get $get) => 'EGP '.number_format(self::calculateSubtotal($get), 2)),
 
                                         Forms\Components\Placeholder::make('tax_display')
                                             ->label(__('VAT'))
-                                            ->content(fn (Get $get) => 'SAR ' . number_format(self::calculateTax($get), 2)),
+                                            ->content(fn (Get $get) => 'EGP '.number_format(self::calculateTax($get), 2)),
 
                                         Forms\Components\Placeholder::make('total_display')
                                             ->label(__('Total'))
-                                            ->content(fn (Get $get) => 'SAR ' . number_format(self::calculateTotal($get), 2)),
+                                            ->content(fn (Get $get) => 'EGP '.number_format(self::calculateTotal($get), 2)),
                                     ]),
                             ]),
                     ]),

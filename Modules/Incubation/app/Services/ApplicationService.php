@@ -52,7 +52,7 @@ class ApplicationService
                 'stage' => $data['stage'] ?? null,
                 'traction' => $data['traction'] ?? null,
                 'funding_raised' => $data['funding_raised'] ?? null,
-                'funding_currency' => $data['funding_currency'] ?? 'SDG',
+                'funding_currency' => $data['funding_currency'] ?? 'EGP',
                 'pitch_deck_url' => $data['pitch_deck_url'] ?? null,
                 'pitch_deck_path' => $pitchDeckPath,
                 'video_pitch_url' => $data['video_pitch_url'] ?? null,

@@ -40,7 +40,7 @@ class InvoiceObserver
         $invoice->status ??= InvoiceStatus::DRAFT;
 
         // Set default currency
-        $invoice->currency ??= config('billing.default_currency', 'SAR');
+        $invoice->currency ??= config('billing.default_currency', 'EGP');
 
         // Set default tax rate
         $invoice->tax_rate ??= config('billing.default_tax_rate', 15.00);
@@ -135,7 +135,7 @@ class InvoiceObserver
         }
 
         // Must have a due date
-        if (!$invoice->due_date) {
+        if (! $invoice->due_date) {
             return false;
         }
 

@@ -11,7 +11,7 @@ return [
     | The default currency code for invoices. Uses ISO 4217 currency codes.
     |
     */
-    'default_currency' => env('BILLING_CURRENCY', 'SAR'),
+    'default_currency' => env('BILLING_CURRENCY', 'EGP'),
 
     /*
     |--------------------------------------------------------------------------

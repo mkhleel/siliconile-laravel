@@ -40,7 +40,7 @@
                     <li><a href="{{ route('about') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">About Us</a></li>
                     <li><a href="{{ route('programs') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Programs</a></li>
                     <li><a href="{{ route('startups') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Our Startups</a></li>
-                    <li><a href="{{ route('events') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Events</a></li>
+                    <li><a href="{{ route('events.index') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Events</a></li>
                     <li><a href="{{ route('contact') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Contact</a></li>
                 </ul>
             </div>
@@ -53,7 +53,7 @@
                     <li><a href="{{ route('pricing') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Membership Plans</a></li>
                     <li><a href="{{ route('programs') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Technical Support</a></li>
                     <li><a href="{{ route('programs') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Mentorship</a></li>
-                    <li><a href="{{ route('events') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Workshops & Training</a></li>
+                    <li><a href="{{ route('events.index') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Workshops & Training</a></li>
                 </ul>
             </div>
 

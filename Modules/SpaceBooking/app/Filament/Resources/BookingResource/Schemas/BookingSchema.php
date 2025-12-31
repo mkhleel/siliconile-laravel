@@ -111,6 +111,7 @@ class BookingSchema
                                     ->get()
                                     ->mapWithKeys(fn ($m) => [$m->id => $m->user?->name ?? "Member #{$m->id}"]);
                             }
+
                             return [];
                         })
                         ->required()
@@ -180,8 +181,8 @@ class BookingSchema
 
             Forms\Components\Placeholder::make('check_in_status')
                 ->label('Check-in Status')
-                ->content(fn ($record) => $record?->checked_in_at 
-                    ? 'Checked in at ' . $record->checked_in_at->format('M d, Y H:i')
+                ->content(fn ($record) => $record?->checked_in_at
+                    ? 'Checked in at '.$record->checked_in_at->format('M d, Y H:i')
                     : 'Not checked in yet'
                 )
                 ->visibleOn('edit')
@@ -189,8 +190,8 @@ class BookingSchema
 
             Forms\Components\Placeholder::make('check_out_status')
                 ->label('Check-out Status')
-                ->content(fn ($record) => $record?->checked_out_at 
-                    ? 'Checked out at ' . $record->checked_out_at->format('M d, Y H:i')
+                ->content(fn ($record) => $record?->checked_out_at
+                    ? 'Checked out at '.$record->checked_out_at->format('M d, Y H:i')
                     : 'Not checked out yet'
                 )
                 ->visibleOn('edit')
@@ -211,7 +212,7 @@ class BookingSchema
                     Forms\Components\TextInput::make('unit_price')
                         ->label('Unit Price')
                         ->numeric()
-                        ->prefix('SDG')
+                        ->prefix('EGP')
                         ->required()
                         ->columnSpan(1),
 
@@ -232,11 +233,11 @@ class BookingSchema
                     Forms\Components\Select::make('currency')
                         ->label('Currency')
                         ->options([
-                            'SDG' => 'SDG (Sudanese Pound)',
+                            'EGP' => 'EGP (Sudanese Pound)',
                             'USD' => 'USD (US Dollar)',
                             'EUR' => 'EUR (Euro)',
                         ])
-                        ->default('SDG')
+                        ->default('EGP')
                         ->native(false)
                         ->columnSpan(1),
                 ]),
@@ -250,7 +251,7 @@ class BookingSchema
                     Forms\Components\TextInput::make('discount_amount')
                         ->label('Discount Amount')
                         ->numeric()
-                        ->prefix('SDG')
+                        ->prefix('EGP')
                         ->default(0)
                         ->helperText('Manual discount applied')
                         ->columnSpan(1),
@@ -265,7 +266,7 @@ class BookingSchema
                     Forms\Components\TextInput::make('total_price')
                         ->label('Total Price')
                         ->numeric()
-                        ->prefix('SDG')
+                        ->prefix('EGP')
                         ->required()
                         ->helperText('Final amount to be paid')
                         ->columnSpan(1),

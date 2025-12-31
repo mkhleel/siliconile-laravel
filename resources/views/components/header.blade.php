@@ -6,7 +6,7 @@
         ['route' => 'about', 'label' => 'About'],
         ['route' => 'programs', 'label' => 'Programs'],
         ['route' => 'startups', 'label' => 'Startups'],
-        ['route' => 'events', 'label' => 'Events'],
+        ['route' => 'events.index', 'label' => 'Events'],
         ['route' => 'spaces', 'label' => 'Spaces'],
         ['route' => 'pricing', 'label' => 'Pricing'],
         ['route' => 'contact', 'label' => 'Contact'],

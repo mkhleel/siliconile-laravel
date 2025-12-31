@@ -6,5 +6,6 @@
     "Membership": true,
     "SpaceBooking": true,
     "Network": true,
-    "Incubation": true
+    "Incubation": true,
+    "Events": true
 }

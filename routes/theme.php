@@ -30,9 +30,11 @@ Volt::route('/programs/{cohort:slug}', 'cohorts.show')->name('cohorts.show');
 // Mentors
 Volt::route('/mentors/apply', 'become-mentor')->name('mentors.apply');
 
-// Events
-Volt::route('/events', 'events-enhanced')->name('events');
-Volt::route('/events/{slug}', 'events.show')->name('events.show');
+// Events - Handled by Events module (Modules/Events/routes/web.php)
+// The Events module registers its own routes at /events
+// - /events → events::event-list (events.index)
+// - /events/{slug} → events::event-detail (events.show)
+// - /events/{slug}/book → events::booking-flow (events.book)
 
 // Coworking & Spaces
 Volt::route('/co-working', 'coworking')->name('coworking');

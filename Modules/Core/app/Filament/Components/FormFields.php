@@ -19,7 +19,7 @@ use Illuminate\Support\Str;
  * Usage:
  *   FormFields::name()
  *   FormFields::slug('name')
- *   FormFields::money('price', 'SDG')
+ *   FormFields::money('price', 'EGP')
  *   FormFields::enumSelect('status', StatusEnum::class)
  */
 class FormFields
@@ -27,7 +27,7 @@ class FormFields
     /**
      * Create a name input field with slug auto-generation.
      *
-     * @param string $slugField The slug field to auto-populate
+     * @param  string  $slugField  The slug field to auto-populate
      */
     public static function name(string $slugField = 'slug'): TextInput
     {
@@ -43,7 +43,7 @@ class FormFields
     /**
      * Create a title input field with slug auto-generation.
      *
-     * @param string $slugField The slug field to auto-populate
+     * @param  string  $slugField  The slug field to auto-populate
      */
     public static function title(string $slugField = 'slug'): TextInput
     {
@@ -59,7 +59,7 @@ class FormFields
     /**
      * Create a slug input field.
      *
-     * @param string|null $uniqueTable Table name for unique validation
+     * @param  string|null  $uniqueTable  Table name for unique validation
      */
     public static function slug(?string $uniqueTable = null): TextInput
     {
@@ -80,10 +80,10 @@ class FormFields
     /**
      * Create a money/currency input field.
      *
-     * @param string $name Field name
-     * @param string $currency Currency prefix
+     * @param  string  $name  Field name
+     * @param  string  $currency  Currency prefix
      */
-    public static function money(string $name, string $currency = 'SDG'): TextInput
+    public static function money(string $name, string $currency = 'EGP'): TextInput
     {
         return TextInput::make($name)
             ->numeric()
@@ -95,10 +95,10 @@ class FormFields
     /**
      * Create a required money input field.
      *
-     * @param string $name Field name
-     * @param string $currency Currency prefix
+     * @param  string  $name  Field name
+     * @param  string  $currency  Currency prefix
      */
-    public static function moneyRequired(string $name, string $currency = 'SDG'): TextInput
+    public static function moneyRequired(string $name, string $currency = 'EGP'): TextInput
     {
         return self::money($name, $currency)->required();
     }
@@ -106,8 +106,8 @@ class FormFields
     /**
      * Create an enum-based select field.
      *
-     * @param string $name Field name
-     * @param class-string<BackedEnum> $enumClass Enum class with options() static method
+     * @param  string  $name  Field name
+     * @param  class-string<BackedEnum>  $enumClass  Enum class with options() static method
      */
     public static function enumSelect(string $name, string $enumClass): Select
     {
@@ -129,8 +129,8 @@ class FormFields
     /**
      * Create a required enum select field.
      *
-     * @param string $name Field name
-     * @param class-string<BackedEnum> $enumClass Enum class
+     * @param  string  $name  Field name
+     * @param  class-string<BackedEnum>  $enumClass  Enum class
      */
     public static function enumSelectRequired(string $name, string $enumClass): Select
     {
@@ -140,8 +140,8 @@ class FormFields
     /**
      * Create an active/inactive toggle.
      *
-     * @param string $name Field name
-     * @param string $label Label text
+     * @param  string  $name  Field name
+     * @param  string  $label  Label text
      */
     public static function activeToggle(string $name = 'is_active', string $label = 'Active'): Toggle
     {
@@ -163,8 +163,8 @@ class FormFields
     /**
      * Create a date picker with common defaults.
      *
-     * @param string $name Field name
-     * @param string|null $label Custom label
+     * @param  string  $name  Field name
+     * @param  string|null  $label  Custom label
      */
     public static function date(string $name, ?string $label = null): DatePicker
     {
@@ -181,9 +181,9 @@ class FormFields
     /**
      * Create a datetime picker with common defaults.
      *
-     * @param string $name Field name
-     * @param string|null $label Custom label
-     * @param int $minutesStep Minutes step for time picker
+     * @param  string  $name  Field name
+     * @param  string|null  $label  Custom label
+     * @param  int  $minutesStep  Minutes step for time picker
      */
     public static function dateTime(string $name, ?string $label = null, int $minutesStep = 15): DateTimePicker
     {

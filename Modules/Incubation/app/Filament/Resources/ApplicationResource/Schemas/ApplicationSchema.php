@@ -222,16 +222,16 @@ class ApplicationSchema
                             Forms\Components\TextInput::make('funding_raised')
                                 ->label('Funding Raised')
                                 ->numeric()
-                                ->prefix(fn ($get) => $get('funding_currency') ?? 'SDG'),
+                                ->prefix(fn ($get) => $get('funding_currency') ?? 'EGP'),
 
                             Forms\Components\Select::make('funding_currency')
                                 ->label('Currency')
                                 ->options([
-                                    'SDG' => 'SDG',
+                                    'EGP' => 'EGP',
                                     'USD' => 'USD',
                                     'EUR' => 'EUR',
                                 ])
-                                ->default('SDG')
+                                ->default('EGP')
                                 ->native(false),
                         ]),
                     ]),

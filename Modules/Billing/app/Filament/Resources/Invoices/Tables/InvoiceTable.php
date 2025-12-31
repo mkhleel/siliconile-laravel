@@ -53,7 +53,7 @@ class InvoiceTable
 
                 Columns\TextColumn::make('total')
                     ->label('Total')
-                    ->money(fn ($record) => $record->currency ?? 'SAR')
+                    ->money(fn ($record) => $record->currency ?? 'EGP')
                     ->sortable()
                     ->alignEnd(),
 

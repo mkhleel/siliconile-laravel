@@ -50,7 +50,7 @@ class PaymentService
         $payment = new Payment;
         $payment->reference = $this->generatePaymentReference();
         $payment->amount = $paymentData['amount'];
-        $payment->currency = $paymentData['currency'] ?? config('payment.default_currency', 'SAR');
+        $payment->currency = $paymentData['currency'] ?? config('payment.default_currency', 'EGP');
         $payment->gateway = $gateway;
         $payment->status = Payment::STATUS_PENDING;
         $payment->customer_email = $paymentData['customer_email'] ?? null;

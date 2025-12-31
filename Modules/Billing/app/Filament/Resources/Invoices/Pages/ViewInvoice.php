@@ -62,13 +62,13 @@ class ViewInvoice extends ViewRecord
                                 Components\TextEntry::make('quantity')
                                     ->alignCenter(),
                                 Components\TextEntry::make('unit_price')
-                                    ->money(fn ($record) => $record->invoice?->currency ?? 'SAR')
+                                    ->money(fn ($record) => $record->invoice?->currency ?? 'EGP')
                                     ->alignEnd(),
                                 Components\TextEntry::make('discount_amount')
-                                    ->money(fn ($record) => $record->invoice?->currency ?? 'SAR')
+                                    ->money(fn ($record) => $record->invoice?->currency ?? 'EGP')
                                     ->alignEnd(),
                                 Components\TextEntry::make('total')
-                                    ->money(fn ($record) => $record->invoice?->currency ?? 'SAR')
+                                    ->money(fn ($record) => $record->invoice?->currency ?? 'EGP')
                                     ->weight('bold')
                                     ->alignEnd(),
                             ])

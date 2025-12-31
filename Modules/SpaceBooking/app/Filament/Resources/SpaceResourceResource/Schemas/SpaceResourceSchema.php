@@ -131,13 +131,13 @@ class SpaceResourceSchema
         return [
             Forms\Components\TextInput::make('hourly_rate')
                 ->numeric()
-                ->prefix('SDG')
+                ->prefix('EGP')
                 ->placeholder('0.00')
                 ->visible(fn (Get $get): bool => $get('resource_type') === ResourceType::MEETING_ROOM->value),
 
             Forms\Components\TextInput::make('daily_rate')
                 ->numeric()
-                ->prefix('SDG')
+                ->prefix('EGP')
                 ->placeholder('0.00')
                 ->visible(fn (Get $get): bool => in_array($get('resource_type'), [
                     ResourceType::HOT_DESK->value,
@@ -146,17 +146,17 @@ class SpaceResourceSchema
 
             Forms\Components\TextInput::make('monthly_rate')
                 ->numeric()
-                ->prefix('SDG')
+                ->prefix('EGP')
                 ->placeholder('0.00')
                 ->visible(fn (Get $get): bool => $get('resource_type') === ResourceType::PRIVATE_OFFICE->value),
 
             Forms\Components\Select::make('currency')
                 ->options([
-                    'SDG' => 'SDG - Sudanese Pound',
+                    'EGP' => 'EGP - Sudanese Pound',
                     'USD' => 'USD - US Dollar',
                     'EUR' => 'EUR - Euro',
                 ])
-                ->default('SDG')
+                ->default('EGP')
                 ->native(false),
         ];
     }

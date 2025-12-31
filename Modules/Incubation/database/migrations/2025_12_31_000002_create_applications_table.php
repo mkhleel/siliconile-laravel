@@ -38,7 +38,7 @@ return new class extends Migration
             $table->string('stage')->nullable(); // idea, mvp, growth, scaling
             $table->text('traction')->nullable(); // Description of current progress
             $table->decimal('funding_raised', 12, 2)->nullable();
-            $table->string('funding_currency', 3)->default('SDG');
+            $table->string('funding_currency', 3)->default('EGP');
 
             // Pitch Materials
             $table->string('pitch_deck_url')->nullable();

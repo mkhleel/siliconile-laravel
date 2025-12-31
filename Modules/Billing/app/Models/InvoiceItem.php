@@ -135,7 +135,7 @@ class InvoiceItem extends Model
      */
     public function getFormattedUnitPriceAttribute(): string
     {
-        return number_format((float) $this->unit_price, 2) . ' ' . ($this->invoice?->currency ?? 'SAR');
+        return number_format((float) $this->unit_price, 2).' '.($this->invoice?->currency ?? 'EGP');
     }
 
     /**
@@ -143,6 +143,6 @@ class InvoiceItem extends Model
      */
     public function getFormattedTotalAttribute(): string
     {
-        return number_format((float) $this->total, 2) . ' ' . ($this->invoice?->currency ?? 'SAR');
+        return number_format((float) $this->total, 2).' '.($this->invoice?->currency ?? 'EGP');
     }
 }

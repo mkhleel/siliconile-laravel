@@ -11,7 +11,7 @@ return [
     */
 
     // Default currency for payments
-    'default_currency' => env('PAYMENT_DEFAULT_CURRENCY', 'SAR'),
+    'default_currency' => env('PAYMENT_DEFAULT_CURRENCY', 'EGP'),
 
     // Payment gateway configurations
     'gateways' => [
@@ -35,7 +35,7 @@ return [
         // Paytabs configuration
         'paytabs' => [
             // 'countries' => ['SA', 'EG'],
-            'default_currency' => 'SAR',
+            'default_currency' => 'EGP',
             'enabled' => env('PAYTABS_ENABLED', true),
             'profile_id' => env('PAYTABS_PROFILE_ID', '136342'),
             'server_key' => env('PAYTABS_SERVER_KEY', 'SGJ99RDNJJ-JHWMJBW62T-DN6LD9KZM9'),

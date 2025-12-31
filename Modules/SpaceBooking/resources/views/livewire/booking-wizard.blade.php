@@ -629,7 +629,7 @@ new class extends Component {
                             <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 space-y-3">
                                 <div class="flex justify-between">
                                     <span class="text-gray-600 dark:text-gray-400">Unit Price:</span>
-                                    <span class="text-gray-900 dark:text-white">{{ number_format($priceQuote['unit_price'], 2) }} SDG / {{ $priceQuote['price_unit']->label() }}</span>
+                                    <span class="text-gray-900 dark:text-white">{{ number_format($priceQuote['unit_price'], 2) }} EGP / {{ $priceQuote['price_unit']->label() }}</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-gray-600 dark:text-gray-400">Quantity:</span>
@@ -637,7 +637,7 @@ new class extends Component {
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-gray-600 dark:text-gray-400">Base Price:</span>
-                                    <span class="text-gray-900 dark:text-white">{{ number_format($priceQuote['base_price'], 2) }} SDG</span>
+                                    <span class="text-gray-900 dark:text-white">{{ number_format($priceQuote['base_price'], 2) }} EGP</span>
                                 </div>
 
                                 @if($priceQuote['available_credits'] > 0)
@@ -650,7 +650,7 @@ new class extends Component {
                                 @if($priceQuote['discount_percent'] > 0)
                                     <div class="flex justify-between text-green-600 dark:text-green-400">
                                         <span>Plan Discount ({{ $priceQuote['discount_percent'] }}%):</span>
-                                        <span>-{{ number_format($priceQuote['base_price'] * $priceQuote['discount_percent'] / 100, 2) }} SDG</span>
+                                        <span>-{{ number_format($priceQuote['base_price'] * $priceQuote['discount_percent'] / 100, 2) }} EGP</span>
                                     </div>
                                 @endif
 

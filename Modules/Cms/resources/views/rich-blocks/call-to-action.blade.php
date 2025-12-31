@@ -133,15 +133,3 @@
         font-size: 1rem;
     }
 }
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-    .cta-title {
-        color: #f9fafb;
-    }
-    
-    .cta-description {
-        color: #d1d5db;
-    }
-}
-</style>

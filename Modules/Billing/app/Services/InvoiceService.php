@@ -40,13 +40,12 @@ class InvoiceService
     /**
      * Create a new draft invoice.
      *
-     * @param Model $billable The entity being billed (Member, User)
-     * @param array<string, mixed> $data Additional invoice data
-     * @return Invoice
+     * @param  Model  $billable  The entity being billed (Member, User)
+     * @param  array<string, mixed>  $data  Additional invoice data
      */
     public function create(Model $billable, array $data = []): Invoice
     {
-        $invoice = new Invoice();
+        $invoice = new Invoice;
         $invoice->billable()->associate($billable);
         $invoice->status = InvoiceStatus::DRAFT;
         $invoice->currency = $data['currency'] ?? config('billing.default_currency', 'EGP');
@@ -75,9 +74,7 @@ class InvoiceService
     /**
      * Create an invoice from a Subscription.
      *
-     * @param Subscription $subscription
-     * @param array<string, mixed> $options Additional options
-     * @return Invoice
+     * @param  array<string, mixed>  $options  Additional options
      */
     public function createFromSubscription(Subscription $subscription, array $options = []): Invoice
     {
@@ -88,7 +85,7 @@ class InvoiceService
             // Create the invoice
             $invoice = $this->create($member, [
                 'origin' => $subscription,
-                'currency' => $subscription->currency ?? 'SAR',
+                'currency' => $subscription->currency ?? 'EGP',
                 'notes' => $options['notes'] ?? null,
                 'metadata' => [
                     'subscription_id' => $subscription->id,
@@ -130,9 +127,7 @@ class InvoiceService
     /**
      * Create an invoice from a Booking.
      *
-     * @param Booking $booking
-     * @param array<string, mixed> $options Additional options
-     * @return Invoice
+     * @param  array<string, mixed>  $options  Additional options
      */
     public function createFromBooking(Booking $booking, array $options = []): Invoice
     {
@@ -154,7 +149,7 @@ class InvoiceService
             // Create the invoice
             $invoice = $this->create($invoiceBillable, [
                 'origin' => $booking,
-                'currency' => $booking->currency ?? 'SAR',
+                'currency' => $booking->currency ?? 'EGP',
                 'notes' => $options['notes'] ?? null,
                 'metadata' => [
                     'booking_id' => $booking->id,
@@ -201,10 +196,9 @@ class InvoiceService
     /**
      * Create a manual invoice with custom items.
      *
-     * @param Model $billable The entity being billed
-     * @param array<array<string, mixed>> $items Line items
-     * @param array<string, mixed> $options Additional options
-     * @return Invoice
+     * @param  Model  $billable  The entity being billed
+     * @param  array<array<string, mixed>>  $items  Line items
+     * @param  array<string, mixed>  $options  Additional options
      */
     public function createManual(Model $billable, array $items, array $options = []): Invoice
     {
@@ -226,19 +220,17 @@ class InvoiceService
     /**
      * Add a line item to an invoice.
      *
-     * @param Invoice $invoice
-     * @param array<string, mixed> $data Item data
-     * @return InvoiceItem
+     * @param  array<string, mixed>  $data  Item data
      *
      * @throws \RuntimeException If invoice is not editable
      */
     public function addItem(Invoice $invoice, array $data): InvoiceItem
     {
-        if (!$invoice->isEditable()) {
+        if (! $invoice->isEditable()) {
             throw new \RuntimeException('Cannot add items to a finalized invoice.');
         }
 
-        $item = new InvoiceItem();
+        $item = new InvoiceItem;
         $item->invoice_id = $invoice->id;
         $item->description = $data['description'];
         $item->quantity = $data['quantity'] ?? 1;
@@ -264,14 +256,12 @@ class InvoiceService
     /**
      * Finalize an invoice - generates number and locks it.
      *
-     * @param Invoice $invoice
-     * @return Invoice
      *
      * @throws \RuntimeException If invoice cannot be finalized
      */
     public function finalize(Invoice $invoice): Invoice
     {
-        if (!$invoice->isEditable()) {
+        if (! $invoice->isEditable()) {
             throw new \RuntimeException('Invoice is already finalized.');
         }
 
@@ -290,7 +280,7 @@ class InvoiceService
             $invoice->sent_at = now();
 
             // Ensure due date is set
-            if (!$invoice->due_date) {
+            if (! $invoice->due_date) {
                 $invoice->due_date = now()->addDays(self::DEFAULT_PAYMENT_TERMS_DAYS);
             }
 
@@ -312,16 +302,14 @@ class InvoiceService
     /**
      * Mark an invoice as paid.
      *
-     * @param Invoice $invoice
-     * @param string|null $transactionReference Payment transaction reference
-     * @param string|null $paymentMethod Payment method used
-     * @return Invoice
+     * @param  string|null  $transactionReference  Payment transaction reference
+     * @param  string|null  $paymentMethod  Payment method used
      *
      * @throws \RuntimeException If invoice cannot be marked as paid
      */
     public function markAsPaid(Invoice $invoice, ?string $transactionReference = null, ?string $paymentMethod = null): Invoice
     {
-        if (!$invoice->canBePaid()) {
+        if (! $invoice->canBePaid()) {
             throw new \RuntimeException("Invoice #{$invoice->display_number} cannot be marked as paid in its current status.");
         }
 
@@ -348,15 +336,13 @@ class InvoiceService
     /**
      * Void an invoice.
      *
-     * @param Invoice $invoice
-     * @param string|null $reason Reason for voiding
-     * @return Invoice
+     * @param  string|null  $reason  Reason for voiding
      *
      * @throws \RuntimeException If invoice cannot be voided
      */
     public function void(Invoice $invoice, ?string $reason = null): Invoice
     {
-        if (!$invoice->status->canBeVoided()) {
+        if (! $invoice->status->canBeVoided()) {
             throw new \RuntimeException("Invoice #{$invoice->display_number} cannot be voided.");
         }
 
@@ -409,16 +395,14 @@ class InvoiceService
     /**
      * Apply a discount to an invoice.
      *
-     * @param Invoice $invoice
-     * @param float $amount Discount amount
-     * @param string|null $description Discount description
-     * @return Invoice
+     * @param  float  $amount  Discount amount
+     * @param  string|null  $description  Discount description
      *
      * @throws \RuntimeException If invoice is not editable
      */
     public function applyDiscount(Invoice $invoice, float $amount, ?string $description = null): Invoice
     {
-        if (!$invoice->isEditable()) {
+        if (! $invoice->isEditable()) {
             throw new \RuntimeException('Cannot apply discount to a finalized invoice.');
         }
 
@@ -432,9 +416,6 @@ class InvoiceService
 
     /**
      * Duplicate an invoice (creates a new draft copy).
-     *
-     * @param Invoice $invoice
-     * @return Invoice
      */
     public function duplicate(Invoice $invoice): Invoice
     {
@@ -473,8 +454,6 @@ class InvoiceService
      * Generate a unique sequential invoice number.
      *
      * Format: INV-YYYY-NNNN (e.g., INV-2025-0001)
-     *
-     * @return string
      */
     protected function generateInvoiceNumber(): string
     {
@@ -501,7 +480,6 @@ class InvoiceService
     /**
      * Extract billing details from a billable entity.
      *
-     * @param Model $billable
      * @return array<string, mixed>
      */
     protected function extractBillingDetails(Model $billable): array

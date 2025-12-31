@@ -71,7 +71,7 @@ class BookingTable
 
                 Columns\TextColumn::make('total_price')
                     ->label('Total')
-                    ->money('SDG')
+                    ->money('EGP')
                     ->sortable(),
 
                 Columns\TextColumn::make('status')

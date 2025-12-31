@@ -14,7 +14,7 @@
 
 {{-- Initialize Flux appearance on page load and navigation --}}
 <script>
-        (function() {
+    (function() {
         function applyAppearance() {
             const appearance = localStorage.getItem('flux.appearance') || 'light';
             if (appearance === 'dark' || (appearance === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -35,7 +35,8 @@
         // Re-apply on Livewire navigation
         document.addEventListener('livewire:navigated', applyAppearance);
     })();
-
 </script>
+
+@fluxAppearance
 
 @fluxAppearance

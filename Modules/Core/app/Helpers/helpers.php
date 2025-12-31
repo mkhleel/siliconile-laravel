@@ -91,7 +91,7 @@ if (! function_exists('currentCurrency')) {
      * Get the current active currency code dynamically
      * Checks session for user preference, then falls back to site default
      *
-     * @return string Currency ISO code (e.g., 'USD', 'SAR', 'EUR')
+     * @return string Currency ISO code (e.g., 'USD', 'EGP', 'EUR')
      */
     function currentCurrency(): string
     {
@@ -99,9 +99,9 @@ if (! function_exists('currentCurrency')) {
         if (session()->has('preferred_currency')) {
             return session('preferred_currency');
         }
-        
+
         // Fall back to site default currency
-        return generalSetting('preferred_currency') ?? config('core.localization.preferred_currency', 'SAR');
+        return generalSetting('preferred_currency') ?? config('core.localization.preferred_currency', 'EGP');
     }
 }
 
@@ -117,8 +117,8 @@ if (! function_exists('formatCurrency')) {
     function formatCurrency(float $amount, ?string $fromCurrency = null): \Illuminate\Support\HtmlString|string
     {
         $currencyService = app(\Modules\Core\Services\CurrencyService::class);
-        $fromCurrency = $fromCurrency ?? config('core.localization.preferred_currency', 'SAR');
-        
+        $fromCurrency = $fromCurrency ?? config('core.localization.preferred_currency', 'EGP');
+
         return $currencyService->formatPrice($amount, $fromCurrency);
     }
 }
@@ -134,7 +134,7 @@ if (! function_exists('currencySymbol')) {
     {
         $currency = $currencyCode ?? currentCurrency();
         $currencyModel = \Modules\Core\Models\Localization\Currency::where('iso', $currency)->first();
-        
+
         return $currencyModel?->symbol ?? $currency;
     }
 }

@@ -21,7 +21,7 @@ final class PaytabsGateway extends AbstractPaymentGateway
 
     private string $checkoutLang;
 
-    private string $currency = 'SAR';
+    private string $currency = 'EGP';
 
     /**
      * Constructor.
@@ -44,7 +44,7 @@ final class PaytabsGateway extends AbstractPaymentGateway
         $this->serverKey = $this->config['server_key'];
         $this->baseUrl = $this->config['base_url'];
         $this->checkoutLang = $this->config['checkout_lang'] ?? 'en';
-        $this->currency = $this->config['default_currency'] ?? 'SAR';
+        $this->currency = $this->config['default_currency'] ?? 'EGP';
 
     }
 
@@ -80,7 +80,7 @@ final class PaytabsGateway extends AbstractPaymentGateway
         try {
             $cartId = $paymentData['reference'] ?? uniqid('paytabs_', true);
 
-            // Convert amount from USD to SAR
+            // Convert amount from USD to EGP
             $currencyService = app(CurrencyService::class);
             $originalAmount = (float) $paymentData['amount'];
             $convertedAmount = $currencyService->convertCurrency(
@@ -362,14 +362,14 @@ final class PaytabsGateway extends AbstractPaymentGateway
         try {
             $tranRef = Cache::get("paytabs_tran_{$paymentId}") ?? $paymentId;
 
-            // Convert amount from USD to SAR if provided
+            // Convert amount from USD to EGP if provided
             $refundAmount = 0;
             if ($amount !== null) {
                 $currencyService = app(CurrencyService::class);
                 $refundAmount = $currencyService->convertCurrency(
                     $amount,
                     'USD',
-                    'SAR'
+                    'EGP'
                 ) ?? $amount;
             }
 
@@ -378,7 +378,7 @@ final class PaytabsGateway extends AbstractPaymentGateway
                 'tran_type' => 'refund',
                 'tran_class' => 'ecom',
                 'cart_id' => uniqid('refund_', true),
-                'cart_currency' => 'SAR',
+                'cart_currency' => 'EGP',
                 'cart_amount' => $refundAmount,
                 'cart_description' => $reason ?? 'Refund',
                 'tran_ref' => $tranRef,

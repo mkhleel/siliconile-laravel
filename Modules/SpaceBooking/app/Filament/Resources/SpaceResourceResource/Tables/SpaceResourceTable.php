@@ -25,7 +25,7 @@ class SpaceResourceTable
                 Columns\ImageColumn::make('image')
                     ->label('')
                     ->circular()
-                    ->defaultImageUrl(fn ($record) => 'https://ui-avatars.com/api/?name=' . urlencode($record->name) . '&background=random'),
+                    ->defaultImageUrl(fn ($record) => 'https://ui-avatars.com/api/?name='.urlencode($record->name).'&background=random'),
 
                 Columns\TextColumn::make('name')
                     ->searchable()
@@ -49,13 +49,13 @@ class SpaceResourceTable
                     ->toggleable(),
 
                 Columns\TextColumn::make('hourly_rate')
-                    ->money('SDG')
+                    ->money('EGP')
                     ->sortable()
                     ->toggleable()
                     ->label('Hourly'),
 
                 Columns\TextColumn::make('daily_rate')
-                    ->money('SDG')
+                    ->money('EGP')
                     ->sortable()
                     ->toggleable()
                     ->label('Daily'),
