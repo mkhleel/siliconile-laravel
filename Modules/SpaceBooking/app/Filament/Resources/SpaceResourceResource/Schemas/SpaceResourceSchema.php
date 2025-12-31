@@ -8,6 +8,7 @@ use Filament\Forms;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Modules\SpaceBooking\Enums\ResourceType;
 use Modules\SpaceBooking\Models\ResourceAmenity;
@@ -70,7 +71,7 @@ class SpaceResourceSchema
                 ->required()
                 ->maxLength(255)
                 ->live(onBlur: true)
-                ->afterStateUpdated(function (Forms\Set $set, ?string $state) {
+                ->afterStateUpdated(function (Set $set, ?string $state) {
                     $set('slug', \Str::slug($state ?? ''));
                 }),
 

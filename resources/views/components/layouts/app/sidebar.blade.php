@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         @include('partials.head')
     </head>
@@ -13,19 +13,31 @@
 
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    <flux:navlist.item icon="home" :href="route('member.portal')" :current="request()->routeIs('member.portal')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                </flux:navlist.group>
+
+                <flux:navlist.group :heading="__('Membership')" class="grid">
+                    <flux:navlist.item icon="credit-card" :href="route('member.subscription')" :current="request()->routeIs('member.subscription')" wire:navigate>{{ __('Subscription') }}</flux:navlist.item>
+                    <flux:navlist.item icon="calendar" :href="route('member.bookings')" :current="request()->routeIs('member.bookings*')" wire:navigate>{{ __('My Bookings') }}</flux:navlist.item>
+                    <flux:navlist.item icon="clipboard-document-list" :href="route('member.orders')" :current="request()->routeIs('member.orders*')" wire:navigate>{{ __('Orders') }}</flux:navlist.item>
+                </flux:navlist.group>
+
+                <flux:navlist.group :heading="__('Explore')" class="grid">
+                    <flux:navlist.item icon="building-office" :href="route('spaces')" :current="request()->routeIs('spaces*')" wire:navigate>{{ __('Book a Space') }}</flux:navlist.item>
+                    <flux:navlist.item icon="calendar-days" :href="route('events')" :current="request()->routeIs('events*')" wire:navigate>{{ __('Events') }}</flux:navlist.item>
+                    <flux:navlist.item icon="currency-dollar" :href="route('pricing')" :current="request()->routeIs('pricing')" wire:navigate>{{ __('Pricing') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
             <flux:spacer />
 
             <flux:navlist variant="outline">
-                <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                {{ __('Repository') }}
+                <flux:navlist.item icon="globe-alt" href="{{ route('home') }}" target="_blank">
+                {{ __('View Site') }}
                 </flux:navlist.item>
 
-                <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire" target="_blank">
-                {{ __('Documentation') }}
+                <flux:navlist.item icon="question-mark-circle" :href="route('contact')" wire:navigate>
+                {{ __('Help & Support') }}
                 </flux:navlist.item>
             </flux:navlist>
 

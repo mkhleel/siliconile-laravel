@@ -49,11 +49,11 @@
             <div class="space-y-4">
                 <h3 class="text-lg font-semibold">Services</h3>
                 <ul class="space-y-2">
-                    <li class="text-sm text-muted-foreground">Coworking Spaces</li>
-                    <li class="text-sm text-muted-foreground">Startup Funding</li>
-                    <li class="text-sm text-muted-foreground">Technical Support</li>
-                    <li class="text-sm text-muted-foreground">Mentorship</li>
-                    <li class="text-sm text-muted-foreground">Workshops & Training</li>
+                    <li><a href="{{ route('spaces') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Coworking Spaces</a></li>
+                    <li><a href="{{ route('pricing') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Membership Plans</a></li>
+                    <li><a href="{{ route('programs') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Technical Support</a></li>
+                    <li><a href="{{ route('programs') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Mentorship</a></li>
+                    <li><a href="{{ route('events') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Workshops & Training</a></li>
                 </ul>
             </div>
 
