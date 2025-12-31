@@ -4,5 +4,6 @@
     "Cms": true,
     "Payment": true,
     "Membership": true,
-    "SpaceBooking": true
+    "SpaceBooking": true,
+    "Network": true
 }

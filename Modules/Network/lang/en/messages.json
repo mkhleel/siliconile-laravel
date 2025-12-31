@@ -1,0 +1,11 @@
+{
+    "network.sync.started": "Network sync started",
+    "network.sync.completed": "Network sync completed",
+    "network.connection.success": "Successfully connected to router",
+    "network.connection.failed": "Failed to connect to router",
+    "network.user.created": "Hotspot user created",
+    "network.user.updated": "Hotspot user updated",
+    "network.user.disabled": "Hotspot user disabled",
+    "network.user.kicked": "Hotspot user session terminated",
+    "network.password.reset": "WiFi password reset successfully"
+}

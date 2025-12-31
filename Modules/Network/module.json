@@ -1,0 +1,11 @@
+{
+    "name": "Network",
+    "alias": "network",
+    "description": "Mikrotik RouterOS integration for WiFi/Hotspot user management",
+    "keywords": ["mikrotik", "network", "hotspot", "wifi"],
+    "priority": 0,
+    "providers": [
+        "Modules\\Network\\Providers\\NetworkServiceProvider"
+    ],
+    "files": []
+}

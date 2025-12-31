@@ -1,0 +1,24 @@
+{
+    "name": "modules/network",
+    "description": "Mikrotik RouterOS integration for WiFi/Hotspot user management",
+    "keywords": ["mikrotik", "network", "hotspot", "wifi"],
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "evilfreelancer/routeros-api-php": "^1.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Network\\": "app/",
+            "Modules\\Network\\Database\\Factories\\": "database/factories/",
+            "Modules\\Network\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Network\\Providers\\NetworkServiceProvider"
+            ]
+        }
+    }
+}

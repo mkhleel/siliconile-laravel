@@ -12,6 +12,7 @@
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.1",
         "calebporzio/sushi": "*",
+        "evilfreelancer/routeros-api-php": "*",
         "filament/filament": "^4.0",
         "filament/spatie-laravel-media-library-plugin": "^4.0",
         "filament/spatie-laravel-settings-plugin": "^4.0",
