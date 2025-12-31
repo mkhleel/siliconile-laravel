@@ -24,6 +24,11 @@ Volt::route('/about', 'about')->name('about');
 // Programs & Startups
 Volt::route('/programs', 'programs')->name('programs');
 Volt::route('/startups', 'startups')->name('startups');
+Volt::route('/programs/apply', 'programs.apply')->name('programs.apply');
+Volt::route('/programs/{cohort:slug}', 'cohorts.show')->name('cohorts.show');
+
+// Mentors
+Volt::route('/mentors/apply', 'become-mentor')->name('mentors.apply');
 
 // Events
 Volt::route('/events', 'events-enhanced')->name('events');
@@ -37,9 +42,12 @@ Volt::route('/spaces/{slug}', 'spaces.show')->name('spaces.show');
 // Membership & Pricing
 Volt::route('/pricing', 'pricing')->name('pricing');
 
-// Application
+// Application (Membership)
 Volt::route('/apply', 'apply')->name('apply');
 Volt::route('/apply/success', 'application-success')->name('application.success');
+
+// Incubation Status Check (public)
+Volt::route('/incubation/status', 'incubation-status')->name('incubation.status');
 
 // Contact
 Volt::route('/contact', 'contact')->name('contact');

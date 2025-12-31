@@ -1,0 +1,17 @@
+{
+    "name": "Incubation",
+    "alias": "incubation",
+    "description": "Manages Cohorts, Applications, Selection Processes, and Mentorship for the incubator program",
+    "keywords": [
+        "incubation",
+        "cohort",
+        "application",
+        "mentorship",
+        "startup"
+    ],
+    "priority": 0,
+    "providers": [
+        "Modules\\Incubation\\Providers\\IncubationServiceProvider"
+    ],
+    "files": []
+}

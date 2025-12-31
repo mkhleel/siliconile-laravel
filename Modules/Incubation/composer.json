@@ -1,0 +1,31 @@
+{
+    "name": "nwidart/incubation",
+    "description": "Manages Cohorts, Applications, Selection Processes, and Mentorship for the incubator program",
+    "keywords": [
+        "incubation",
+        "cohort",
+        "application",
+        "mentorship",
+        "startup"
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Modules\\Incubation\\": "app/",
+            "Modules\\Incubation\\Database\\Factories\\": "database/factories/",
+            "Modules\\Incubation\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Incubation\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Incubation\\Providers\\IncubationServiceProvider"
+            ]
+        }
+    }
+}

@@ -13,10 +13,38 @@
     ];
 @endphp
 
-<header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur" x-data="mobileMenu">
-    <div class="container flex h-16 items-center justify-between px-4 md:px-6">
+<header 
+    class="fixed top-0 z-50 w-full transition-all duration-300 ease-in-out" 
+    x-data="{ 
+        isOpen: false,
+        scrolled: false,
+        toggle() { this.isOpen = !this.isOpen },
+        close() { this.isOpen = false },
+        init() {
+            this.scrolled = window.scrollY > 50;
+            window.addEventListener('scroll', () => {
+                this.scrolled = window.scrollY > 50;
+            });
+        }
+    }"
+    :class="scrolled ? 'bg-background/95 backdrop-blur border-b shadow-sm py-0' : 'bg-transparent py-2'"
+>
+    <div class="container flex items-center justify-between px-4 md:px-6 transition-all duration-300" :class="scrolled ? 'h-16' : 'h-20'">
         <a href="{{ route('home') }}" class="flex items-center space-x-2">
-            <img src="{{ asset('theme/assets/images/logo.svg') }}" alt="Siliconile Logo" class="h-12 w-auto">
+            <!-- Square logo (default - at top) -->
+            <img 
+                src="{{ asset('theme/assets/images/siliconile.svg') }}" 
+                alt="Siliconile Logo" 
+                class="w-auto transition-all duration-300"
+                :class="scrolled ? 'h-0 opacity-0 w-0' : 'h-20 md:ps-5 opacity-100'"
+            >
+            <!-- Full logo (scrolled) -->
+            <img 
+                src="{{ asset('theme/assets/images/logo.svg') }}" 
+                alt="Siliconile Logo" 
+                class="w-auto transition-all duration-300"
+                :class="scrolled ? 'h-10 opacity-100' : 'h-0 opacity-0 w-0'"
+            >
         </a>
 
         <!-- Desktop Navigation -->
