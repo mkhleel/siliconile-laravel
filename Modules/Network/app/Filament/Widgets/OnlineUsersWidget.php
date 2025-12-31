@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Network\Filament\Widgets;
 
 use Filament\Support\Enums\IconPosition;
+use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Facades\Cache;
@@ -40,7 +41,7 @@ final class OnlineUsersWidget extends BaseWidget
             return [
                 Stat::make(__('Network Module'), __('Disabled'))
                     ->description(__('Configure router settings to enable'))
-                    ->descriptionIcon('heroicon-o-wifi', IconPosition::Before)
+                    ->descriptionIcon(Heroicon::OutlinedWifi, IconPosition::Before)
                     ->color('gray'),
             ];
         }
@@ -63,7 +64,7 @@ final class OnlineUsersWidget extends BaseWidget
             return [
                 Stat::make(__('Router Status'), __('Disconnected'))
                     ->description(__('Cannot connect to Mikrotik router'))
-                    ->descriptionIcon('heroicon-o-x-circle', IconPosition::Before)
+                    ->descriptionIcon(Heroicon::OutlinedXCircle, IconPosition::Before)
                     ->color('danger'),
             ];
         }
@@ -71,7 +72,7 @@ final class OnlineUsersWidget extends BaseWidget
         return [
             Stat::make(__('Online Users'), (string) $onlineCount)
                 ->description(__('Currently connected to WiFi'))
-                ->descriptionIcon('heroicon-o-wifi', IconPosition::Before)
+                ->descriptionIcon(Heroicon::OutlinedWifi, IconPosition::Before)
                 ->color($onlineCount > 0 ? 'success' : 'gray')
                 ->chart($this->getOnlineHistory())
                 ->extraAttributes([
@@ -80,7 +81,7 @@ final class OnlineUsersWidget extends BaseWidget
 
             Stat::make(__('Router'), $settings->ip_address)
                 ->description(__('Connected'))
-                ->descriptionIcon('heroicon-o-check-circle', IconPosition::Before)
+                ->descriptionIcon(Heroicon::OutlinedCheckCircle, IconPosition::Before)
                 ->color('success'),
         ];
     }

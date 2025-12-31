@@ -6,6 +6,7 @@ namespace Modules\SpaceBooking\Filament\Resources\BookingResource\Pages;
 
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Support\Icons\Heroicon;
 use Modules\SpaceBooking\Filament\Resources\BookingResource;
 
 class ListBookings extends ListRecords
@@ -17,7 +18,7 @@ class ListBookings extends ListRecords
         return [
             Actions\Action::make('calendar')
                 ->label('Calendar View')
-                ->icon('heroicon-o-calendar-days')
+                ->icon(Heroicon::OutlinedCalendarDays)
                 ->url(fn () => BookingResource::getUrl('calendar'))
                 ->color('info'),
 

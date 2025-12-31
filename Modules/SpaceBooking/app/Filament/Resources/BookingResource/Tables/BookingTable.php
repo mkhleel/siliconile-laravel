@@ -10,6 +10,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Notifications\Notification;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns;
 use Filament\Tables\Filters;
 use Filament\Tables\Table;
@@ -122,7 +123,7 @@ class BookingTable
 
                 // Quick status actions
                 Action::make('confirm')
-                    ->icon('heroicon-o-check-circle')
+                    ->icon(Heroicon::OutlinedCheckCircle)
                     ->color('success')
                     ->requiresConfirmation()
                     ->visible(fn (Booking $record): bool => $record->status->canConfirm())
@@ -135,7 +136,7 @@ class BookingTable
                     }),
 
                 Action::make('cancel')
-                    ->icon('heroicon-o-x-circle')
+                    ->icon(Heroicon::OutlinedXCircle)
                     ->color('danger')
                     ->requiresConfirmation()
                     ->visible(fn (Booking $record): bool => $record->status->canCancel())
@@ -153,9 +154,9 @@ class BookingTable
                     }),
 
                 Action::make('checkIn')
-                    ->icon('heroicon-o-arrow-right-on-rectangle')
+                    ->icon(Heroicon::OutlinedArrowRightOnRectangle)
                     ->color('info')
-                    ->visible(fn (Booking $record): bool => $record->status === BookingStatus::CONFIRMED && !$record->checked_in_at)
+                    ->visible(fn (Booking $record): bool => $record->status === BookingStatus::CONFIRMED && ! $record->checked_in_at)
                     ->action(function (Booking $record) {
                         $record->checkIn();
                         Notification::make()
@@ -165,9 +166,9 @@ class BookingTable
                     }),
 
                 Action::make('checkOut')
-                    ->icon('heroicon-o-arrow-left-on-rectangle')
+                    ->icon(Heroicon::OutlinedArrowLeftOnRectangle)
                     ->color('gray')
-                    ->visible(fn (Booking $record): bool => $record->checked_in_at && !$record->checked_out_at)
+                    ->visible(fn (Booking $record): bool => $record->checked_in_at && ! $record->checked_out_at)
                     ->action(function (Booking $record) {
                         $record->checkOut();
                         Notification::make()

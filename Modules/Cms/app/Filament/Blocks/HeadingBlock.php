@@ -7,6 +7,7 @@ namespace Modules\Cms\Filament\Blocks;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Str;
 
 final class HeadingBlock
@@ -15,7 +16,7 @@ final class HeadingBlock
     {
         return Block::make('heading')
 
-            ->icon('heroicon-o-h1')
+            ->icon(Heroicon::OutlinedH1)
             ->schema([
                 TextInput::make('content')
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Core\Filament\Pages;
 
 use Artisan;
@@ -19,6 +21,7 @@ use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
@@ -37,7 +40,7 @@ class GeneralSettings extends SettingsPage
         return __('Settings');
     }
 
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-cog';
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::OutlinedCog;
 
     /**
      * @return string|null
@@ -52,7 +55,7 @@ class GeneralSettings extends SettingsPage
         return [
             Action::make('site_map')->
                 label(__('Generate Site Map'))
-                    ->icon('heroicon-o-document')
+                    ->icon(Heroicon::OutlinedDocument)
                     ->size('sm')
                     ->requiresConfirmation()
                     ->modalHeading(__('Site Map'))
@@ -70,7 +73,7 @@ class GeneralSettings extends SettingsPage
                     ->color('primary'),
             Action::make('clear_cache')
 
-                ->icon('heroicon-o-trash')
+                ->icon(Heroicon::OutlinedTrash)
                 ->size('sm')
                 ->requiresConfirmation()
                 ->modalHeading(__('Clear Cache'))
@@ -369,8 +372,8 @@ class GeneralSettings extends SettingsPage
                                 ->schema([
                                     Toggle::make('watermark_enabled')
 
-                                        ->onIcon('heroicon-o-check')
-                                        ->offIcon('heroicon-o-x-mark')
+                                        ->onIcon(Heroicon::OutlinedCheck)
+                                        ->offIcon(Heroicon::OutlinedXMark)
                                         ->default(false),
 
                                     TextInput::make('watermark_text'),

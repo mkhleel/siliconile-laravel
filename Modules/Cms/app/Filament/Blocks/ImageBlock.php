@@ -9,6 +9,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Str;
 
 final class ImageBlock
@@ -17,7 +18,7 @@ final class ImageBlock
     {
         return Block::make('image')
 
-            ->icon('heroicon-o-photo')
+            ->icon(Heroicon::OutlinedPhoto)
             ->schema([
                 FileUpload::make('url')
 

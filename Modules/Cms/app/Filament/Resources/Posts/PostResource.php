@@ -319,7 +319,7 @@ class PostResource extends Resource
                 EditAction::make(),
                 DeleteAction::make(),
                 Action::make('publish')
-                    ->icon('heroicon-o-eye')
+                    ->icon(Heroicon::OutlinedEye)
                     ->action(function (Post $record) {
                         $record->update([
                             'status' => 'published',
@@ -329,7 +329,7 @@ class PostResource extends Resource
                     ->requiresConfirmation()
                     ->visible(fn (Post $record) => $record->status !== 'published'),
                 Action::make('duplicate')
-                    ->icon('heroicon-o-document-duplicate')
+                    ->icon(Heroicon::OutlinedDocumentDuplicate)
                     ->action(function (Post $record) {
                         $data = $record->toArray();
                         unset($data['id'], $data['created_at'], $data['updated_at'], $data['deleted_at']);

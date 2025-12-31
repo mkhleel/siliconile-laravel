@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Network\Filament\Resources;
 
-use Filament\Actions;
+use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\ViewAction;
+use Filament\Forms\Components\DatePicker;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Grid;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Modules\Network\Enums\SyncAction;
@@ -22,7 +28,7 @@ class NetworkSyncLogResource extends Resource
 {
     protected static ?string $model = NetworkSyncLog::class;
 
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-clipboard-document-list';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
 
     protected static string|UnitEnum|null $navigationGroup = 'Network';
 
@@ -114,10 +120,13 @@ class NetworkSyncLogResource extends Resource
 
                 Tables\Filters\Filter::make('created_at')
                     ->form([
-                        \Filament\Forms\Components\DatePicker::make('from')
-                            ->label(__('From')),
-                        \Filament\Forms\Components\DatePicker::make('until')
-                            ->label(__('Until')),
+                        Grid::make(2)
+                            ->schema([
+                                DatePicker::make('from')
+                                    ->label(__('From')),
+                                DatePicker::make('until')
+                                    ->label(__('Until')),
+                            ]),
                     ])
                     ->query(function ($query, array $data) {
                         return $query
@@ -125,12 +134,12 @@ class NetworkSyncLogResource extends Resource
                             ->when($data['until'], fn ($q, $date) => $q->whereDate('created_at', '<=', $date));
                     }),
             ])
-            ->actions([
-                Actions\ViewAction::make(),
+            ->recordActions([
+                ViewAction::make(),
             ])
-            ->bulkActions([
-                Actions\BulkActionGroup::make([
-                    Actions\DeleteBulkAction::make()
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make()
                         ->requiresConfirmation(),
                 ]),
             ])

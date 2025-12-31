@@ -6,6 +6,7 @@ use Filament\Actions\Action;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\FontWeight;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
@@ -29,7 +30,7 @@ class LanguageResource extends Resource
         return __('Languages');
     }
 
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-language';
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::OutlinedLanguage;
 
     public static function form(Schema $schema): Schema
     {

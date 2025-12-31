@@ -8,6 +8,7 @@ use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Notifications\Notification;
+use Filament\Support\Icons\Heroicon;
 use Modules\Membership\Models\Member;
 use Modules\Network\Exceptions\MikrotikOperationException;
 use Modules\Network\Services\MikrotikService;
@@ -24,7 +25,7 @@ class ResetWifiPasswordAction
     {
         return Action::make($name)
             ->label(__('Reset WiFi Password'))
-            ->icon('heroicon-o-key')
+            ->icon(Heroicon::OutlinedKey)
             ->color('warning')
             ->visible(fn () => self::isModuleEnabled())
             ->form([

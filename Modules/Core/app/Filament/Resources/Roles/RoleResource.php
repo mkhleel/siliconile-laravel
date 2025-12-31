@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -28,10 +29,7 @@ use Spatie\Permission\Models\Role;
 
 class RoleResource extends Resource
 {
-    public static function getNavigationIcon(): ?string
-    {
-        return 'heroicon-o-lock-closed';
-    }
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::OutlinedLockClosed;
 
     public static function getModel(): string
     {
@@ -57,47 +55,61 @@ class RoleResource extends Resource
     {
         return $schema
             ->components([
-                Section::make()
-                    ->columnSpanFull()
+                Section::make(__('Role Details'))
+                    ->description(__('Configure the role name and guard'))
+                    ->icon('heroicon-o-identification')
                     ->schema([
                         Grid::make(2)
-                            ->columnSpanFull()
                             ->schema([
                                 TextInput::make('name')
-
-                                    ->required(),
+                                    ->label(__('Role Name'))
+                                    ->placeholder(__('e.g., Editor, Manager'))
+                                    ->required()
+                                    ->maxLength(255),
 
                                 Select::make('guard_name')
-
+                                    ->label(__('Guard'))
                                     ->options([
-                                        'web' => 'web',
-                                        'admin' => 'admin',
+                                        'web' => 'Web (Users)',
+                                        'admin' => 'Admin (Staff)',
                                     ])
                                     ->default('web')
+                                    ->native(false)
                                     ->required(),
-
-                                Select::make('permissions')
-                                    ->columnSpanFull()
-                                    ->multiple()
-
-                                    ->relationship(
-                                        name: 'permissions',
-                                        modifyQueryUsing: fn (Builder $query) => $query->orderBy('name')->orderBy('name'),
-                                    )
-                                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->name} ({$record->guard_name})")
-                                    ->searchable(['name', 'guard_name']) // searchable on both name and guard_name
-                                    ->preload(),
-
-                                Select::make(config('permission.column_names.team_foreign_key', 'team_id'))
-
-                                    ->hidden(fn () => ! config('permission.teams', false) || Filament::hasTenancy())
-//                                    ->options(
-//                                        fn () =>  Modules\Core\Models\Team::class::pluck('name', 'id')
-//                                    )
-                                    ->dehydrated(fn ($state) => (int) $state <= 0)
-                                    ->placeholder(__('Select a Team'))
-                                    ->hint(__('Leave blank for a global role')),
                             ]),
+                    ]),
+
+                Section::make(__('Permissions'))
+                    ->description(__('Assign permissions to this role'))
+                    ->icon('heroicon-o-key')
+                    ->collapsible()
+                    ->schema([
+                        Select::make('permissions')
+                            ->label(__('Assigned Permissions'))
+                            ->multiple()
+                            ->relationship(
+                                name: 'permissions',
+                                modifyQueryUsing: fn (Builder $query) => $query->orderBy('name'),
+                            )
+                            ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->name} ({$record->guard_name})")
+                            ->searchable(['name', 'guard_name'])
+                            ->preload()
+                            ->columnSpanFull(),
+                    ]),
+
+                Section::make(__('Team Assignment'))
+                    ->description(__('Assign this role to a specific team (optional)'))
+                    ->icon('heroicon-o-user-group')
+                    ->hidden(fn () => ! config('permission.teams', false) || Filament::hasTenancy())
+                    ->collapsible()
+                    ->collapsed()
+                    ->schema([
+                        Select::make(config('permission.column_names.team_foreign_key', 'team_id'))
+                            ->label(__('Team'))
+                            ->dehydrated(fn ($state) => (int) $state <= 0)
+                            ->placeholder(__('Select a Team'))
+                            ->hint(__('Leave blank for a global role'))
+                            ->native(false),
                     ]),
             ]);
     }

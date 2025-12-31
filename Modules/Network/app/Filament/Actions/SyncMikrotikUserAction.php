@@ -6,6 +6,7 @@ namespace Modules\Network\Filament\Actions;
 
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
+use Filament\Support\Icons\Heroicon;
 use Modules\Membership\Models\Member;
 use Modules\Network\Services\MikrotikService;
 use Modules\Network\Settings\RouterSettings;
@@ -21,7 +22,7 @@ class SyncMikrotikUserAction
     {
         return Action::make($name)
             ->label(__('Sync to WiFi'))
-            ->icon('heroicon-o-arrow-path')
+            ->icon(Heroicon::OutlinedArrowPath)
             ->color('info')
             ->visible(fn () => self::isModuleEnabled())
             ->requiresConfirmation()

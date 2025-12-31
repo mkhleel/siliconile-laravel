@@ -96,8 +96,19 @@ class extends Component
     #[Validate('nullable|string|max:2000')]
     public ?string $startup_idea = null;
 
+    // add asking for if the members has visit any coworking space before, and how he found us
+    #[Validate('nullable|string|max:2000')]
+    public ?string $visited_coworking_space_before = null;
+
+    #[Validate('nullable|string|max:2000')]
+    public ?string $how_found_us = null;
+
     #[Validate('required|boolean')]
     public bool $terms_accepted = false;
+
+    #[Validate('nullable|boolean')]
+    public bool $marketing_messages_accepted = false;
+
 
     public function nextStep(): void
     {
@@ -175,6 +186,11 @@ class extends Component
             'emergency_contact_phone' => $this->emergency_contact_phone,
             'gender' => $this->gender ? Gender::from($this->gender) : null,
             'dob' => $this->dob,
+            'motivation' => $this->motivation,
+            'startup_idea' => $this->startup_idea,
+            'visited_coworking_space_before' => $this->visited_coworking_space_before,
+            'how_found_us' => $this->how_found_us,
+            'marketing_messages_accepted' => $this->marketing_messages_accepted,
         ]);
 
         session()->flash('success', 'Your application has been submitted successfully! We will review it and get back to you soon.');
@@ -194,45 +210,53 @@ class extends Component
     <x-sections.content>
         <div class="max-w-3xl mx-auto">
             <!-- Progress Steps -->
-            <div class="mb-12">
+            <div class="mb-8 md:mb-12">
                 <div class="flex items-center justify-between">
                     @foreach(range(1, $totalSteps) as $step)
-                        <div class="flex items-center">
-                            <button
-                                wire:click="goToStep({{ $step }})"
-                                @class([
-                                    'w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-colors',
-                                    'bg-primary text-primary-foreground' => $currentStep === $step,
-                                    'bg-primary/20 text-primary' => $currentStep > $step,
-                                    'bg-muted text-muted-foreground' => $currentStep < $step,
-                                    'cursor-pointer hover:bg-primary/30' => $currentStep > $step,
-                                    'cursor-default' => $currentStep <= $step,
-                                ])
-                                @if($currentStep < $step) disabled @endif
-                            >
-                                @if($currentStep > $step)
-                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                @else
-                                    {{ $step }}
-                                @endif
-                            </button>
+                        <div class="flex items-center flex-1 {{ $step === $totalSteps ? 'flex-none' : '' }}">
+                            <div class="relative flex flex-col items-center">
+                                <button
+                                    wire:click="goToStep({{ $step }})"
+                                    @class([
+                                        'w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm sm:text-base font-semibold transition-colors flex-shrink-0',
+                                        'bg-primary text-primary-foreground' => $currentStep === $step,
+                                        'bg-primary/20 text-primary' => $currentStep > $step,
+                                        'bg-muted text-muted-foreground' => $currentStep < $step,
+                                        'cursor-pointer hover:bg-primary/30' => $currentStep > $step,
+                                        'cursor-default' => $currentStep <= $step,
+                                    ])
+                                    @if($currentStep < $step) disabled @endif
+                                >
+                                    @if($currentStep > $step)
+                                        <svg class="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    @else
+                                        {{ $step }}
+                                    @endif
+                                </button>
+                                <span @class([
+                                    'absolute -bottom-6 sm:-bottom-7 text-xs sm:text-sm whitespace-nowrap text-center',
+                                    'font-semibold text-primary' => $currentStep === $step,
+                                    'text-muted-foreground' => $currentStep !== $step,
+                                ])>
+                                    @switch($step)
+                                        @case(1) <span class="hidden sm:inline">Personal</span><span class="sm:hidden">Info</span> @break
+                                        @case(2) <span class="hidden sm:inline">Professional</span><span class="sm:hidden">Work</span> @break
+                                        @case(3) Contact @break
+                                        @case(4) Submit @break
+                                    @endswitch
+                                </span>
+                            </div>
                             @if($step < $totalSteps)
                                 <div @class([
-                                    'w-16 md:w-24 h-1 mx-2',
+                                    'flex-1 h-0.5 sm:h-1 mx-1 sm:mx-2',
                                     'bg-primary' => $currentStep > $step,
                                     'bg-muted' => $currentStep <= $step,
                                 ])></div>
                             @endif
                         </div>
                     @endforeach
-                </div>
-                <div class="flex justify-between mt-2 text-sm">
-                    <span class="text-center w-20">Personal</span>
-                    <span class="text-center w-20">Professional</span>
-                    <span class="text-center w-20">Contact</span>
-                    <span class="text-center w-20">Submit</span>
                 </div>
             </div>
 
@@ -450,6 +474,20 @@ class extends Component
                                 :rows="4"
                             />
 
+                            <x-ui.textarea
+                                wire:model="visited_coworking_space_before"
+                                label="Have you visited any coworking space before?"
+                                placeholder="Share your experience if any..."
+                                :rows="3"
+                            />
+
+                            <x-ui.textarea
+                                wire:model="how_found_us"
+                                label="How did you find out about Siliconile?"
+                                placeholder="e.g., social media, friend, event, etc."
+                                :rows="3"
+                            />
+
                             <div class="p-4 bg-muted/50 rounded-lg">
                                 <label class="flex items-start gap-3 cursor-pointer">
                                     <input
@@ -462,6 +500,22 @@ class extends Component
                                     </span>
                                 </label>
                                 @error('terms_accepted')
+                                    <p class="text-sm text-destructive mt-2">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="p-4 bg-muted/50 rounded-lg">
+                                <label class="flex items-start gap-3 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        wire:model="marketing_messages_accepted"
+                                        class="mt-1 w-4 h-4 text-primary rounded"
+                                    />
+                                    <span class="text-sm">
+                                        I consent to receive marketing communications from Siliconile about events, programs, and opportunities. I understand I can unsubscribe at any time.
+                                    </span>
+                                </label>
+                                @error('marketing_messages_accepted')
                                     <p class="text-sm text-destructive mt-2">{{ $message }}</p>
                                 @enderror
                             </div>

@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -31,10 +32,7 @@ class PermissionResource extends Resource
 {
     protected static bool $isScopedToTenant = false;
 
-    public static function getNavigationIcon(): ?string
-    {
-        return 'heroicon-o-lock-closed';
-    }
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::OutlinedLockClosed;
 
     public static function getModel(): string
     {
@@ -60,36 +58,51 @@ class PermissionResource extends Resource
     {
         return $schema
             ->components([
-                Section::make()
+                Section::make(__('Permission Details'))
+                    ->description(__('Configure permission name and guard'))
+                    ->icon('heroicon-o-key')
                     ->schema([
                         Grid::make(2)->schema([
                             TextInput::make('name')
-
-                                ->required(),
+                                ->label(__('Permission Name'))
+                                ->placeholder(__('e.g., create-posts, edit-users'))
+                                ->required()
+                                ->maxLength(255),
                             Select::make('guard_name')
-
+                                ->label(__('Guard'))
                                 ->options([
-                                    'web' => 'web',
-                                    'admin' => 'admin',
+                                    'web' => 'Web (Users)',
+                                    'admin' => 'Admin (Staff)',
                                 ])
                                 ->default('web')
+                                ->native(false)
                                 ->required(),
-                            Select::make('roles')
-                                ->multiple()
-
-                                ->relationship(
-                                    name: 'roles',
-                                    titleAttribute: 'name',
-                                    modifyQueryUsing: function (Builder $query) {
-                                        if (Filament::hasTenancy()) {
-                                            return $query->where(config('permission.column_names.team_foreign_key'), Filament::getTenant());
-                                        }
-
-                                        return $query;
-                                    }
-                                )
-                                ->preload(),
                         ]),
+                    ]),
+
+                Section::make(__('Role Assignment'))
+                    ->description(__('Assign this permission to roles'))
+                    ->icon('heroicon-o-shield-check')
+                    ->collapsible()
+                    ->schema([
+                        Select::make('roles')
+                            ->label(__('Assigned Roles'))
+                            ->multiple()
+                            ->relationship(
+                                name: 'roles',
+                                titleAttribute: 'name',
+                                modifyQueryUsing: function (Builder $query) {
+                                    if (Filament::hasTenancy()) {
+                                        return $query->where(config('permission.column_names.team_foreign_key'), Filament::getTenant());
+                                    }
+
+                                    return $query;
+                                }
+                            )
+                            ->preload()
+                            ->searchable()
+                            ->native(false)
+                            ->columnSpanFull(),
                     ]),
             ]);
     }

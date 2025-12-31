@@ -6,6 +6,7 @@ namespace Modules\Network\Filament\Actions;
 
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
+use Filament\Support\Icons\Heroicon;
 use Modules\Membership\Models\Member;
 use Modules\Network\Services\MikrotikService;
 use Modules\Network\Settings\RouterSettings;
@@ -21,7 +22,7 @@ class KickMikrotikUserAction
     {
         return Action::make($name)
             ->label(__('Kick WiFi Session'))
-            ->icon('heroicon-o-bolt')
+            ->icon(Heroicon::OutlinedBolt)
             ->color('danger')
             ->visible(fn () => self::isModuleEnabled())
             ->requiresConfirmation()

@@ -63,6 +63,11 @@ class User extends Authenticatable
         'admin_notes',
         'rejection_reason',
         'dob',
+        'motivation',
+        'startup_idea',
+        'visited_coworking_space_before',
+        'how_found_us',
+        'marketing_messages_accepted',
     ];
 
     /**

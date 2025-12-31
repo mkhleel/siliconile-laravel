@@ -7,12 +7,12 @@ namespace Modules\Billing\Filament\Resources\Invoices\Pages;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Filament\Actions;
 use Filament\Forms;
+use Filament\Infolists\Components;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use Filament\Infolists\Components;
 use Illuminate\Support\Facades\Mail;
 use Modules\Billing\Enums\InvoiceStatus;
 use Modules\Billing\Filament\Resources\Invoices\InvoiceResource;
@@ -189,7 +189,7 @@ class ViewInvoice extends ViewRecord
                         : "invoice-draft-{$this->record->id}.pdf";
 
                     return response()->streamDownload(
-                        fn () => print($pdf->output()),
+                        fn () => print ($pdf->output()),
                         $filename,
                         ['Content-Type' => 'application/pdf']
                     );
@@ -302,7 +302,7 @@ class ViewInvoice extends ViewRecord
 
                         Notification::make()
                             ->title('Invoice Voided')
-                            ->body("Invoice has been voided.")
+                            ->body('Invoice has been voided.')
                             ->warning()
                             ->send();
 

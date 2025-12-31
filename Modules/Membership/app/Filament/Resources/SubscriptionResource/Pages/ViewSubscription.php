@@ -9,6 +9,7 @@ use Filament\Infolists\Components;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Modules\Membership\Filament\Resources\SubscriptionResource;
 use Modules\Membership\Services\SubscriptionService;
 
@@ -23,7 +24,7 @@ class ViewSubscription extends ViewRecord
 
             Actions\Action::make('activate')
                 ->label('Activate')
-                ->icon('heroicon-o-check-badge')
+                ->icon(Heroicon::OutlinedCheckBadge)
                 ->color('success')
                 ->requiresConfirmation()
                 ->visible(fn ($record) => $record->status->value === 'pending')
@@ -34,7 +35,7 @@ class ViewSubscription extends ViewRecord
 
             Actions\Action::make('renew')
                 ->label('Renew')
-                ->icon('heroicon-o-arrow-path')
+                ->icon(Heroicon::OutlinedArrowPath)
                 ->color('success')
                 ->requiresConfirmation()
                 ->visible(fn ($record) => $record->canRenew())
@@ -45,7 +46,7 @@ class ViewSubscription extends ViewRecord
 
             Actions\Action::make('cancel')
                 ->label('Cancel')
-                ->icon('heroicon-o-x-circle')
+                ->icon(Heroicon::OutlinedXCircle)
                 ->color('danger')
                 ->requiresConfirmation()
                 ->form([

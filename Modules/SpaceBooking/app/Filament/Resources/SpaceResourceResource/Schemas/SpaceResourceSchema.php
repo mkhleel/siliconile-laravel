@@ -10,8 +10,8 @@ use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Modules\SpaceBooking\Enums\ResourceType;
-use Modules\SpaceBooking\Models\ResourceAmenity;
 
 /**
  * Schema configuration for SpaceResource forms.
@@ -25,7 +25,7 @@ class SpaceResourceSchema
                 Tabs::make('Resource Details')
                     ->tabs([
                         Tabs\Tab::make('Basic Info')
-                            ->icon('heroicon-o-information-circle')
+                            ->icon(Heroicon::OutlinedInformationCircle)
                             ->schema([
                                 Section::make('General Information')
                                     ->schema(self::getBasicInfoSchema())
@@ -33,7 +33,7 @@ class SpaceResourceSchema
                             ]),
 
                         Tabs\Tab::make('Pricing')
-                            ->icon('heroicon-o-currency-dollar')
+                            ->icon(Heroicon::OutlinedCurrencyDollar)
                             ->schema([
                                 Section::make('Pricing Configuration')
                                     ->schema(self::getPricingSchema())
@@ -54,7 +54,7 @@ class SpaceResourceSchema
                             ]),
 
                         Tabs\Tab::make('Amenities')
-                            ->icon('heroicon-o-sparkles')
+                            ->icon(Heroicon::OutlinedSparkles)
                             ->schema([
                                 Section::make('Resource Amenities')
                                     ->schema(self::getAmenitiesSchema()),

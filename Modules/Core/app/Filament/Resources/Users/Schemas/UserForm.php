@@ -6,8 +6,6 @@ namespace Modules\Core\Filament\Resources\Users\Schemas;
 
 use App\Enums\UserType;
 use App\Models\User;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Group;
@@ -24,78 +22,93 @@ class UserForm
     {
         return $schema
             ->components([
-                Section::make('Personal Information')
-                    ->label(__('Personal Information'))
+                Section::make(__('Personal Information'))
+                    ->description(__('Basic user profile details'))
+                    ->icon('heroicon-o-user')
                     ->aside()
                     ->schema([
                         Group::make()
                             ->columns(2)
                             ->schema([
                                 TextInput::make('name')
-                                    ->required(),
+                                    ->required()
+                                    ->maxLength(255),
                                 TextInput::make('username')
-                                    ->required(),
+                                    ->required()
+                                    ->maxLength(255),
                                 TextInput::make('email')
                                     ->email()
                                     ->required()
                                     ->unique(User::class, 'email', fn (?User $record) => $record),
-                                Select::make('type')
-                                    ->options(UserType::class)
-                                    ->native(false),
                                 TextInput::make('phone')
                                     ->required()
-                                    ->label('Contact No.')
+                                    ->label(__('Contact No.'))
                                     ->tel()
                                     ->maxLength(255),
+                                Select::make('type')
+                                    ->label(__('User Type'))
+                                    ->options(UserType::class)
+                                    ->native(false),
+                                Select::make('gender')
+                                    ->label(__('Gender'))
+                                    ->options(['male' => __('Male'), 'female' => __('Female')])
+                                    ->native(false)
+                                    ->required(),
                             ]),
+                        TextInput::make('about_me')
+                            ->label(__('About Me'))
+                            ->maxLength(1000)
+                            ->columnSpanFull(),
                     ]),
-                Section::make('Authentication')
+
+                Section::make(__('Authentication'))
+                    ->description(__('Password and security settings'))
+                    ->icon('heroicon-o-lock-closed')
                     ->aside()
                     ->schema([
-                        Group::make()
-                            ->columns(2)
-
-                            // ->help('Account Details')
-                            ->schema([
-                                TextInput::make('password')
-                                    ->password()
-                                    ->required(fn (string $operation): bool => $operation === 'create')
-                                    ->maxLength(255)
-                                    ->dehydrated(fn (?string $state): bool => filled($state))
-                                    ->rule(Password::default()),
-                            ]),
+                        TextInput::make('password')
+                            ->password()
+                            ->required(fn (string $operation): bool => $operation === 'create')
+                            ->maxLength(255)
+                            ->dehydrated(fn (?string $state): bool => filled($state))
+                            ->rule(Password::default())
+                            ->helperText(__('Leave empty to keep current password')),
                     ]),
-                Section::make('Address')
+
+                Section::make(__('Location'))
+                    ->description(__('Address and location information'))
+                    ->icon('heroicon-o-map-pin')
                     ->aside()
+                    ->collapsible()
                     ->schema([
                         Group::make()
                             ->columns(3)
-                            // ->label('Account Details')
                             ->schema([
                                 Select::make('country')
+                                    ->label(__('Country'))
                                     ->live()
                                     ->dehydrated()
                                     ->options(Country::all()->pluck('name', 'id')->toArray())
-                                    ->afterStateUpdated(fn (callable $set) => $set('parent_id', null))
-                                    ->searchable(),
+                                    ->afterStateUpdated(fn (callable $set) => $set('state_id', null))
+                                    ->searchable()
+                                    ->native(false),
 
                                 Select::make('state_id')
+                                    ->label(__('State/Province'))
                                     ->live()
                                     ->dehydrated()
-                                    ->options(fn (callable $get) => City::whereCountryId($get('country'))?->pluck('name', 'id')->toArray())
-                                    ->disabled(fn (callable $get) => ! $get('country')),
+                                    ->options(fn (callable $get) => City::whereCountryId($get('country'))?->pluck('name', 'id')->toArray() ?? [])
+                                    ->disabled(fn (callable $get) => ! $get('country'))
+                                    ->searchable()
+                                    ->native(false),
 
                                 Select::make('city_id')
+                                    ->label(__('City/Area'))
                                     ->live()
-                                    ->options(fn (callable $get) => Area::whereCityId($get('state_id'))?->pluck('name', 'id')->toArray())
-                                    ->disabled(fn (callable $get) => ! $get('state_id')),
-                                TextInput::make('about_me')
-                                    ->columnSpan(2)
-                                    ->required(),
-                                Select::make('gender')
-                                    ->options(['male' => __('Male'), 'female' => __('Female')])
-                                    ->columnSpan(2)
-                                    ->required(),
+                                    ->options(fn (callable $get) => Area::whereCityId($get('state_id'))?->pluck('name', 'id')->toArray() ?? [])
+                                    ->disabled(fn (callable $get) => ! $get('state_id'))
+                                    ->searchable()
+                                    ->native(false),
                             ]),
                     ]),
             ]);

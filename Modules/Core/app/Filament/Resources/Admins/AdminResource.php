@@ -65,43 +65,57 @@ class AdminResource extends Resource
         return $schema
             ->components([
                 Section::make(__('Personal Information'))
-                    ->columnSpanFull()
+                    ->description(__('Basic admin profile details'))
+                    ->icon('heroicon-o-user')
                     ->schema([
                         Group::make()
                             ->columns(2)
                             ->schema([
                                 TextInput::make('name')
-                                    ->required(),
+                                    ->label(__('Full Name'))
+                                    ->required()
+                                    ->maxLength(255),
                                 TextInput::make('username')
-                                    ->required(),
+                                    ->label(__('Username'))
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->unique(Admin::class, 'username', fn (?Admin $record) => $record),
                                 TextInput::make('email')
+                                    ->label(__('Email Address'))
                                     ->email()
                                     ->required()
-                                    ->unique(Admin::class, 'email', fn (?Admin $record) => $record),
+                                    ->unique(Admin::class, 'email', fn (?Admin $record) => $record)
+                                    ->columnSpanFull(),
                             ]),
                     ]),
+
                 Section::make(__('Authentication'))
-                    ->columnSpanFull()
+                    ->description(__('Password and security settings'))
+                    ->icon('heroicon-o-lock-closed')
                     ->schema([
-                        Group::make()
-                            ->columns(2)
-                            ->schema([
-                                TextInput::make('password')
-                                    ->password()
-                                    ->required(fn (string $operation): bool => $operation === 'create')
-                                    ->maxLength(255)
-                                    ->dehydrated(fn (?string $state): bool => filled($state))
-                                    ->rule(Password::default()),
-
-                                Select::make('roles')
-                                    ->multiple()
-                                    ->relationship('roles', 'name', modifyQueryUsing: fn (Builder $query): Builder => $query->where('guard_name', Filament::getAuthGuard()))
-                                    ->preload(),
-                            ]),
+                        TextInput::make('password')
+                            ->label(__('Password'))
+                            ->password()
+                            ->required(fn (string $operation): bool => $operation === 'create')
+                            ->maxLength(255)
+                            ->dehydrated(fn (?string $state): bool => filled($state))
+                            ->rule(Password::default())
+                            ->helperText(__('Leave empty to keep current password')),
                     ]),
 
+                Section::make(__('Access Control'))
+                    ->description(__('Assign roles to this admin'))
+                    ->icon('heroicon-o-shield-check')
+                    ->schema([
+                        Select::make('roles')
+                            ->label(__('Assigned Roles'))
+                            ->multiple()
+                            ->relationship('roles', 'name', modifyQueryUsing: fn (Builder $query): Builder => $query->where('guard_name', Filament::getAuthGuard()))
+                            ->preload()
+                            ->searchable()
+                            ->native(false),
+                    ]),
             ]);
-
     }
 
     public static function table(Table $table): Table
@@ -139,10 +153,10 @@ class AdminResource extends Resource
                             ->rule('required', fn ($get) => (bool) $get('new_password'))
                             ->same('new_password'),
                     ])
-                    ->icon('heroicon-o-key'),
+                    ->icon(Heroicon::OutlinedKey),
                 Action::make('deactivate')
                     ->color('danger')
-                    ->icon('heroicon-o-trash')
+                    ->icon(Heroicon::OutlinedTrash)
                     ->action(fn (Admin $record) => $record->delete()),
             ])
             ->toolbarActions([

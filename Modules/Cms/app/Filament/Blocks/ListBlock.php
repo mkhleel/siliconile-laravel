@@ -8,6 +8,7 @@ use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Support\Icons\Heroicon;
 
 final class ListBlock
 {
@@ -15,7 +16,7 @@ final class ListBlock
     {
         return Block::make('list')
 
-            ->icon('heroicon-o-list-bullet')
+            ->icon(Heroicon::OutlinedListBullet)
             ->schema([
                 Select::make('type')
 

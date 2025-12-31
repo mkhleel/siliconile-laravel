@@ -9,6 +9,7 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
+use Filament\Support\Icons\Heroicon;
 
 final class TableBlock
 {
@@ -16,7 +17,7 @@ final class TableBlock
     {
         return Block::make('table')
 
-            ->icon('heroicon-o-table-cells')
+            ->icon(Heroicon::OutlinedTableCells)
             ->schema([
                 Toggle::make('has_header')
 

@@ -9,6 +9,7 @@ use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Str;
 
 final class QuoteBlock
@@ -17,7 +18,7 @@ final class QuoteBlock
     {
         return Block::make('quote')
 
-            ->icon('heroicon-o-chat-bubble-left-right')
+            ->icon(Heroicon::OutlinedChatBubbleLeftRight)
             ->schema([
                 Textarea::make('content')
 

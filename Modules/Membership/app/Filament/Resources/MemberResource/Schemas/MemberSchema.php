@@ -8,6 +8,7 @@ use App\Models\User;
 use Filament\Forms;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Modules\Membership\Enums\MemberType;
 
 class MemberSchema
@@ -97,19 +98,19 @@ class MemberSchema
                         Forms\Components\TextInput::make('linkedin_url')
                             ->label('LinkedIn URL')
                             ->url()
-                            ->prefixIcon('heroicon-o-link')
+                            ->prefixIcon(Heroicon::OutlinedLink)
                             ->maxLength(255),
 
                         Forms\Components\TextInput::make('twitter_url')
                             ->label('Twitter/X URL')
                             ->url()
-                            ->prefixIcon('heroicon-o-link')
+                            ->prefixIcon(Heroicon::OutlinedLink)
                             ->maxLength(255),
 
                         Forms\Components\TextInput::make('website_url')
                             ->label('Website URL')
                             ->url()
-                            ->prefixIcon('heroicon-o-globe-alt')
+                            ->prefixIcon(Heroicon::OutlinedGlobeAlt)
                             ->maxLength(255),
                     ])
                     ->columns(2)

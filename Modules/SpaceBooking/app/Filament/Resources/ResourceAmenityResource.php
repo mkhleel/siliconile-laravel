@@ -8,6 +8,7 @@ use BackedEnum;
 use Filament\Actions;
 use Filament\Forms;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -42,40 +43,64 @@ class ResourceAmenityResource extends Resource
     {
         return $schema
             ->components([
-                Section::make('Amenity Details')
+                Section::make(__('Amenity Details'))
+                    ->description(__('Configure amenity name and identifier'))
+                    ->icon('heroicon-o-sparkles')
                     ->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->required()
-                            ->maxLength(255)
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(function (Forms\Set $set, ?string $state) {
-                                $set('slug', \Str::slug($state ?? ''));
-                            }),
+                        Grid::make(2)->schema([
+                            Forms\Components\TextInput::make('name')
+                                ->label(__('Amenity Name'))
+                                ->required()
+                                ->maxLength(255)
+                                ->live(onBlur: true)
+                                ->afterStateUpdated(function (Forms\Set $set, ?string $state) {
+                                    $set('slug', \Str::slug($state ?? ''));
+                                }),
 
-                        Forms\Components\TextInput::make('slug')
-                            ->required()
-                            ->maxLength(255)
-                            ->unique(ignoreRecord: true)
-                            ->alphaDash(),
+                            Forms\Components\TextInput::make('slug')
+                                ->label(__('Slug'))
+                                ->required()
+                                ->maxLength(255)
+                                ->unique(ignoreRecord: true)
+                                ->alphaDash(),
+                        ]),
+                    ]),
 
-                        Forms\Components\TextInput::make('icon')
-                            ->placeholder('heroicon-o-wifi')
-                            ->helperText('Use Heroicon names like heroicon-o-wifi'),
+                Section::make(__('Display Settings'))
+                    ->description(__('Icon and description for display'))
+                    ->icon('heroicon-o-paint-brush')
+                    ->collapsible()
+                    ->schema([
+                        Grid::make(2)->schema([
+                            Forms\Components\TextInput::make('icon')
+                                ->label(__('Icon'))
+                                ->placeholder('heroicon-o-wifi')
+                                ->helperText(__('Use Heroicon names like heroicon-o-wifi')),
+
+                            Forms\Components\Toggle::make('is_active')
+                                ->label(__('Active'))
+                                ->default(true)
+                                ->helperText(__('Inactive amenities will not be shown')),
+                        ]),
 
                         Forms\Components\Textarea::make('description')
+                            ->label(__('Description'))
                             ->maxLength(500)
-                            ->rows(2),
+                            ->rows(2)
+                            ->columnSpanFull(),
+                    ]),
 
-                        Forms\Components\Toggle::make('is_active')
-                            ->label('Active')
-                            ->default(true),
-
+                Section::make(__('Sorting'))
+                    ->icon('heroicon-o-arrows-up-down')
+                    ->collapsed()
+                    ->schema([
                         Forms\Components\TextInput::make('sort_order')
+                            ->label(__('Sort Order'))
                             ->numeric()
                             ->default(0)
-                            ->minValue(0),
-                    ])
-                    ->columns(2),
+                            ->minValue(0)
+                            ->helperText(__('Lower numbers appear first')),
+                    ]),
             ]);
     }
 

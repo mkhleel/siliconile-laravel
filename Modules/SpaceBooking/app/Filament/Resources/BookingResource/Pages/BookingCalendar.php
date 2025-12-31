@@ -49,7 +49,7 @@ class BookingCalendar extends Page
         return [
             Actions\Action::make('listView')
                 ->label('List View')
-                ->icon('heroicon-o-list-bullet')
+                ->icon(Heroicon::OutlinedListBullet)
                 ->url(fn () => BookingResource::getUrl('index'))
                 ->color('gray'),
 
@@ -95,7 +95,7 @@ class BookingCalendar extends Page
 
         return $bookings->map(fn (Booking $booking) => [
             'id' => $booking->id,
-            'title' => $booking->resource->name . ' - ' . $booking->getBookerName(),
+            'title' => $booking->resource->name.' - '.$booking->getBookerName(),
             'start' => $booking->start_time->toIso8601String(),
             'end' => $booking->end_time->toIso8601String(),
             'color' => $this->getStatusColor($booking->status),

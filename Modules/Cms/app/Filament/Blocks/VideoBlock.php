@@ -8,6 +8,7 @@ use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Str;
 
 final class VideoBlock
@@ -16,7 +17,7 @@ final class VideoBlock
     {
         return Block::make('video')
 
-            ->icon('heroicon-o-play')
+            ->icon(Heroicon::OutlinedPlay)
             ->schema([
                 TextInput::make('url')
 

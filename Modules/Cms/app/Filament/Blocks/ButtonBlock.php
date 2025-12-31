@@ -8,6 +8,7 @@ use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Support\Icons\Heroicon;
 
 final class ButtonBlock
 {
@@ -15,7 +16,7 @@ final class ButtonBlock
     {
         return Block::make('button')
 
-            ->icon('heroicon-o-cursor-arrow-rays')
+            ->icon(Heroicon::OutlinedCursorArrowRays)
             ->schema([
                 TextInput::make('text')
 

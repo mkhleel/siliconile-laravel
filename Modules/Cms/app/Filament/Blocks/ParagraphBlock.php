@@ -7,6 +7,7 @@ namespace Modules\Cms\Filament\Blocks;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Str;
 
 final class ParagraphBlock
@@ -15,7 +16,7 @@ final class ParagraphBlock
     {
         return Block::make('paragraph')
 
-            ->icon('heroicon-o-bars-3-bottom-left')
+            ->icon(Heroicon::OutlinedBars3BottomLeft)
             ->schema([
                 Textarea::make('content')
 

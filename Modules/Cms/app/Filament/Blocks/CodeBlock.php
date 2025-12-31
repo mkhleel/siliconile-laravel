@@ -7,6 +7,7 @@ namespace Modules\Cms\Filament\Blocks;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Support\Icons\Heroicon;
 
 final class CodeBlock
 {
@@ -14,7 +15,7 @@ final class CodeBlock
     {
         return Block::make('code')
 
-            ->icon('heroicon-o-code-bracket')
+            ->icon(Heroicon::OutlinedCodeBracket)
             ->schema([
                 Textarea::make('content')
 

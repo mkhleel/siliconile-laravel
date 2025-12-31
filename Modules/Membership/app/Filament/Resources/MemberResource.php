@@ -21,7 +21,7 @@ class MemberResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
-    protected static string | UnitEnum | null $navigationGroup = 'Membership';
+    protected static string|UnitEnum|null $navigationGroup = 'Membership';
 
     protected static ?int $navigationSort = 1;
 

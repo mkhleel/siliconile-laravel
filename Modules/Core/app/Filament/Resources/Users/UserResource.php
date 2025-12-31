@@ -18,7 +18,7 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-        public static function getPluralLabel(): ?string
+    public static function getPluralLabel(): ?string
     {
         return __('Users');
     }
