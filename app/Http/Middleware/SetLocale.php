@@ -20,19 +20,17 @@ class SetLocale
     public function handle(Request $request, Closure $next): Response
     {
         $supportedLocales = config('app.supported_locales', ['en', 'ar']);
-
         // Check for locale in query string (for switching)
         if ($request->has('lang') && in_array($request->query('lang'), $supportedLocales, true)) {
             $locale = $request->query('lang');
             Session::put('locale', $locale);
-
+            
             // Redirect to remove the query parameter
             return redirect()->to($request->url());
         }
 
         // Get locale from session, cookie, or default
         $locale = Session::get('locale', $request->cookie('locale', config('app.locale')));
-        // dd($locale);
 
         // Validate locale
         if (! in_array($locale, $supportedLocales, true)) {

@@ -17,6 +17,7 @@ return new class extends SettingsMigration
         $this->migrator->add('general.site_theme', 'classic');
         $this->migrator->add('general.slider', []);
         $this->migrator->add('general.currency', 'USD');
+        $this->migrator->add('general.preferred_currency', 'USD');
         $this->migrator->add('general.admin_prefix', 'admin');
         $this->migrator->add('general.site_active', true);
         $this->migrator->add('general.disabled_modules', []);

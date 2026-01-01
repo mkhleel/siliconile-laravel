@@ -29,7 +29,7 @@ class extends Component
 
 <main class="flex-1">
     <x-sections.hero
-        title="{{ __('Membership <span class=') }}"text-primary'>Plans</span>"
+        title="{{ __('Membership Plans') }}"
         subtitle="{{ __('Choose the perfect membership plan for your startup journey. From daily passes to dedicated office spaces, we have options for every stage of your growth.') }}"
     />
 

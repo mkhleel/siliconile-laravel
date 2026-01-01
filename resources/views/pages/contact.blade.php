@@ -44,8 +44,8 @@ class extends Component {
 <div>
     <!-- Hero Section -->
     <x-sections.hero 
-        title="{{ __('Get in <span class=') }}"text-primary'>Touch</span>"
-        subtitle="{{ __('Ready to start your entrepreneurial journey? We') }}"d love to hear from you. Let's discuss how Siliconile can help turn your idea into reality."
+        title="{{ __('Get in Touch') }}"
+        subtitle="{{ __('Ready to start your entrepreneurial journey? We\'d love to hear from you. Let\'s discuss how Siliconile can help turn your idea into reality.') }}"
     />
 
     <section class="py-16 md:py-24">

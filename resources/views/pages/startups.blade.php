@@ -12,7 +12,7 @@ use Modules\Incubation\Models\Application;
 
 new
 #[Layout('layouts.app')]
-#[Title('Siliconile | Startups & {{ __('Portfolio') }}')]
+#[Title('Siliconile | Startups & Portfolio')]
 class extends Component
 {
     public string $selectedFilter = 'all';

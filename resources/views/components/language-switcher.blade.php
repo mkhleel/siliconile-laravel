@@ -49,7 +49,7 @@
         <div class="py-1" role="none">
             @foreach($locales as $code => $locale)
                 <a 
-                    href="{{ url()->current() }}?lang={{ $code }}"
+                    href="{{ url()->current() }}?locale={{ $code }}"
                     class="flex items-center gap-3 px-4 py-2 text-sm transition-colors {{ $currentLocale === $code ? 'bg-accent text-accent-foreground' : 'hover:bg-accent hover:text-accent-foreground' }}"
                     role="menuitem"
                     wire:navigate.hover

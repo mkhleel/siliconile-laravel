@@ -380,8 +380,8 @@ new #[Layout('layouts.app')] class extends Component {
             <div class="flex items-center justify-between">
                 @php
                     $steps = [
-                        1 => '{{ __('Select Tickets') }}',
-                        2 => auth()->check() ? 'Payment' : '{{ __('Your Details') }}',
+                        1 => __('Select Tickets'),
+                        2 => auth()->check() ? 'Payment' :  __('Your Details'),
                         3 => auth()->check() ? 'Confirmation' : ($this->isFreeOrder ? 'Confirmation' : 'Payment'),
                         4 => 'Confirmation',
                     ];

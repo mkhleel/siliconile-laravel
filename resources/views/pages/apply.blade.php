@@ -22,7 +22,6 @@ class extends Component
     public int $currentStep = 1;
     public int $totalSteps = 4;
 
-    // {{ __('Personal {{ __('Info') }}rmation') }} (Step 1)
     #[Validate('required|string|max:255')]
     public string $name = '';
 
@@ -209,8 +208,8 @@ class extends Component
 
 <main class="flex-1">
     <x-sections.hero
-        title="{{ __('Apply to <span class=') }}"text-primary'>Siliconile</span>"
-        subtitle="{{ __('Join Luxor') }}"s premier startup community. Complete the application form below to start your entrepreneurial journey with us."
+        title="{{ __('Apply to Siliconile') }}"
+        subtitle="{{ __('Join Luxor premier startup community. Complete the application form below to start your entrepreneurial journey with us.') }}"
     />
 
     <x-sections.content>
@@ -247,10 +246,10 @@ class extends Component
                                     'text-muted-foreground' => $currentStep !== $step,
                                 ])>
                                     @switch($step)
-                                        @case(1) <span class="hidden sm:inline">Personal</span><span class="sm:hidden">Info</span> @break
-                                        @case(2) <span class="hidden sm:inline">Professional</span><span class="sm:hidden">Work</span> @break
-                                        @case(3) Contact @break
-                                        @case(4) Submit @break
+                                        @case(1) <span class="hidden sm:inline">{{ __('Personal') }}</span><span class="sm:hidden">{{ __('Info') }}</span> @break
+                                        @case(2) <span class="hidden sm:inline">{{ __('Professional') }}</span><span class="sm:hidden">{{ __('Work') }}</span> @break
+                                        @case(3) {{ __('Contact') }} @break
+                                        @case(4) {{ __('Submit') }} @break
                                     @endswitch
                                 </span>
                             </div>
@@ -270,7 +269,7 @@ class extends Component
                 <form wire:submit="submit">
                     <!-- Step 1: Personal Information -->
                     <div x-show="$wire.currentStep === 1" x-transition>
-                        <h2 class="text-2xl font-bold mb-6">Personal Information</h2>
+                        <h2 class="text-2xl font-bold mb-6">{{ __('Personal Information') }}</h2>
                         <div class="space-y-6">
                             <x-ui.input
                                 wire:model="name"
@@ -293,7 +292,7 @@ class extends Component
                                 wire:model="phone"
                                 type="tel"
                                 label="{{ __('Phone Number') }}"
-                                placeholder="{{ __('+20 1XX XXX XXXX') }}"
+                                placeholder="+20 1XX XXX XXXX"
                                 :required="true"
                                 :error="$errors->first('phone')"
                             />

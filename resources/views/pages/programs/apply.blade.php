@@ -462,7 +462,7 @@ class extends Component
                                 <div class="grid gap-4 md:grid-cols-2 mt-4">
                                     <div class="space-y-2">
                                         <label class="text-sm font-medium">{{ __('Phone Number') }}</label>
-                                        <input type="tel" wire:model="founderPhone" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('+20 1XX XXX XXXX') }}">
+                                        <input type="tel" wire:model="founderPhone" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="+20 1XX XXX XXXX">
                                     </div>
 
                                     <div class="space-y-2">
@@ -736,8 +736,7 @@ class extends Component
                             @endif
 
                             @if($currentStep < $totalSteps)
-                            <button type="button" wire:click="nextStep" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6" @if($currentStep === 1 && $this->{{ __('openCohorts->isEmpty()) disabled') }} @endif{{ __('>
-                                Next') }}
+                            <button type="button" wire:click="nextStep" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6" @if($currentStep === 1 && $this->openCohorts->isEmpty()) disabled @endif>{{ __('Next') }}
                                 <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                             </button>
                             @else

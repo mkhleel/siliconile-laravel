@@ -43,7 +43,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'default_image' => env('SEO_DEFAULT_IMAGE', '/images/og-default.jpg'),
+    'default_image' => env('SEO_DEFAULT_IMAGE', '/images/1.png'),
     'default_image_width' => env('SEO_DEFAULT_IMAGE_WIDTH', 1200),
     'default_image_height' => env('SEO_DEFAULT_IMAGE_HEIGHT', 630),
     'twitter_card_type' => env('SEO_TWITTER_CARD_TYPE', 'summary_large_image'),
@@ -56,7 +56,7 @@ return [
 
     'organization' => [
         'name' => env('SEO_ORG_NAME', config('app.name')),
-        'logo' => env('SEO_ORG_LOGO', '/images/logo.png'),
+        'logo' => env('SEO_ORG_LOGO', '/images/1.png'),
         'address' => [
             'streetAddress' => env('SEO_ORG_STREET', ''),
             'addressLocality' => env('SEO_ORG_CITY', ''),

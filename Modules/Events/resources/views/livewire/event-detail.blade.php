@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
-use Modules\{{ __('Events') }}\Enums\AttendeeStatus;
+use Modules\Events\Enums\AttendeeStatus;
 use Modules\Events\Enums\EventStatus;
 use Modules\Events\Models\Event;
 use Modules\Events\Models\TicketType;
@@ -261,8 +261,7 @@ new #[Layout('layouts.app')] class extends Component {
                             <div class="text-center py-4 px-6 bg-muted rounded-lg">
                                 <p class="text-muted-foreground">
                                     Registration
-                                    @if($event->registration_start_date && $event->registration_start_date->isFuture(){{ __(')
-                                        opens') }} {{ $event->registration_start_date->diffForHumans() }}
+                                    @if($event->registration_start_date && $event->registration_start_date->isFuture()) {{ __('opens') }} {{ $event->registration_start_date->diffForHumans() }}
                                     @else
                                         {{ __('is closed') }}
                                     @endif

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Core\Console\Commands;
 
+use Gemini\Laravel\Facades\Gemini;
 use Illuminate\Console\Command;
-use Illuminate\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use Gemini\Laravel\Facades\Gemini;
 use Spatie\Fork\Fork;
+use Symfony\Component\Finder\Finder;
 use Throwable;
+
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\multiselect;
 
@@ -22,11 +22,14 @@ use function Laravel\Prompts\multiselect;
 final class ExtractLangStrings extends Command
 {
     private const JSON_FILE_KEY = '__JSON__';
-    private const ALL_FILES_KEY = '__ALL_FILES__';
-    private const MAIN_APP_KEY = '__MAIN__';
-    private const ALL_TARGETS_KEY = '__ALL_TARGETS__';
-    private const FILE_KEY_SEPARATOR = '::';
 
+    private const ALL_FILES_KEY = '__ALL_FILES__';
+
+    private const MAIN_APP_KEY = '__MAIN__';
+
+    private const ALL_TARGETS_KEY = '__ALL_TARGETS__';
+
+    private const FILE_KEY_SEPARATOR = '::';
 
     protected $signature = 'translations:extract-and-generate
                             {--source=. : The root directory of the application to scan for keys (deprecated; use interactive prompt)}
@@ -48,27 +51,43 @@ final class ExtractLangStrings extends Command
 
     // --- State Properties ---
     private array $translations = [];
+
     private array $existingTranslations = [];
+
     private array $sourceTextMap = [];
+
     private array $failedKeys = [];
+
     private float $startTime;
+
     private bool $shouldExit = false;
+
     private bool $isOffline = false;
+
     private bool $consolidateModules = false;
 
     /** @var array<string, array{name: string, path: string, lang_path: string}> */
     private array $scanTargets = [];
+
     private array $availableScanTargets = [];
+
     private array $fileTargetMap = [];
+
     private array $keyOriginMap = [];
 
     // --- Statistics ---
     private int $filesScanned = 0;
+
     private int $uniqueKeysForProcessing = 0;
+
     private int $totalKeysToTranslate = 0;
+
     private int $totalKeysSuccessfullyProcessed = 0;
+
     private int $totalKeysFailed = 0;
+
     private int $totalChunks = 0;
+
     private int $processedChunks = 0;
 
     public function handle()
@@ -76,7 +95,7 @@ final class ExtractLangStrings extends Command
         $this->startTime = microtime(true);
         $this->showWelcome();
 
-        if (!config('gemini.api_key') || config('gemini.api_key') === 'YOUR_API_KEY') {
+        if (! config('gemini.api_key') || config('gemini.api_key') === 'YOUR_API_KEY') {
             $this->isOffline = true;
             $this->warn(' ⚠️  Gemini API key is not configured. Running in OFFLINE mode.');
             $this->comment('   New translation files will be generated with keys as placeholder values.');
@@ -88,10 +107,11 @@ final class ExtractLangStrings extends Command
         $selectedTargets = $this->promptForScanTargets($this->availableScanTargets);
         if (empty($selectedTargets)) {
             $this->warn('No application or module targets were selected for scanning. Exiting.');
+
             return Command::SUCCESS;
         }
         $this->scanTargets = array_intersect_key($this->availableScanTargets, array_flip($selectedTargets));
-        $this->info("Scanning " . count($this->scanTargets) . " target(s): " . implode(', ', array_column($this->scanTargets, 'name')));
+        $this->info('Scanning '.count($this->scanTargets).' target(s): '.implode(', ', array_column($this->scanTargets, 'name')));
 
         $this->promptForConsolidation();
 
@@ -100,16 +120,17 @@ final class ExtractLangStrings extends Command
 
         [$scannedKeys, $keysWithSources] = $this->extractRawKeys();
         $this->saveExtractionLog($keysWithSources);
-        $this->info("Detailed code extraction log saved to <fg=bright-cyan>translation_extraction_log.json</>");
+        $this->info('Detailed code extraction log saved to <fg=bright-cyan>translation_extraction_log.json</>');
 
         $allPossibleKeys = $this->getAllKeySources($scannedKeys);
         if (empty($allPossibleKeys)) {
             $this->alert('No translation keys were found from any source. Exiting.');
+
             return Command::SUCCESS;
         }
         $this->populateSourceTextForNewKeys($allPossibleKeys);
 
-        $this->success("Key discovery complete! Found " . count($allPossibleKeys) . " unique keys from all sources combined.");
+        $this->success('Key discovery complete! Found '.count($allPossibleKeys).' unique keys from all sources combined.');
         $this->line('');
 
         $availableFiles = $this->determineAvailableFiles($allPossibleKeys);
@@ -117,12 +138,13 @@ final class ExtractLangStrings extends Command
 
         if (empty($selectedFiles)) {
             $this->warn('No files were selected for processing. Exiting.');
+
             return Command::SUCCESS;
         }
 
         $keysForProcessing = $this->mapKeysToSelectedFiles($allPossibleKeys, $selectedFiles);
         $this->uniqueKeysForProcessing = array_sum(array_map('count', $keysForProcessing));
-        $this->info(" ✅ Selected " . count($keysForProcessing) . " file groups containing {$this->uniqueKeysForProcessing} unique keys for processing.");
+        $this->info(' ✅ Selected '.count($keysForProcessing)." file groups containing {$this->uniqueKeysForProcessing} unique keys for processing.");
 
         $this->phaseTitle('📊 Phase 1.5: Analyzing Translation Status', 'blue');
         $this->performCrossCheckAndReport($keysForProcessing);
@@ -132,6 +154,7 @@ final class ExtractLangStrings extends Command
         if ($this->totalKeysToTranslate === 0) {
             $this->success(' 🎉 All selected keys are fully translated. Nothing to do!');
             $this->displayFinalSummary();
+
             return Command::SUCCESS;
         }
 
@@ -141,7 +164,7 @@ final class ExtractLangStrings extends Command
         } else {
             $this->phaseTitle(' 🤖 Phase 2: Translating with Gemini AI', 'magenta');
             if ($this->option('context')) {
-                $this->info("💡 Applying project-specific context for enhanced translation accuracy.");
+                $this->info('💡 Applying project-specific context for enhanced translation accuracy.');
             }
             $this->totalChunks = $this->calculateTotalChunks($keysToTranslate);
             if ($this->totalChunks === 0) {
@@ -157,11 +180,12 @@ final class ExtractLangStrings extends Command
 
         $this->phaseTitle(' 💾 Phase 3: Writing Language Files', 'green');
         $this->writeTranslationFiles();
-        if (!empty($this->failedKeys)) {
+        if (! empty($this->failedKeys)) {
             $this->saveFailedKeysLog();
-            $this->warn("Some translations failed. Failed keys have been saved to: <fg=bright-red>failed_translation_keys.json</>");
+            $this->warn('Some translations failed. Failed keys have been saved to: <fg=bright-red>failed_translation_keys.json</>');
         }
         $this->displayFinalSummary();
+
         return Command::SUCCESS;
     }
 
@@ -170,7 +194,7 @@ final class ExtractLangStrings extends Command
         $this->consolidateModules = $this->option('consolidate-modules');
         $hasModulesSelected = count(array_diff(array_keys($this->scanTargets), [self::MAIN_APP_KEY])) > 0;
 
-        if ($hasModulesSelected && !$this->option('consolidate-modules') && !$this->option('no-interaction')) {
+        if ($hasModulesSelected && ! $this->option('consolidate-modules') && ! $this->option('no-interaction')) {
             $this->consolidateModules = confirm(
                 label: 'Consolidate all module translations into the main application\'s `lang` directory?',
                 default: false,
@@ -193,13 +217,14 @@ final class ExtractLangStrings extends Command
             foreach ($modules as $module) {
                 if ($module->isEnabled()) {
                     $targets[$module->getName()] = [
-                        'name' => 'Module: ' . $module->getName(),
+                        'name' => 'Module: '.$module->getName(),
                         'path' => $module->getPath(),
-                        'lang_path' => $module->getPath() . DIRECTORY_SEPARATOR . $this->option('target-dir'),
+                        'lang_path' => $module->getPath().DIRECTORY_SEPARATOR.$this->option('target-dir'),
                     ];
                 }
             }
         }
+
         return $targets;
     }
 
@@ -210,7 +235,7 @@ final class ExtractLangStrings extends Command
         }
 
         $displayChoices = [self::ALL_TARGETS_KEY => '-- ALL TARGETS --'] +
-            collect($availableTargets)->mapWithKeys(fn($target, $key) => [$key => $target['name']])->all();
+            collect($availableTargets)->mapWithKeys(fn ($target, $key) => [$key => $target['name']])->all();
 
         $selected = $this->promptForMultiChoice(
             label: 'Which parts of the application would you like to scan and process?',
@@ -222,17 +247,18 @@ final class ExtractLangStrings extends Command
         if (in_array(self::ALL_TARGETS_KEY, $selected)) {
             return array_keys($availableTargets);
         }
+
         return $selected;
     }
 
     private function loadExistingTranslations(): void
     {
-        $this->info("Reading existing language files from selected targets...");
+        $this->info('Reading existing language files from selected targets...');
         $languages = explode(',', $this->option('langs'));
 
         foreach ($this->scanTargets as $targetKey => $target) {
             $baseLangPath = $target['lang_path'];
-            if (!File::isDirectory($baseLangPath)) {
+            if (! File::isDirectory($baseLangPath)) {
                 continue;
             }
 
@@ -240,7 +266,7 @@ final class ExtractLangStrings extends Command
 
             foreach (File::directories($baseLangPath) as $langDirPath) {
                 $lang = basename($langDirPath);
-                if (!in_array($lang, $languages) && $lang !== 'en') {
+                if (! in_array($lang, $languages) && $lang !== 'en') {
                     continue;
                 }
                 foreach (File::allFiles($langDirPath) as $file) {
@@ -249,7 +275,7 @@ final class ExtractLangStrings extends Command
                     }
                     $relativePath = $file->getRelativePathname();
                     $fileKey = str_replace(['.php', DIRECTORY_SEPARATOR], ['', '/'], $relativePath);
-                    $contextualFileKey = $origin . self::FILE_KEY_SEPARATOR . $fileKey;
+                    $contextualFileKey = $origin.self::FILE_KEY_SEPARATOR.$fileKey;
 
                     $includedData = @include $file->getPathname();
                     if (is_array($includedData)) {
@@ -260,7 +286,7 @@ final class ExtractLangStrings extends Command
                         foreach ($flatData as $keySuffix => $text) {
                             if (is_string($text)) {
                                 $fullKey = "{$fileKey}.{$keySuffix}";
-                                if ($lang === 'en' || !isset($this->sourceTextMap[$fullKey])) {
+                                if ($lang === 'en' || ! isset($this->sourceTextMap[$fullKey])) {
                                     $this->sourceTextMap[$fullKey] = $text;
                                 }
                             }
@@ -268,24 +294,24 @@ final class ExtractLangStrings extends Command
                     }
                 }
             }
-            $jsonFinder = new Finder();
+            $jsonFinder = new Finder;
             $jsonFinder->files()->in($baseLangPath)->name('*.json');
 
             foreach ($jsonFinder as $jsonFile) {
                 $lang = $jsonFile->getFilenameWithoutExtension();
-                if (!in_array($lang, $languages) && $lang !== 'en') {
+                if (! in_array($lang, $languages) && $lang !== 'en') {
                     continue;
                 }
                 $relativePath = $jsonFile->getRelativePath();
-                $fileKey = !empty($relativePath) ? rtrim(str_replace(DIRECTORY_SEPARATOR, '/', $relativePath), '/') . '/' . self::JSON_FILE_KEY : self::JSON_FILE_KEY;
-                $contextualFileKey = $origin . self::FILE_KEY_SEPARATOR . $fileKey;
+                $fileKey = ! empty($relativePath) ? rtrim(str_replace(DIRECTORY_SEPARATOR, '/', $relativePath), '/').'/'.self::JSON_FILE_KEY : self::JSON_FILE_KEY;
+                $contextualFileKey = $origin.self::FILE_KEY_SEPARATOR.$fileKey;
 
                 $jsonContent = json_decode($jsonFile->getContents(), true);
                 if (is_array($jsonContent)) {
                     $this->existingTranslations[$lang][$contextualFileKey] = $jsonContent;
                     $this->fileTargetMap[$contextualFileKey] = $origin;
                     foreach ($jsonContent as $key => $text) {
-                        if (is_string($text) && ($lang === 'en' || !isset($this->sourceTextMap[$key]))) {
+                        if (is_string($text) && ($lang === 'en' || ! isset($this->sourceTextMap[$key]))) {
                             $this->sourceTextMap[$key] = $text;
                         }
                     }
@@ -316,13 +342,13 @@ final class ExtractLangStrings extends Command
 
         foreach ($this->scanTargets as $targetKey => $target) {
             // If scanning the main app, add the modules directory name to the exclusion list.
-            $extraExcludes = ($targetKey === self::MAIN_APP_KEY && !empty($moduleDirectoryToExclude)) ? $moduleDirectoryToExclude : [];
+            $extraExcludes = ($targetKey === self::MAIN_APP_KEY && ! empty($moduleDirectoryToExclude)) ? $moduleDirectoryToExclude : [];
             $finder = $this->configureFinder([$target['path']], $extraExcludes);
             $allPatterns = $this->getExtractionPatterns();
 
             foreach ($finder as $file) {
                 $this->filesScanned++;
-                $extractionBar->setMessage('Scanning: ' . $file->getRelativePathname());
+                $extractionBar->setMessage('Scanning: '.$file->getRelativePathname());
                 $relativePath = $file->getRelativePathname();
                 $content = $file->getContents();
                 $origin = $this->consolidateModules ? self::MAIN_APP_KEY : $targetKey;
@@ -331,16 +357,17 @@ final class ExtractLangStrings extends Command
                     if (preg_match_all($pattern, $content, $matches)) {
                         $foundKeys = array_merge(...array_slice($matches, 1));
                         foreach ($foundKeys as $key) {
-                            if (empty($key))
+                            if (empty($key)) {
                                 continue;
+                            }
                             $key = str_replace('/', '.', $key);
-                            if (!isset($keysWithSources[$key])) {
+                            if (! isset($keysWithSources[$key])) {
                                 $keysWithSources[$key] = [];
                             }
-                            if (!in_array($relativePath, $keysWithSources[$key])) {
+                            if (! in_array($relativePath, $keysWithSources[$key])) {
                                 $keysWithSources[$key][] = $relativePath;
                             }
-                            if (!isset($this->keyOriginMap[$key])) {
+                            if (! isset($this->keyOriginMap[$key])) {
                                 $this->keyOriginMap[$key] = $origin;
                             }
                         }
@@ -351,14 +378,15 @@ final class ExtractLangStrings extends Command
         }
         $extractionBar->finish();
         $this->line('');
+
         return [array_keys($keysWithSources), $keysWithSources];
     }
 
     private function configureFinder(array $scanPaths, array $extraExcludes = []): Finder
     {
-        $finder = new Finder();
+        $finder = new Finder;
         $defaultExcludes = explode(',', $this->option('exclude'));
-        $filesToExclude = ['artisan', 'composer.json', 'composer.lock', 'failed_translation_keys.json', 'translation_extraction_log.json', 'laravel-translation-extractor.sh', 'package.json', 'package-lock.json', 'phpunit.xml', 'README.md', 'vite.config.js', '.env*', '.phpactor.json', '.phpunit.result.cache', 'Homestead.*', 'auth.json',];
+        $filesToExclude = ['artisan', 'composer.json', 'composer.lock', 'failed_translation_keys.json', 'translation_extraction_log.json', 'laravel-translation-extractor.sh', 'package.json', 'package-lock.json', 'phpunit.xml', 'README.md', 'vite.config.js', '.env*', '.phpactor.json', '.phpunit.result.cache', 'Homestead.*', 'auth.json'];
 
         $finder->files()
             ->in($scanPaths)
@@ -370,8 +398,9 @@ final class ExtractLangStrings extends Command
 
         $extensions = explode(',', $this->option('extensions'));
         foreach ($extensions as $ext) {
-            $finder->name('*.' . trim($ext));
+            $finder->name('*.'.trim($ext));
         }
+
         return $finder;
     }
 
@@ -385,13 +414,13 @@ final class ExtractLangStrings extends Command
         }
     }
 
-
     private function writeTranslationFiles()
     {
         $actionVerb = $this->isOffline ? 'Generated placeholder' : ($this->option('skip-existing') ? 'Updated' : 'Wrote');
 
         if (empty($this->translations)) {
-            $this->info("No new translations were generated, so no files were written.");
+            $this->info('No new translations were generated, so no files were written.');
+
             return;
         }
 
@@ -409,27 +438,28 @@ final class ExtractLangStrings extends Command
                 $existingData = $this->existingTranslations[$lang][$contextualFileKey] ?? [];
                 $finalFlatData = array_merge($existingData, $newData);
 
-                if (empty($finalFlatData))
+                if (empty($finalFlatData)) {
                     continue;
+                }
                 ksort($finalFlatData);
 
                 if (str_ends_with($fileKey, self::JSON_FILE_KEY)) {
                     $relativePath = str_replace(self::JSON_FILE_KEY, '', $fileKey);
-                    $filePath = rtrim($targetBaseDir, '/') . '/' . $relativePath . $lang . '.json';
+                    $filePath = rtrim($targetBaseDir, '/').'/'.$relativePath.$lang.'.json';
                     File::ensureDirectoryExists(dirname($filePath));
                     File::put($filePath, json_encode($finalFlatData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-                    $this->line("  <fg=bright-green;options=bold> ✅ {$actionVerb}:</> <fg=bright-cyan>{$filePath}</> <fg=bright-white>(" . count($finalFlatData) . " total keys)</>");
+                    $this->line("  <fg=bright-green;options=bold> ✅ {$actionVerb}:</> <fg=bright-cyan>{$filePath}</> <fg=bright-white>(".count($finalFlatData).' total keys)</>');
                 } else {
                     $finalNestedData = Arr::undot($finalFlatData);
                     $this->ksortRecursive($finalNestedData);
 
-                    $filePath = rtrim($targetBaseDir, '/') . '/' . $lang . '/' . $fileKey . '.php';
+                    $filePath = rtrim($targetBaseDir, '/').'/'.$lang.'/'.$fileKey.'.php';
                     File::ensureDirectoryExists(dirname($filePath));
 
-                    $content = "<?php\n\nreturn " . var_export($finalNestedData, true) . ";\n";
+                    $content = "<?php\n\nreturn ".var_export($finalNestedData, true).";\n";
                     File::put($filePath, $content);
 
-                    $this->line("  <fg=bright-green;options=bold> ✅ {$actionVerb}:</> <fg=bright-cyan>{$filePath}</> <fg=bright-white>(" . count($finalFlatData) . " total keys)</>");
+                    $this->line("  <fg=bright-green;options=bold> ✅ {$actionVerb}:</> <fg=bright-cyan>{$filePath}</> <fg=bright-white>(".count($finalFlatData).' total keys)</>');
                 }
             }
         }
@@ -450,7 +480,7 @@ final class ExtractLangStrings extends Command
             if (str_contains($rawKey, '.')) {
                 $prefix = explode('.', $rawKey, 2)[0];
                 if (preg_match('/^[a-zA-Z0-9_-]+$/', $prefix)) {
-                    $contextualFileKey = $origin . self::FILE_KEY_SEPARATOR . $prefix;
+                    $contextualFileKey = $origin.self::FILE_KEY_SEPARATOR.$prefix;
 
                     // If this file group was selected, map the key
                     if (isset($selectedFileMap[$contextualFileKey])) {
@@ -462,11 +492,11 @@ final class ExtractLangStrings extends Command
             }
 
             // If it wasn't mapped as a PHP key, treat it as a JSON key
-            if (!$isPhpKey) {
+            if (! $isPhpKey) {
                 // Find all possible JSON files for the key's origin that were selected
                 $possibleJsonFiles = array_filter(
                     $selectedFiles,
-                    fn($file) => str_starts_with($file, $origin . self::FILE_KEY_SEPARATOR) && str_ends_with($file, self::JSON_FILE_KEY)
+                    fn ($file) => str_starts_with($file, $origin.self::FILE_KEY_SEPARATOR) && str_ends_with($file, self::JSON_FILE_KEY)
                 );
 
                 // Add the key to all matching selected JSON files
@@ -483,7 +513,6 @@ final class ExtractLangStrings extends Command
         return $structured;
     }
 
-
     private function determineAvailableFiles(array $allPossibleKeys): array
     {
         $fileGroups = [];
@@ -498,22 +527,23 @@ final class ExtractLangStrings extends Command
             if (str_contains($key, '.')) {
                 $prefix = explode('.', $key, 2)[0];
                 if (preg_match('/^[a-zA-Z0-9_-]+$/', $prefix)) {
-                    $contextualFileKey = $origin . self::FILE_KEY_SEPARATOR . $prefix;
+                    $contextualFileKey = $origin.self::FILE_KEY_SEPARATOR.$prefix;
                     $fileGroups[$contextualFileKey] = true;
                 } else {
                     // It's a sentence-like key, so it belongs in a root JSON file
-                    $contextualFileKey = $origin . self::FILE_KEY_SEPARATOR . self::JSON_FILE_KEY;
+                    $contextualFileKey = $origin.self::FILE_KEY_SEPARATOR.self::JSON_FILE_KEY;
                     $fileGroups[$contextualFileKey] = true;
                 }
             } else {
                 // No dot, so it belongs in a root JSON file
-                $contextualFileKey = $origin . self::FILE_KEY_SEPARATOR . self::JSON_FILE_KEY;
+                $contextualFileKey = $origin.self::FILE_KEY_SEPARATOR.self::JSON_FILE_KEY;
                 $fileGroups[$contextualFileKey] = true;
             }
         }
 
         $uniqueFiles = array_keys($fileGroups);
         sort($uniqueFiles);
+
         return $uniqueFiles;
     }
 
@@ -521,6 +551,7 @@ final class ExtractLangStrings extends Command
     {
         if (empty($availableFiles)) {
             $this->warn('No processable translation file groups were found.');
+
             return [];
         }
 
@@ -535,6 +566,7 @@ final class ExtractLangStrings extends Command
                 } else {
                     $displayName = "{$targetName}: {$fileKey}.php";
                 }
+
                 return [$contextualFileKey => $displayName];
             })->all();
 
@@ -559,7 +591,7 @@ final class ExtractLangStrings extends Command
     private function populateSourceTextForNewKeys(array $allKeys): void
     {
         foreach ($allKeys as $key) {
-            if (!isset($this->sourceTextMap[$key])) {
+            if (! isset($this->sourceTextMap[$key])) {
                 if ($this->isOffline) {
                     $this->sourceTextMap[$key] = $key;
                 }
@@ -567,14 +599,14 @@ final class ExtractLangStrings extends Command
         }
     }
 
-
     private function loadFrameworkTranslations(): void
     {
-        $this->info("Reading Laravel framework default language files...");
+        $this->info('Reading Laravel framework default language files...');
         $frameworkLangPath = base_path('vendor/laravel/framework/src/Illuminate/Translation/lang/en');
 
-        if (!File::isDirectory($frameworkLangPath)) {
-            $this->warn("Could not find Laravel framework language directory. Skipping.");
+        if (! File::isDirectory($frameworkLangPath)) {
+            $this->warn('Could not find Laravel framework language directory. Skipping.');
+
             return;
         }
 
@@ -583,7 +615,7 @@ final class ExtractLangStrings extends Command
                 continue;
             }
             $filename = $file->getFilenameWithoutExtension();
-            $contextualFileKey = self::MAIN_APP_KEY . self::FILE_KEY_SEPARATOR . $filename;
+            $contextualFileKey = self::MAIN_APP_KEY.self::FILE_KEY_SEPARATOR.$filename;
             // $this->keyOriginMap[$filename] = self::MAIN_APP_KEY;
 
             $includedData = @include $file->getPathname();
@@ -597,7 +629,7 @@ final class ExtractLangStrings extends Command
                     if (is_string($text)) {
                         $fullKey = "{$filename}.{$keySuffix}";
                         $this->keyOriginMap[$fullKey] = self::MAIN_APP_KEY;
-                        if (!isset($this->sourceTextMap[$fullKey])) {
+                        if (! isset($this->sourceTextMap[$fullKey])) {
                             $this->sourceTextMap[$fullKey] = $text;
                         }
                     }
@@ -623,9 +655,9 @@ final class ExtractLangStrings extends Command
             }
         }
         $allKeys = array_merge($allKeys, array_keys($this->sourceTextMap));
+
         return array_values(array_unique($allKeys));
     }
-
 
     private function performCrossCheckAndReport(array $structuredKeys): void
     {
@@ -634,7 +666,7 @@ final class ExtractLangStrings extends Command
         foreach ($structuredKeys as $filename => $keys) {
             foreach ($keys as $key) {
                 foreach ($languages as $lang) {
-                    if (!isset($this->existingTranslations[$lang][$filename][$key])) {
+                    if (! isset($this->existingTranslations[$lang][$filename][$key])) {
                         $missingStats[$filename][$lang][] = $key;
                     }
                 }
@@ -642,15 +674,16 @@ final class ExtractLangStrings extends Command
         }
 
         if (empty($missingStats)) {
-            $this->success("All selected keys are fully translated and synchronized across all target languages!");
+            $this->success('All selected keys are fully translated and synchronized across all target languages!');
+
             return;
         }
 
-        $this->warn("Found missing translations needing synchronization:");
+        $this->warn('Found missing translations needing synchronization:');
         foreach ($missingStats as $contextualFileKey => $langData) {
             [$targetKey, $fileKey] = explode(self::FILE_KEY_SEPARATOR, $contextualFileKey, 2);
             $targetName = $this->availableScanTargets[$targetKey]['name'];
-            $fileNameDisplay = str_ends_with($fileKey, self::JSON_FILE_KEY) ? "JSON File (" . str_replace(self::JSON_FILE_KEY, '*.json', $fileKey) . ")" : "{$fileKey}.php";
+            $fileNameDisplay = str_ends_with($fileKey, self::JSON_FILE_KEY) ? 'JSON File ('.str_replace(self::JSON_FILE_KEY, '*.json', $fileKey).')' : "{$fileKey}.php";
             $this->line("  <fg=bright-yellow;options=bold>File: {$targetName} -> {$fileNameDisplay}</>");
             foreach ($langData as $lang => $keys) {
                 $count = count($keys);
@@ -661,7 +694,7 @@ final class ExtractLangStrings extends Command
 
     private function filterOutExistingKeys(array $structuredKeys): array
     {
-        if (!$this->option('skip-existing')) {
+        if (! $this->option('skip-existing')) {
             return $structuredKeys;
         }
 
@@ -672,7 +705,7 @@ final class ExtractLangStrings extends Command
             foreach ($keys as $key) {
                 $isMissingInAtLeastOneLang = false;
                 foreach ($languages as $lang) {
-                    if (!isset($this->existingTranslations[$lang][$contextualFileKey][$key])) {
+                    if (! isset($this->existingTranslations[$lang][$contextualFileKey][$key])) {
                         $isMissingInAtLeastOneLang = true;
                         break;
                     }
@@ -690,12 +723,11 @@ final class ExtractLangStrings extends Command
         return $keysThatNeedTranslation;
     }
 
-
     private function promptForMultiChoice(string $label, array $options, string $hint = '', ?array $default = null): array
     {
         // 1️⃣ Non-interactive environment (CI, cron, supervisor)
         // Do not prompt. Just return defaults or everything.
-        if (!$this->input->isInteractive()) {
+        if (! $this->input->isInteractive()) {
             return $default ?? array_keys($options);
         }
 
@@ -721,7 +753,7 @@ final class ExtractLangStrings extends Command
             // Return selected keys based on display string values
             return array_values(
                 array_filter(
-                    array_map(fn($display) => $flipped[$display] ?? null, $selection)
+                    array_map(fn ($display) => $flipped[$display] ?? null, $selection)
                 )
             );
         }
@@ -735,7 +767,6 @@ final class ExtractLangStrings extends Command
         );
     }
 
-
     public static function staticStructureTranslationsFromGemini(
         array $geminiData,
         array $originalKeys,
@@ -746,10 +777,10 @@ final class ExtractLangStrings extends Command
         $chunkTranslations = [];
         [, $fileKey] = explode(self::FILE_KEY_SEPARATOR, $contextualFileKey, 2);
         $isJsonFile = str_ends_with($fileKey, self::JSON_FILE_KEY);
-        $prefix = $isJsonFile ? '' : str_replace('/', '.', $fileKey) . '.';
+        $prefix = $isJsonFile ? '' : str_replace('/', '.', $fileKey).'.';
 
         foreach ($originalKeys as $originalKey) {
-            $keyToLookup = $isJsonFile ? $originalKey : $prefix . $originalKey;
+            $keyToLookup = $isJsonFile ? $originalKey : $prefix.$originalKey;
             $keyTranslations = $geminiData[$keyToLookup] ?? null;
 
             foreach ($languages as $lang) {
@@ -766,6 +797,7 @@ final class ExtractLangStrings extends Command
                 $chunkTranslations[$lang][$contextualFileKey][$originalKey] = $text;
             }
         }
+
         return $chunkTranslations;
     }
 
@@ -783,7 +815,7 @@ final class ExtractLangStrings extends Command
                 $this->totalKeysSuccessfullyProcessed += $chunkCount;
                 $progressBar->setMessage("✅ Chunk {$this->processedChunks}/{$this->totalChunks} - SUCCESS ({$chunkCount} keys)");
             } else {
-                $this->error(" ❌ Chunk {$this->processedChunks}/{$this->totalChunks}: " . $result['message']);
+                $this->error(" ❌ Chunk {$this->processedChunks}/{$this->totalChunks}: ".$result['message']);
                 $this->totalKeysFailed += $chunkCount;
                 if (isset($result['failed_keys'], $result['filename'])) {
                     $this->failedKeys[$result['filename']] = array_merge(
@@ -799,17 +831,21 @@ final class ExtractLangStrings extends Command
 
     private function checkForExitSignal(): bool
     {
-        if ($this->shouldExit)
+        if ($this->shouldExit) {
             return true;
-        if (!stream_isatty(STDIN))
+        }
+        if (! stream_isatty(STDIN)) {
             return false;
+        }
         stream_set_blocking(STDIN, false);
         $char = fread(STDIN, 1);
         stream_set_blocking(STDIN, true);
         if ($char === $this->option('stop-key')) {
             $this->shouldExit = true;
+
             return true;
         }
+
         return false;
     }
 
@@ -820,13 +856,12 @@ final class ExtractLangStrings extends Command
         foreach ($keys as $key) {
             $keysString .= "- `{$key}`\n";
         }
-
         [, $fileKey] = explode(self::FILE_KEY_SEPARATOR, $contextualFileKey, 2);
         $fileNameForPrompt = str_ends_with($fileKey, self::JSON_FILE_KEY)
             ? 'a main JSON file (e.g., en.json)'
             : "'{$fileKey}.php'";
         $projectContextString = '';
-        if (!empty($projectContext)) {
+        if (! empty($projectContext)) {
             $sanitizedContext = trim(str_replace(["\n", "\r"], ' ', $projectContext));
             $projectContextString = "- **Project-Specific Context**: Your translations should be tailored for the following context: {$sanitizedContext}\n";
         }
@@ -952,7 +987,6 @@ Example correct output structure:
 Return ONLY the valid JSON object. No other text.
 PROMPT;
 
-
         $modelToUse = config('gemini.model', 'gemini-2.5-flash-lite');
         for ($attempt = 1; $attempt <= $maxRetries; $attempt++) {
             try {
@@ -960,13 +994,15 @@ PROMPT;
                 $responseText = $response->text();
                 $cleanedResponseText = preg_replace('/^```json\s*([\s\S]*?)\s*```$/m', '$1', $responseText);
                 $decoded = json_decode(trim($cleanedResponseText), true, 512, JSON_THROW_ON_ERROR);
-                if (is_array($decoded))
+                if (is_array($decoded)) {
                     return $decoded;
+                }
             } catch (Throwable $e) {
                 if (str_contains($e->getMessage(), 'quota') || str_contains($e->getMessage(), 'rate limit') || str_contains($e->getMessage(), 'exceeded')) {
                     if ($attempt < $maxRetries) {
                         $delay = ($baseRetryDelay * pow(2, $attempt) + mt_rand(500, 1500) / 1000);
                         usleep((int) ($delay * 1000000));
+
                         continue;
                     }
                 }
@@ -983,15 +1019,16 @@ PROMPT;
 
     private function getExtractionPatterns(): array
     {
-        $functions = implode('|', ['__', 'trans', 'trans_choice', '@lang', '@ta', '@t', 't_', '->label','@choice', 'Lang::get', 'Lang::choice', 'Lang::has', '\$t', 'i18n\.t']);
+        $functions = implode('|', ['__', 'trans', 'trans_choice', '@lang', '@ta', '@t', 't_', '->label', '@choice', 'Lang::get', 'Lang::choice', 'Lang::has', '\$t', 'i18n\.t']);
         $attributes = implode('|', ['v-t', 'x-text']);
-        $mainPattern = "/" . "(?:route|config)\s*\([^\)]+\)(*SKIP)(*FAIL)" . "|" . "(?:{$functions})\s*\(\s*['\"]([^'\"]+)['\"]" . "|" . "(?:{$attributes})=['\"]([^'\"]+)['\"]" . "/";
+        $mainPattern = '/'."(?:route|config)\s*\([^\)]+\)(*SKIP)(*FAIL)".'|'."(?:{$functions})\s*\(\s*['\"]([^'\"]+)['\"]".'|'."(?:{$attributes})=['\"]([^'\"]+)['\"]".'/';
         $patterns = [$mainPattern];
-        if (!$this->option('no-advanced')) {
+        if (! $this->option('no-advanced')) {
             $commonPrefixes = implode('|', ['messages', 'validation', 'auth', 'pagination', 'passwords', 'general', 'models', 'enums', 'attributes']);
-            $advancedPattern = "/" . "(?:route|config)\s*\([^\)]+\)(*SKIP)(*FAIL)" . "|" . "['\"]((?:{$commonPrefixes})[.\/][\w.-]+)['\"]" . "/";
+            $advancedPattern = '/'."(?:route|config)\s*\([^\)]+\)(*SKIP)(*FAIL)".'|'."['\"]((?:{$commonPrefixes})[.\/][\w.-]+)['\"]".'/';
             $patterns[] = $advancedPattern;
         }
+
         return $patterns;
     }
 
@@ -1005,14 +1042,15 @@ PROMPT;
         $tasks = [];
 
         foreach ($structuredKeys as $contextualFileKey => $keys) {
-            if (empty($keys))
+            if (empty($keys)) {
                 continue;
+            }
 
             [, $fileKey] = explode(self::FILE_KEY_SEPARATOR, $contextualFileKey, 2);
             $isJsonFile = str_ends_with($fileKey, self::JSON_FILE_KEY);
-            $prefix = $isJsonFile ? '' : str_replace('/', '.', $fileKey) . '.';
+            $prefix = $isJsonFile ? '' : str_replace('/', '.', $fileKey).'.';
 
-            $fullKeysForAI = $isJsonFile ? $keys : array_map(fn($key) => $prefix . $key, $keys);
+            $fullKeysForAI = $isJsonFile ? $keys : array_map(fn ($key) => $prefix.$key, $keys);
 
             $keyChunks = array_chunk($fullKeysForAI, $chunkSize);
             $originalKeyChunks = array_chunk($keys, $chunkSize);
@@ -1050,16 +1088,17 @@ PROMPT;
                     } catch (Throwable $e) {
                         return [
                             'status' => 'error',
-                            'message' => "File: {$contextualFileKey}, Keys: " . implode(',', array_slice($originalChunk, 0, 3)) . "... - Error: " . $e->getMessage(),
+                            'message' => "File: {$contextualFileKey}, Keys: ".implode(',', array_slice($originalChunk, 0, 3)).'... - Error: '.$e->getMessage(),
                             'chunk_keys_count' => count($chunk),
                             'failed_keys' => $originalChunk,
-                            'filename' => $contextualFileKey
+                            'filename' => $contextualFileKey,
                         ];
                     }
                 };
             }
 
         }
+
         return $tasks;
     }
 
@@ -1077,9 +1116,10 @@ PROMPT;
             $results = Fork::new()->concurrent(15)->run(...$tasks);
             $this->processTranslationResults($results, $progressBar);
             $progressBar->finish();
+
             return;
         }
-        $this->warn(" 🐌 Running in synchronous mode - this will be slower but more stable!");
+        $this->warn(' 🐌 Running in synchronous mode - this will be slower but more stable!');
         $this->line('');
         $this->runSeriallyAndTranslate($keysToTranslate);
     }
@@ -1103,10 +1143,10 @@ PROMPT;
             if ($result['status'] === 'success') {
                 $this->mergeTranslations($result['data']);
                 $this->totalKeysSuccessfullyProcessed += $chunkCount;
-                $this->output->writeln("<fg=green;options=bold>✓ Done</>");
+                $this->output->writeln('<fg=green;options=bold>✓ Done</>');
             } else {
-                $this->output->writeln("<fg=red;options=bold>✗ Failed</>");
-                $this->error("     Error: " . $result['message']);
+                $this->output->writeln('<fg=red;options=bold>✗ Failed</>');
+                $this->error('     Error: '.$result['message']);
                 $this->totalKeysFailed += $chunkCount;
                 if (isset($result['failed_keys'], $result['filename'])) {
                     $this->failedKeys[$result['filename']] = array_merge($this->failedKeys[$result['filename']] ?? [], $result['failed_keys']);
@@ -1117,16 +1157,16 @@ PROMPT;
 
     private function generateOfflinePlaceholders(array $keysToTranslate): void
     {
-        $this->info("Generating placeholder values for new keys...");
+        $this->info('Generating placeholder values for new keys...');
         $languages = explode(',', $this->option('langs'));
 
         foreach ($keysToTranslate as $contextualFileKey => $keys) {
             [, $fileKey] = explode(self::FILE_KEY_SEPARATOR, $contextualFileKey, 2);
             $isJsonFile = str_ends_with($fileKey, self::JSON_FILE_KEY);
-            $prefix = $isJsonFile ? '' : str_replace('/', '.', $fileKey) . '.';
+            $prefix = $isJsonFile ? '' : str_replace('/', '.', $fileKey).'.';
 
             foreach ($keys as $key) {
-                $fullKey = $isJsonFile ? $key : $prefix . $key;
+                $fullKey = $isJsonFile ? $key : $prefix.$key;
                 $placeholderValue = $this->sourceTextMap[$fullKey] ?? $fullKey;
                 foreach ($languages as $lang) {
                     $this->translations[$lang][$contextualFileKey][$key] = $placeholderValue;
@@ -1134,9 +1174,8 @@ PROMPT;
             }
         }
         $this->totalKeysSuccessfullyProcessed = $this->totalKeysToTranslate;
-        $this->success("Placeholder generation complete.");
+        $this->success('Placeholder generation complete.');
     }
-
 
     private function mergeTranslations(array $chunkTranslations)
     {
@@ -1165,10 +1204,11 @@ PROMPT;
         $chunkSize = (int) $this->option('chunk-size');
         $total = 0;
         foreach ($structuredKeys as $keys) {
-            if (!empty($keys)) {
+            if (! empty($keys)) {
                 $total += count(array_chunk($keys, $chunkSize));
             }
         }
+
         return $total;
     }
 
@@ -1222,14 +1262,14 @@ PROMPT;
         $this->line('  <fg=bright-yellow;options=bold> ⚙️  GENERAL INFO</>');
         $this->line("    <fg=bright-white>Total Execution Time:</>         <fg=bright-yellow;options=bold>{$executionTime} seconds</>");
         if ($this->isOffline) {
-            $this->line("    <fg=bright-white>Mode:</>                        <fg=yellow;options=bold>Offline (Placeholders Generated)</>");
+            $this->line('    <fg=bright-white>Mode:</>                        <fg=yellow;options=bold>Offline (Placeholders Generated)</>');
         }
-        $this->line("    <fg=bright-white>Extraction Log:</>               <fg=bright-cyan>translation_extraction_log.json</>");
-        if (!empty($this->failedKeys)) {
-            $this->line("    <fg=bright-white>Failure Log:</>                  <fg=bright-red>failed_translation_keys.json</>");
+        $this->line('    <fg=bright-white>Extraction Log:</>               <fg=bright-cyan>translation_extraction_log.json</>');
+        if (! empty($this->failedKeys)) {
+            $this->line('    <fg=bright-white>Failure Log:</>                  <fg=bright-red>failed_translation_keys.json</>');
         }
         if ($this->option('context')) {
-            $this->line("    <fg=bright-white>Project Context:</>              <fg=bright-cyan>Provided</>");
+            $this->line('    <fg=bright-white>Project Context:</>              <fg=bright-cyan>Provided</>');
         }
         $this->line('');
         if ($this->shouldExit) {

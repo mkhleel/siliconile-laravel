@@ -121,7 +121,7 @@ new #[Layout('layouts.app')] class extends Component {
 <div>
     {{-- Hero Section --}}
     <x-sections.hero
-        title="{{ __('Events & <span class=') }}"text-primary'>Workshops</span>"
+        title="{{ __('Events & Workshops') }}"
         subtitle="{{ __('Join our vibrant community events, workshops, and networking sessions. Connect with fellow entrepreneurs, learn from experts, and grow your startup.') }}"
     />
 
@@ -243,7 +243,7 @@ new #[Layout('layouts.app')] class extends Component {
 
                             {{-- Type Badge --}}
                             <div class="absolute top-3 right-3">
-                                <span class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-{{ $event->type->getColor() }}-100 text-{{ $event->type->getColor() }}{{ __('-800 dark:bg-') }}{{ $event->type->getColor() }}{{ __('-900/20 dark:text-') }}{{ $event->type->getColor() }}-400">
+                                <span class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-{{ $event->type->getColor() }}-100 text-{{ $event->type->getColor() }}-800 dark:bg-{{ $event->type->getColor() }}-900/20 dark:text-{{ $event->type->getColor() }}-400">
                                     {{ $event->type->getLabel() }}
                                 </span>
                             </div>

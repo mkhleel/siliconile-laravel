@@ -116,7 +116,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->bootUsing(function (Panel $panel) {
                 $panel->plugins([
-                    SpatieTranslatablePlugin::make()->defaultLocales(config('core.localization.languages', ['en'])),
+                    SpatieTranslatablePlugin::make()->defaultLocales(config('core.localization.languages', ['en', 'ar'])),
                 ]);
                 try {
                     $logotypeSetting = app(GeneralSettings::class)->site_logo;

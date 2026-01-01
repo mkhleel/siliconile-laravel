@@ -50,11 +50,11 @@ class extends Component
     }
 };
 
-?>
+?>  
 
 <main class="flex-1">
     <x-sections.hero
-        title="{{ __('Events & <span class=') }}"text-primary'>Workshops</span>"
+        title="{{ __('Events & Workshops') }}"
         subtitle="{{ __('Join our vibrant community events, workshops, and networking sessions. Connect with fellow entrepreneurs, learn from experts, and grow your startup.') }}"
     />
 

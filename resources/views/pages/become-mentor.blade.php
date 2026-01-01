@@ -328,7 +328,7 @@ class extends Component
                         @if($currentStep === 1)
                         <div class="space-y-6">
                             <div class="space-y-2">
-                                <h2 class="text-xl font-semibold">Personal Information</h2>
+                                <h2 class="text-xl font-semibold">{{ __('Personal Information') }}</h2>
                                 <p class="text-sm text-muted-foreground">{{ __('Tell us about yourself') }}</p>
                             </div>
 
@@ -361,7 +361,7 @@ class extends Component
 
                             <div class="space-y-2">
                                 <label class="text-sm font-medium">{{ __('Phone Number') }}</label>
-                                <input type="tel" wire:model="phone" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('+20 1XX XXX XXXX') }}">
+                                <input type="tel" wire:model="phone" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="+20 1XX XXX XXXX">
                             </div>
 
                             <div class="space-y-4">

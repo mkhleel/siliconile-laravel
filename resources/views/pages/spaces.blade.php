@@ -47,7 +47,7 @@ class extends Component
 
 <main class="flex-1">
     <x-sections.hero
-        title="{{ __('Book a <span class=') }}"text-primary'>Space</span>"
+        title="{{ __('Book a Space') }}"
         subtitle="{{ __('Reserve meeting rooms, private offices, or hot desks for your next project. Flexible booking options to fit your schedule.') }}"
     />
 
