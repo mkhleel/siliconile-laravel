@@ -1,2 +1,19 @@
 {
+    "": null,
+    "Profile": "Profile",
+    "Logout": "Logout",
+    "Create": "Create",
+    "Name": "Name",
+    "Role": "Role",
+    "Created at": "Created at",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "Apply filters": "Apply filters",
+    "Open filters": "Open filters",
+    "Reset filters": "Reset filters",
+    "Apply table column manager": "Apply table column manager",
+    "Open column manager": "Open column manager",
+    "Email": "Email",
+    "Type": "Type",
+    "Reorder records": "Reorder records"
 }

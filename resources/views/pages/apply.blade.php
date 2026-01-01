@@ -22,7 +22,7 @@ class extends Component
     public int $currentStep = 1;
     public int $totalSteps = 4;
 
-    // Personal Information (Step 1)
+    // {{ __('Personal {{ __('Info') }}rmation') }} (Step 1)
     #[Validate('required|string|max:255')]
     public string $name = '';
 
@@ -44,7 +44,7 @@ class extends Component
     #[Validate('nullable|date|before:today')]
     public ?string $dob = null;
 
-    // Professional Information (Step 2)
+    // {{ __('Professional Information') }} (Step 2)
     #[Validate('required|in:entrepreneur,student,professional,other')]
     public string $applicant_type = 'entrepreneur';
 
@@ -70,7 +70,7 @@ class extends Component
     #[Validate('nullable|string|max:50')]
     public ?string $grade = null;
 
-    // Contact & Location (Step 3)
+    // {{ __('Contact & Location') }} (Step 3)
     #[Validate('nullable|string|max:500')]
     public ?string $address = null;
 
@@ -209,8 +209,8 @@ class extends Component
 
 <main class="flex-1">
     <x-sections.hero
-        title="Apply to <span class='text-primary'>Siliconile</span>"
-        subtitle="Join Luxor's premier startup community. Complete the application form below to start your entrepreneurial journey with us."
+        title="{{ __('Apply to <span class=') }}"text-primary'>Siliconile</span>"
+        subtitle="{{ __('Join Luxor') }}"s premier startup community. Complete the application form below to start your entrepreneurial journey with us."
     />
 
     <x-sections.content>
@@ -274,8 +274,8 @@ class extends Component
                         <div class="space-y-6">
                             <x-ui.input
                                 wire:model="name"
-                                label="Full Name"
-                                placeholder="Enter your full name"
+                                label="{{ __('Full Name') }}"
+                                placeholder="{{ __('Enter your full name') }}"
                                 :required="true"
                                 :error="$errors->first('name')"
                             />
@@ -283,7 +283,7 @@ class extends Component
                             <x-ui.input
                                 wire:model="email"
                                 type="email"
-                                label="Email Address"
+                                label="{{ __('Email Address') }}"
                                 placeholder="your@email.com"
                                 :required="true"
                                 :error="$errors->first('email')"
@@ -292,8 +292,8 @@ class extends Component
                             <x-ui.input
                                 wire:model="phone"
                                 type="tel"
-                                label="Phone Number"
-                                placeholder="+20 1XX XXX XXXX"
+                                label="{{ __('Phone Number') }}"
+                                placeholder="{{ __('+20 1XX XXX XXXX') }}"
                                 :required="true"
                                 :error="$errors->first('phone')"
                             />
@@ -302,8 +302,8 @@ class extends Component
                                 <x-ui.input
                                     wire:model="password"
                                     type="password"
-                                    label="Password"
-                                    placeholder="Min 8 characters"
+                                    label="{{ __('Password') }}"
+                                    placeholder="{{ __('Min 8 characters') }}"
                                     :required="true"
                                     :error="$errors->first('password')"
                                 />
@@ -311,8 +311,8 @@ class extends Component
                                 <x-ui.input
                                     wire:model="password_confirmation"
                                     type="password"
-                                    label="Confirm Password"
-                                    placeholder="Confirm your password"
+                                    label="{{ __('Confirm Password') }}"
+                                    placeholder="{{ __('Confirm your password') }}"
                                     :required="true"
                                     :error="$errors->first('password_confirmation')"
                                 />
@@ -323,13 +323,13 @@ class extends Component
                                     wire:model="gender"
                                     label="Gender"
                                     :options="['male' => 'Male', 'female' => 'Female']"
-                                    placeholder="Select gender"
+                                    placeholder="{{ __('Select gender') }}"
                                 />
 
                                 <x-ui.input
                                     wire:model="dob"
                                     type="date"
-                                    label="Date of Birth"
+                                    label="{{ __('Date of Birth') }}"
                                     :error="$errors->first('dob')"
                                 />
                             </div>
@@ -341,7 +341,7 @@ class extends Component
                         <h2 class="text-2xl font-bold mb-6">Professional Information</h2>
                         <div class="space-y-6">
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">I am a...</label>
+                                <label class="text-sm font-medium">{{ __('I am a...') }}</label>
                                 <div class="grid gap-4 md:grid-cols-2">
                                     @foreach(['entrepreneur' => 'Entrepreneur / Founder', 'student' => 'Student', 'professional' => 'Working Professional', 'other' => 'Other'] as $value => $label)
                                         <label @class([
@@ -363,50 +363,50 @@ class extends Component
 
                             @if($applicant_type === 'student')
                                 <div class="space-y-4 p-4 bg-muted/50 rounded-lg">
-                                    <h3 class="font-semibold">Student Information</h3>
+                                    <h3 class="font-semibold">{{ __('Student Information') }}</h3>
                                     <x-ui.input
                                         wire:model="university"
                                         label="University"
-                                        placeholder="e.g., Cairo University"
+                                        placeholder="{{ __('e.g., Cairo University') }}"
                                     />
                                     <div class="grid gap-4 md:grid-cols-2">
                                         <x-ui.input
                                             wire:model="faculty"
                                             label="Faculty"
-                                            placeholder="e.g., Computer Science"
+                                            placeholder="{{ __('e.g., Computer Science') }}"
                                         />
                                         <x-ui.input
                                             wire:model="grade"
-                                            label="Year / Grade"
-                                            placeholder="e.g., 3rd Year"
+                                            label="{{ __('Year / Grade') }}"
+                                            placeholder="{{ __('e.g., 3rd Year') }}"
                                         />
                                     </div>
                                 </div>
                             @else
                                 <x-ui.input
                                     wire:model="job_title"
-                                    label="Job Title / Role"
-                                    placeholder="e.g., Founder & CEO"
+                                    label="{{ __('Job Title / Role') }}"
+                                    placeholder="{{ __('e.g., Founder & CEO') }}"
                                 />
 
                                 <div class="grid gap-4 md:grid-cols-2">
                                     <x-ui.input
                                         wire:model="company_name"
-                                        label="Company / Startup Name"
-                                        placeholder="Your company name"
+                                        label="{{ __('Company / Startup Name') }}"
+                                        placeholder="{{ __('Your company name') }}"
                                     />
                                     <x-ui.input
                                         wire:model="company_field"
-                                        label="Industry / Field"
-                                        placeholder="e.g., EdTech, FinTech"
+                                        label="{{ __('Industry / Field') }}"
+                                        placeholder="{{ __('e.g., EdTech, FinTech') }}"
                                     />
                                 </div>
                             @endif
 
                             <x-ui.textarea
                                 wire:model="skills"
-                                label="Skills & Expertise"
-                                placeholder="List your key skills (e.g., Web Development, Marketing, Finance...)"
+                                label="{{ __('Skills & Expertise') }}"
+                                placeholder="{{ __('List your key skills (e.g., Web Development, Marketing, Finance...)') }}"
                                 :rows="3"
                             />
                         </div>
@@ -418,8 +418,8 @@ class extends Component
                         <div class="space-y-6">
                             <x-ui.textarea
                                 wire:model="address"
-                                label="Address"
-                                placeholder="Your full address"
+                                label="{{ __('Address') }}"
+                                placeholder="{{ __('Your full address') }}"
                                 :rows="2"
                             />
 
@@ -427,35 +427,35 @@ class extends Component
                                 <x-ui.input
                                     wire:model="city"
                                     label="City"
-                                    placeholder="e.g., Luxor"
+                                    placeholder="{{ __('e.g., Luxor') }}"
                                 />
                                 <x-ui.input
                                     wire:model="country"
                                     label="Country"
-                                    placeholder="e.g., Egypt"
+                                    placeholder="{{ __('e.g., Egypt') }}"
                                 />
                             </div>
 
                             <x-ui.input
                                 wire:model="whatsapp"
                                 type="tel"
-                                label="WhatsApp Number"
+                                label="{{ __('WhatsApp Number') }}"
                                 placeholder="+20 1XX XXX XXXX"
                             />
 
                             <div class="space-y-4 p-4 bg-muted/50 rounded-lg">
-                                <h3 class="font-semibold">Emergency Contact</h3>
+                                <h3 class="font-semibold">{{ __('Emergency Contact') }}</h3>
                                 <div class="grid gap-4 md:grid-cols-2">
                                     <x-ui.input
                                         wire:model="emergency_contact_name"
-                                        label="Contact Name"
-                                        placeholder="Full name"
+                                        label="{{ __('Contact Name') }}"
+                                        placeholder="{{ __('Full name') }}"
                                     />
                                     <x-ui.input
                                         wire:model="emergency_contact_phone"
                                         type="tel"
-                                        label="Contact Phone"
-                                        placeholder="Phone number"
+                                        label="{{ __('Contact Phone') }}"
+                                        placeholder="{{ __('Phone number') }}"
                                     />
                                 </div>
                             </div>
@@ -464,33 +464,33 @@ class extends Component
 
                     <!-- Step 4: Application Details -->
                     <div x-show="$wire.currentStep === 4" x-transition>
-                        <h2 class="text-2xl font-bold mb-6">Almost Done!</h2>
+                        <h2 class="text-2xl font-bold mb-6">{{ __('Almost Done!') }}</h2>
                         <div class="space-y-6">
                             <x-ui.textarea
                                 wire:model="motivation"
-                                label="Why do you want to join Siliconile?"
-                                placeholder="Tell us about your goals and what you hope to achieve..."
+                                label="{{ __('Why do you want to join Siliconile?') }}"
+                                placeholder="{{ __('Tell us about your goals and what you hope to achieve...') }}"
                                 :rows="4"
                             />
 
                             <x-ui.textarea
                                 wire:model="startup_idea"
-                                label="Tell us about your startup or project idea"
-                                placeholder="Describe your idea, the problem you're solving, and your target market..."
+                                label="{{ __('Tell us about your startup or project idea') }}"
+                                placeholder="{{ __('Describe your idea, the problem you') }}"re solving, and your target market..."
                                 :rows="4"
                             />
 
                             <x-ui.textarea
                                 wire:model="visited_coworking_space_before"
-                                label="Have you visited any coworking space before?"
-                                placeholder="Share your experience if any..."
+                                label="{{ __('Have you visited any coworking space before?') }}"
+                                placeholder="{{ __('Share your experience if any...') }}"
                                 :rows="3"
                             />
 
                             <x-ui.textarea
                                 wire:model="how_found_us"
-                                label="How did you find out about Siliconile?"
-                                placeholder="e.g., social media, friend, event, etc."
+                                label="{{ __('How did you find out about Siliconile?') }}"
+                                placeholder="{{ __('e.g., social media, friend, event, etc.') }}"
                                 :rows="3"
                             />
 
@@ -502,7 +502,7 @@ class extends Component
                                         class="mt-1 w-4 h-4 text-primary rounded"
                                     />
                                     <span class="text-sm">
-                                        I agree to the <a href="#" class="text-primary hover:underline">Terms of Service</a> and <a href="#" class="text-primary hover:underline">Privacy Policy</a>. I understand that my application will be reviewed and I will be contacted regarding the next steps.
+                                        I agree to the <a href="#" class="text-primary hover:underline">{{ __('Terms of Service') }}</a> and <a href="#" class="text-primary hover:underline">{{ __('Privacy Policy') }}</a>. I understand that my application will be reviewed and I will be contacted regarding the next steps.
                                     </span>
                                 </label>
                                 @error('terms_accepted')
@@ -518,7 +518,7 @@ class extends Component
                                         class="mt-1 w-4 h-4 text-primary rounded"
                                     />
                                     <span class="text-sm">
-                                        I consent to receive marketing communications from Siliconile about events, programs, and opportunities. I understand I can unsubscribe at any time.
+                                        {{ __('I consent to receive marketing communications from Siliconile about events, programs, and opportunities. I understand I can unsubscribe at any time.') }}
                                     </span>
                                 </label>
                                 @error('marketing_messages_accepted')
@@ -550,7 +550,7 @@ class extends Component
                             </x-ui.button>
                         @else
                             <x-ui.button type="submit" wire:loading.attr="disabled">
-                                <span wire:loading.remove>Submit Application</span>
+                                <span wire:loading.remove>{{ __('Submit Application') }}</span>
                                 <span wire:loading>Submitting...</span>
                             </x-ui.button>
                         @endif

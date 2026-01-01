@@ -1,5 +1,5 @@
 <x-membership::layouts.master>
-    <h1>Hello World</h1>
+    <h1>{{ __('Hello World') }}</h1>
 
-    <p>Module: {!! config('membership.name') !!}</p>
+    <p>{{ __('Module:') }} {!! config('membership.name') !!}</p>
 </x-membership::layouts.master>

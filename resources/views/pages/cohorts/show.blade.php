@@ -103,7 +103,7 @@ class extends Component
                         @if($cohort->isAcceptingApplications())
                         <div class="flex flex-col sm:flex-row gap-4">
                             <a href="{{ route('incubation.apply', $cohort) }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-8">
-                                Apply Now
+                                {{ __('Apply Now') }}
                                 <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                                 </svg>
@@ -137,7 +137,7 @@ class extends Component
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                 <div>
                     <div class="text-3xl font-bold text-primary">{{ $cohort->capacity }}</div>
-                    <div class="text-sm text-muted-foreground">Total Spots</div>
+                    <div class="text-sm text-muted-foreground">{{ __('Total Spots') }}</div>
                 </div>
                 <div>
                     <div class="text-3xl font-bold text-green-600">{{ $cohort->available_spots }}</div>
@@ -161,7 +161,7 @@ class extends Component
     <section class="py-16">
         <div class="container px-4 md:px-6">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">What You'll Get</h2>
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">{{ __('What You\'ll Get') }}</h2>
 
                 <div class="grid gap-4 md:grid-cols-2">
                     @foreach($cohort->benefits as $benefit)
@@ -187,7 +187,7 @@ class extends Component
     <section class="py-16 bg-muted/50">
         <div class="container px-4 md:px-6">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">Program Milestones</h2>
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">{{ __('Program Milestones') }}</h2>
 
                 <div class="relative">
                     <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-primary/20"></div>
@@ -220,7 +220,7 @@ class extends Component
     <section class="py-16">
         <div class="container px-4 md:px-6">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">Eligibility Criteria</h2>
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">{{ __('Eligibility Criteria') }}</h2>
 
                 <div class="rounded-xl border bg-card p-6 md:p-8">
                     <ul class="space-y-4">
@@ -245,8 +245,8 @@ class extends Component
         <div class="container px-4 md:px-6">
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Meet Our Mentors</h2>
-                    <p class="text-muted-foreground">Get guidance from industry experts who have been there</p>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">{{ __('Meet Our Mentors') }}</h2>
+                    <p class="text-muted-foreground">{{ __('Get guidance from industry experts who have been there') }}</p>
                 </div>
 
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -277,18 +277,18 @@ class extends Component
     <section class="py-20 bg-primary text-primary-foreground">
         <div class="container px-4 md:px-6">
             <div class="max-w-3xl mx-auto text-center space-y-6">
-                <h2 class="text-3xl md:text-4xl font-bold">Ready to Join {{ $cohort->name }}?</h2>
-                <p class="text-xl opacity-90">Take the first step towards transforming your startup idea into reality.</p>
+                <h2 class="text-3xl md:text-4xl font-bold">{{ __('Ready to Join') }} {{ $cohort->name }}?</h2>
+                <p class="text-xl opacity-90">{{ __('Take the first step towards transforming your startup idea into reality.') }}</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="{{ route('incubation.apply', $cohort) }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-white text-primary hover:bg-white/90 h-11 px-8">
-                        Start Your Application
+                        {{ __('Start Your Application') }}
                     </a>
                     <a href="{{ route('contact') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors border border-white/30 hover:bg-white/10 h-11 px-8">
-                        Have Questions?
+                        {{ __('Have Questions?') }}
                     </a>
                 </div>
                 @if($cohort->application_end_date)
-                <p class="text-sm opacity-75">Applications close on {{ $cohort->application_end_date->format('F j, Y') }}</p>
+                <p class="text-sm opacity-75">{{ __('Applications close on') }} {{ $cohort->application_end_date->format('F j, Y') }}</p>
                 @endif
             </div>
         </div>
@@ -297,10 +297,10 @@ class extends Component
     <section class="py-16 bg-muted/50">
         <div class="container px-4 md:px-6">
             <div class="max-w-xl mx-auto text-center space-y-6">
-                <h3 class="text-2xl font-bold">Interested in Future Cohorts?</h3>
-                <p class="text-muted-foreground">Get notified when applications open for our next program</p>
+                <h3 class="text-2xl font-bold">{{ __('Interested in Future Cohorts?') }}</h3>
+                <p class="text-muted-foreground">{{ __('Get notified when applications open for our next program') }}</p>
                 <a href="{{ route('contact') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6">
-                    Get Notified
+                    {{ __('Get Notified') }}
                 </a>
             </div>
         </div>

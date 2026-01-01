@@ -4,7 +4,7 @@
  * BookingWizard - Multi-step booking component for members.
  *
  * Steps:
- * 1. Select Date & Time
+ * 1. {{ __('Select {{ __('Date') }} & Time') }}
  * 2. Choose available resource
  * 3. Review price quote
  * 4. Confirm & proceed to payment
@@ -111,7 +111,7 @@ new class extends Component {
             return null;
         }
 
-        return SpaceResource::with('amenities')->find($this->selectedResourceId);
+        return Space{{ __('Resource:') }}:with('amenities')->find($this->selectedResourceId);
     }
 
     #[Computed]
@@ -424,7 +424,7 @@ new class extends Component {
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label for="startTime" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                Start Time
+                                {{ __('Start Time') }}
                             </label>
                             <select
                                 id="startTime"
@@ -439,7 +439,7 @@ new class extends Component {
 
                         <div>
                             <label for="endTime" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                End Time
+                                {{ __('End Time') }}
                             </label>
                             <select
                                 id="endTime"
@@ -454,7 +454,7 @@ new class extends Component {
                     </div>
                 </div>
 
-                {{-- Quick Duration Buttons --}}
+                {{-- {{ __('Quick Duration') }} Buttons --}}
                 <div>
                     <span class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Quick Duration</span>
                     <div class="flex flex-wrap gap-2">
@@ -475,13 +475,13 @@ new class extends Component {
         {{-- Step 2: Resource Selection --}}
         @if($currentStep === 2)
             <div class="space-y-6">
-                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Choose a Resource</h2>
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">{{ __('Choose a Resource') }}</h2>
 
                 {{-- Filters --}}
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
                     <div>
                         <label for="resourceType" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            Resource Type
+                            {{ __('Resource Type') }}
                         </label>
                         <select
                             id="resourceType"
@@ -497,7 +497,7 @@ new class extends Component {
 
                     <div>
                         <label for="capacity" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            Min Capacity
+                            {{ __('Min Capacity') }}
                         </label>
                         <input
                             type="number"
@@ -578,13 +578,13 @@ new class extends Component {
                     @empty
                         <div class="col-span-2 text-center py-12">
                             <x-heroicon-o-calendar-days class="w-12 h-12 mx-auto text-gray-400 mb-4" />
-                            <p class="text-gray-500 dark:text-gray-400">No resources available for the selected time slot.</p>
+                            <p class="text-gray-500 dark:text-gray-400">{{ __('No resources available for the selected time slot.') }}</p>
                             <button
                                 type="button"
                                 wire:click="previousStep"
                                 class="mt-4 text-primary-600 hover:text-primary-700 font-medium"
                             >
-                                Try a different time
+                                {{ __('Try a different time') }}
                             </button>
                         </div>
                     @endforelse
@@ -595,13 +595,13 @@ new class extends Component {
         {{-- Step 3: Price Review --}}
         @if($currentStep === 3)
             <div class="space-y-6">
-                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Review Your Booking</h2>
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">{{ __('Review Your Booking') }}</h2>
 
                 @if($this->selectedResource && $priceQuote)
                     {{-- Booking Summary --}}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-4">
-                            <h3 class="font-medium text-gray-700 dark:text-gray-300">Booking Details</h3>
+                            <h3 class="font-medium text-gray-700 dark:text-gray-300">{{ __('Booking Details') }}</h3>
 
                             <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 space-y-3">
                                 <div class="flex justify-between">
@@ -609,47 +609,47 @@ new class extends Component {
                                     <span class="font-medium text-gray-900 dark:text-white">{{ $this->selectedResource->name }}</span>
                                 </div>
                                 <div class="flex justify-between">
-                                    <span class="text-gray-600 dark:text-gray-400">Date:</span>
+                                    <span class="text-gray-600 dark:text-gray-400">{{ __('Date:') }}</span>
                                     <span class="font-medium text-gray-900 dark:text-white">{{ Carbon\Carbon::parse($selectedDate)->format('l, F j, Y') }}</span>
                                 </div>
                                 <div class="flex justify-between">
-                                    <span class="text-gray-600 dark:text-gray-400">Time:</span>
+                                    <span class="text-gray-600 dark:text-gray-400">{{ __('Time:') }}</span>
                                     <span class="font-medium text-gray-900 dark:text-white">{{ $startTime }} - {{ $endTime }}</span>
                                 </div>
                                 <div class="flex justify-between">
-                                    <span class="text-gray-600 dark:text-gray-400">Duration:</span>
+                                    <span class="text-gray-600 dark:text-gray-400">{{ __('Duration:') }}</span>
                                     <span class="font-medium text-gray-900 dark:text-white">{{ $priceQuote['quantity'] }} {{ $priceQuote['price_unit']->pluralLabel() }}</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="space-y-4">
-                            <h3 class="font-medium text-gray-700 dark:text-gray-300">Price Breakdown</h3>
+                            <h3 class="font-medium text-gray-700 dark:text-gray-300">{{ __('Price Breakdown') }}</h3>
 
                             <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 space-y-3">
                                 <div class="flex justify-between">
-                                    <span class="text-gray-600 dark:text-gray-400">Unit Price:</span>
-                                    <span class="text-gray-900 dark:text-white">{{ number_format($priceQuote['unit_price'], 2) }} EGP / {{ $priceQuote['price_unit']->label() }}</span>
+                                    <span class="text-gray-600 dark:text-gray-400">{{ __('Unit Price:') }}</span>
+                                    <span class="text-gray-900 dark:text-white">{{ number_format($priceQuote['unit_price'], 2) }} {{ __('EGP /') }} {{ $priceQuote['price_unit']->label() }}</span>
                                 </div>
                                 <div class="flex justify-between">
-                                    <span class="text-gray-600 dark:text-gray-400">Quantity:</span>
+                                    <span class="text-gray-600 dark:text-gray-400">{{ __('Quantity:') }}</span>
                                     <span class="text-gray-900 dark:text-white">{{ $priceQuote['quantity'] }} {{ $priceQuote['price_unit']->pluralLabel() }}</span>
                                 </div>
                                 <div class="flex justify-between">
-                                    <span class="text-gray-600 dark:text-gray-400">Base Price:</span>
+                                    <span class="text-gray-600 dark:text-gray-400">{{ __('Base Price:') }}</span>
                                     <span class="text-gray-900 dark:text-white">{{ number_format($priceQuote['base_price'], 2) }} EGP</span>
                                 </div>
 
                                 @if($priceQuote['available_credits'] > 0)
                                     <div class="flex justify-between text-green-600 dark:text-green-400">
-                                        <span>Credits Applied:</span>
+                                        <span>{{ __('Credits Applied:') }}</span>
                                         <span>-{{ number_format($priceQuote['available_credits'], 2) }} {{ $priceQuote['price_unit']->pluralLabel() }}</span>
                                     </div>
                                 @endif
 
                                 @if($priceQuote['discount_percent'] > 0)
                                     <div class="flex justify-between text-green-600 dark:text-green-400">
-                                        <span>Plan Discount ({{ $priceQuote['discount_percent'] }}%):</span>
+                                        <span>{{ __('Plan Discount (') }}{{ $priceQuote['discount_percent'] }}%):</span>
                                         <span>-{{ number_format($priceQuote['base_price'] * $priceQuote['discount_percent'] / 100, 2) }} EGP</span>
                                     </div>
                                 @endif
@@ -657,7 +657,7 @@ new class extends Component {
                                 <hr class="border-gray-200 dark:border-gray-700">
 
                                 <div class="flex justify-between text-lg font-semibold">
-                                    <span class="text-gray-900 dark:text-white">Total:</span>
+                                    <span class="text-gray-900 dark:text-white">{{ __('Total:') }}</span>
                                     <span class="text-primary-600 dark:text-primary-400">{{ $priceQuote['formatted_total'] }}</span>
                                 </div>
                             </div>
@@ -674,13 +674,13 @@ new class extends Component {
                     {{-- Additional Notes --}}
                     <div>
                         <label for="notes" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            Notes (Optional)
+                            {{ __('Notes (Optional)') }}
                         </label>
                         <textarea
                             id="notes"
                             wire:model="notes"
                             rows="3"
-                            placeholder="Any special requests or notes for your booking..."
+                            placeholder="{{ __('Any special requests or notes for your booking...') }}"
                             class="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-primary-500 focus:border-primary-500"
                         ></textarea>
                     </div>
@@ -688,7 +688,7 @@ new class extends Component {
                     @if($this->selectedResource->resource_type === \Modules\SpaceBooking\Enums\ResourceType::MEETING_ROOM)
                         <div>
                             <label for="attendeesCount" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                Number of Attendees
+                                {{ __('Number of Attendees') }}
                             </label>
                             <input
                                 type="number"
@@ -696,7 +696,7 @@ new class extends Component {
                                 wire:model="attendeesCount"
                                 min="1"
                                 max="{{ $this->selectedResource->capacity }}"
-                                placeholder="How many people will attend?"
+                                placeholder="{{ __('How many people will attend?') }}"
                                 class="w-full md:w-1/3 rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                             >
                         </div>
@@ -712,7 +712,7 @@ new class extends Component {
                     <x-heroicon-o-check-circle class="w-10 h-10 text-primary-600 dark:text-primary-400" />
                 </div>
 
-                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Ready to Book?</h2>
+                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">{{ __('Ready to Book?') }}</h2>
 
                 <p class="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
                     You're about to book <strong>{{ $this->selectedResource?->name }}</strong>
@@ -725,11 +725,11 @@ new class extends Component {
                         Total: {{ $priceQuote['formatted_total'] }}
                     </p>
                     <p class="text-sm text-gray-500 dark:text-gray-400">
-                        Payment will be required to complete the booking.
+                        {{ __('Payment will be required to complete the booking.') }}
                     </p>
                 @else
                     <p class="text-lg font-semibold text-green-600 dark:text-green-400">
-                        Free (covered by your membership)
+                        {{ __('Free (covered by your membership)') }}
                     </p>
                 @endif
 
@@ -739,7 +739,7 @@ new class extends Component {
                     wire:loading.attr="disabled"
                     class="inline-flex items-center justify-center px-8 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    <span wire:loading.remove wire:target="confirmBooking">Confirm Booking</span>
+                    <span wire:loading.remove wire:target="confirmBooking">{{ __('Confirm Booking') }}</span>
                     <span wire:loading wire:target="confirmBooking" class="flex items-center">
                         <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

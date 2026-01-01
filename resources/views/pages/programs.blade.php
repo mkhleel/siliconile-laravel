@@ -66,7 +66,7 @@ class extends Component
         <div class="container px-4 md:px-6">
             <div class="max-w-4xl mx-auto text-center space-y-8">
                 <h1 class="text-4xl md:text-6xl font-bold tracking-tight">Our <span class="text-primary">Programs</span></h1>
-                <p class="text-xl md:text-2xl text-muted-foreground">Comprehensive support programs designed to take your startup from idea to scale, with world-class resources and expert guidance every step of the way.</p>
+                <p class="text-xl md:text-2xl text-muted-foreground">{{ __('Comprehensive support programs designed to take your startup from idea to scale, with world-class resources and expert guidance every step of the way.') }}</p>
             </div>
         </div>
     </section>
@@ -77,11 +77,11 @@ class extends Component
             <div class="grid gap-8 md:grid-cols-4 text-center">
                 <div class="space-y-2">
                     <div class="text-4xl md:text-5xl font-bold text-primary">{{ $this->stats['total_cohorts'] ?: '10+' }}</div>
-                    <div class="text-lg font-semibold">Program Cohorts</div>
+                    <div class="text-lg font-semibold">{{ __('Program Cohorts') }}</div>
                 </div>
                 <div class="space-y-2">
                     <div class="text-4xl md:text-5xl font-bold text-primary">{{ $this->stats['total_accepted'] ?: '50+' }}</div>
-                    <div class="text-lg font-semibold">Startups Accepted</div>
+                    <div class="text-lg font-semibold">{{ __('Startups Accepted') }}</div>
                 </div>
                 <div class="space-y-2">
                     <div class="text-4xl md:text-5xl font-bold text-primary">{{ $this->stats['total_graduated'] ?: '40+' }}</div>
@@ -89,7 +89,7 @@ class extends Component
                 </div>
                 <div class="space-y-2">
                     <div class="text-4xl md:text-5xl font-bold text-primary">{{ $this->stats['success_rate'] }}%</div>
-                    <div class="text-lg font-semibold">Success Rate</div>
+                    <div class="text-lg font-semibold">{{ __('Success Rate') }}</div>
                 </div>
             </div>
         </div>
@@ -104,8 +104,8 @@ class extends Component
                     <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
                     Applications Open
                 </span>
-                <h2 class="text-3xl md:text-5xl font-bold">Apply Now</h2>
-                <p class="text-xl text-muted-foreground max-w-2xl mx-auto">Join our next cohort and transform your startup idea into reality</p>
+                <h2 class="text-3xl md:text-5xl font-bold">{{ __('Apply Now') }}</h2>
+                <p class="text-xl text-muted-foreground max-w-2xl mx-auto">{{ __('Join our next cohort and transform your startup idea into reality') }}</p>
             </div>
 
             <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-{{ min($this->openCohorts->count(), 3) }}">
@@ -126,7 +126,7 @@ class extends Component
                     <div class="p-6 space-y-4">
                         <div class="flex items-center justify-between">
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100">
-                                Open for Applications
+                                {{ __('Open for Applications') }}
                             </span>
                             @if($cohort->application_end_date)
                             <span class="text-sm text-muted-foreground">
@@ -162,7 +162,7 @@ class extends Component
 
                         @if($cohort->benefits)
                         <div class="space-y-2">
-                            <div class="text-sm font-medium">What You Get:</div>
+                            <div class="text-sm font-medium">{{ __('What You Get:') }}</div>
                             <ul class="space-y-1">
                                 @foreach(array_slice($cohort->benefits, 0, 4) as $benefit)
                                 <li class="flex items-center space-x-2 text-sm">
@@ -197,8 +197,8 @@ class extends Component
     <section class="py-20">
         <div class="container px-4 md:px-6">
             <div class="text-center space-y-4 mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold">Currently Running</h2>
-                <p class="text-xl text-muted-foreground max-w-2xl mx-auto">Our active incubation programs nurturing the next generation of startups</p>
+                <h2 class="text-3xl md:text-4xl font-bold">{{ __('Currently Running') }}</h2>
+                <p class="text-xl text-muted-foreground max-w-2xl mx-auto">{{ __('Our active incubation programs nurturing the next generation of startups') }}</p>
             </div>
 
             <div class="grid gap-8 md:grid-cols-2">
@@ -206,7 +206,7 @@ class extends Component
                 <div class="rounded-lg border bg-card p-6 space-y-4">
                     <div class="flex items-center justify-between">
                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100">
-                            In Progress
+                            {{ __('In Progress') }}
                         </span>
                         <span class="text-sm text-muted-foreground">{{ $cohort->applications_count }} Startups</span>
                     </div>
@@ -221,7 +221,7 @@ class extends Component
                         @endphp
                         <div class="bg-primary h-2 rounded-full transition-all" style="width: {{ $progress }}%"></div>
                     </div>
-                    <div class="text-sm text-muted-foreground">{{ round($progress) }}% Complete</div>
+                    <div class="text-sm text-muted-foreground">{{ round($progress) }}{{ __('% Complete') }}</div>
                 </div>
                 @endforeach
             </div>
@@ -241,10 +241,10 @@ class extends Component
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
                             </div>
-                            <div class="text-primary font-semibold text-sm uppercase tracking-wide">Flagship Program</div>
+                            <div class="text-primary font-semibold text-sm uppercase tracking-wide">{{ __('Flagship Program') }}</div>
                         </div>
-                        <h2 class="text-3xl md:text-4xl font-bold">Startup Incubation Program</h2>
-                        <p class="text-lg text-muted-foreground">Our flagship 6-month intensive program for early-stage startups. Get everything you need to validate your idea, build your MVP, and secure your first customers.</p>
+                        <h2 class="text-3xl md:text-4xl font-bold">{{ __('Startup Incubation Program') }}</h2>
+                        <p class="text-lg text-muted-foreground">{{ __('Our flagship 6-month intensive program for early-stage startups. Get everything you need to validate your idea, build your MVP, and secure your first customers.') }}</p>
                         
                         <div class="space-y-2">
                             <h3 class="text-xl font-semibold">What You Get:</h3>
@@ -253,7 +253,7 @@ class extends Component
                                     <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
-                                    <span>Dedicated office space for 6 months</span>
+                                    <span>{{ __('Dedicated office space for 6 months') }}</span>
                                 </li>
                                 <li class="flex items-center space-x-3">
                                     <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -265,25 +265,25 @@ class extends Component
                                     <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
-                                    <span>Weekly 1-on-1 mentorship sessions</span>
+                                    <span>{{ __('Weekly 1-on-1 mentorship sessions') }}</span>
                                 </li>
                                 <li class="flex items-center space-x-3">
                                     <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
-                                    <span>Demo Day presentation to investors</span>
+                                    <span>{{ __('Demo Day presentation to investors') }}</span>
                                 </li>
                                 <li class="flex items-center space-x-3">
                                     <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
-                                    <span>Access to investor network</span>
+                                    <span>{{ __('Access to investor network') }}</span>
                                 </li>
                                 <li class="flex items-center space-x-3">
                                     <svg class="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
-                                    <span>Legal & accounting support</span>
+                                    <span>{{ __('Legal & accounting support') }}</span>
                                 </li>
                             </ul>
                         </div>
@@ -294,47 +294,47 @@ class extends Component
                         </a>
                         @else
                         <a href="{{ route('contact') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8">
-                            Get Notified
+                            {{ __('Get Notified') }}
                         </a>
                         @endif
                     </div>
 
                     <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-8 bg-gradient-to-br from-primary/5 to-secondary/10">
-                        <h3 class="text-2xl font-bold mb-6">Program Timeline</h3>
+                        <h3 class="text-2xl font-bold mb-6">{{ __('Program Timeline') }}</h3>
                         <div class="space-y-6">
                             <div class="flex items-start space-x-4">
                                 <div class="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shrink-0">1</div>
                                 <div>
                                     <div class="font-semibold">Application & Selection</div>
-                                    <div class="text-sm text-muted-foreground">2 weeks • Submit application, interviews, final selection</div>
+                                    <div class="text-sm text-muted-foreground">{{ __('2 weeks • Submit application, interviews, final selection') }}</div>
                                 </div>
                             </div>
                             <div class="flex items-start space-x-4">
                                 <div class="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shrink-0">2</div>
                                 <div>
                                     <div class="font-semibold">Onboarding & Discovery</div>
-                                    <div class="text-sm text-muted-foreground">2 weeks • Team building, mentor matching, goal setting</div>
+                                    <div class="text-sm text-muted-foreground">{{ __('2 weeks • Team building, mentor matching, goal setting') }}</div>
                                 </div>
                             </div>
                             <div class="flex items-start space-x-4">
                                 <div class="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shrink-0">3</div>
                                 <div>
                                     <div class="font-semibold">Build & Validate</div>
-                                    <div class="text-sm text-muted-foreground">12 weeks • MVP development, customer validation, iteration</div>
+                                    <div class="text-sm text-muted-foreground">{{ __('12 weeks • MVP development, customer validation, iteration') }}</div>
                                 </div>
                             </div>
                             <div class="flex items-start space-x-4">
                                 <div class="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shrink-0">4</div>
                                 <div>
                                     <div class="font-semibold">Scale & Launch</div>
-                                    <div class="text-sm text-muted-foreground">6 weeks • Go-to-market, fundraising preparation</div>
+                                    <div class="text-sm text-muted-foreground">{{ __('6 weeks • Go-to-market, fundraising preparation') }}</div>
                                 </div>
                             </div>
                             <div class="flex items-start space-x-4">
                                 <div class="w-8 h-8 rounded-full bg-green-600 text-white flex items-center justify-center text-sm font-bold shrink-0">🎓</div>
                                 <div>
                                     <div class="font-semibold">Demo Day & Graduation</div>
-                                    <div class="text-sm text-muted-foreground">1 week • Pitch to investors, alumni network access</div>
+                                    <div class="text-sm text-muted-foreground">{{ __('1 week • Pitch to investors, alumni network access') }}</div>
                                 </div>
                             </div>
                         </div>
@@ -348,8 +348,8 @@ class extends Component
     <section class="py-20">
         <div class="container px-4 md:px-6">
             <div class="text-center space-y-4 mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold">Who Should Apply?</h2>
-                <p class="text-xl text-muted-foreground max-w-2xl mx-auto">Our program is designed for ambitious founders ready to take their startup to the next level</p>
+                <h2 class="text-3xl md:text-4xl font-bold">{{ __('Who Should Apply?') }}</h2>
+                <p class="text-xl text-muted-foreground max-w-2xl mx-auto">{{ __('Our program is designed for ambitious founders ready to take their startup to the next level') }}</p>
             </div>
 
             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -359,8 +359,8 @@ class extends Component
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-semibold">Early-Stage Startups</h3>
-                    <p class="text-muted-foreground">Idea to MVP stage with a clear problem-solution fit</p>
+                    <h3 class="text-lg font-semibold">{{ __('Early-Stage Startups') }}</h3>
+                    <p class="text-muted-foreground">{{ __('Idea to MVP stage with a clear problem-solution fit') }}</p>
                 </div>
 
                 <div class="rounded-lg border bg-card p-6 space-y-3">
@@ -369,8 +369,8 @@ class extends Component
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-semibold">Committed Teams</h3>
-                    <p class="text-muted-foreground">At least one full-time founder dedicated to the venture</p>
+                    <h3 class="text-lg font-semibold">{{ __('Committed Teams') }}</h3>
+                    <p class="text-muted-foreground">{{ __('At least one full-time founder dedicated to the venture') }}</p>
                 </div>
 
                 <div class="rounded-lg border bg-card p-6 space-y-3">
@@ -379,8 +379,8 @@ class extends Component
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-semibold">Tech-Enabled Solutions</h3>
-                    <p class="text-muted-foreground">Technology-driven products or services</p>
+                    <h3 class="text-lg font-semibold">{{ __('Tech-Enabled Solutions') }}</h3>
+                    <p class="text-muted-foreground">{{ __('Technology-driven products or services') }}</p>
                 </div>
 
                 <div class="rounded-lg border bg-card p-6 space-y-3">
@@ -389,8 +389,8 @@ class extends Component
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-semibold">Scalable Business Model</h3>
-                    <p class="text-muted-foreground">Clear path to growth and revenue generation</p>
+                    <h3 class="text-lg font-semibold">{{ __('Scalable Business Model') }}</h3>
+                    <p class="text-muted-foreground">{{ __('Clear path to growth and revenue generation') }}</p>
                 </div>
 
                 <div class="rounded-lg border bg-card p-6 space-y-3">
@@ -400,8 +400,8 @@ class extends Component
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-semibold">MENA Focus</h3>
-                    <p class="text-muted-foreground">Targeting Egypt or broader MENA region markets</p>
+                    <h3 class="text-lg font-semibold">{{ __('MENA Focus') }}</h3>
+                    <p class="text-muted-foreground">{{ __('Targeting Egypt or broader MENA region markets') }}</p>
                 </div>
 
                 <div class="rounded-lg border bg-card p-6 space-y-3">
@@ -410,7 +410,7 @@ class extends Component
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-semibold">Pre-Seed / Seed Stage</h3>
+                    <h3 class="text-lg font-semibold">{{ __('Pre-Seed / Seed Stage') }}</h3>
                     <p class="text-muted-foreground">Raised less than $500K in funding</p>
                 </div>
             </div>
@@ -421,8 +421,8 @@ class extends Component
     <section class="py-20 bg-primary text-primary-foreground">
         <div class="container px-4 md:px-6">
             <div class="max-w-3xl mx-auto text-center space-y-6">
-                <h2 class="text-3xl md:text-4xl font-bold">Ready to Transform Your Startup?</h2>
-                <p class="text-xl opacity-90">Join hundreds of founders who have accelerated their journey with Siliconile</p>
+                <h2 class="text-3xl md:text-4xl font-bold">{{ __('Ready to Transform Your Startup?') }}</h2>
+                <p class="text-xl opacity-90">{{ __('Join hundreds of founders who have accelerated their journey with Siliconile') }}</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     @if($this->openCohorts->isNotEmpty())
                     <a href="{{ route('incubation.apply', $this->openCohorts->first()) }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-white text-primary hover:bg-white/90 h-11 px-8">
@@ -430,7 +430,7 @@ class extends Component
                     </a>
                     @endif
                     <a href="{{ route('contact') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors border border-white/30 hover:bg-white/10 h-11 px-8">
-                        Schedule a Call
+                        {{ __('Schedule a Call') }}
                     </a>
                 </div>
             </div>
@@ -441,10 +441,10 @@ class extends Component
     <section class="py-16 bg-muted/50">
         <div class="container px-4 md:px-6">
             <div class="max-w-xl mx-auto text-center space-y-6">
-                <h3 class="text-2xl font-bold">Already Applied?</h3>
-                <p class="text-muted-foreground">Track the status of your application</p>
+                <h3 class="text-2xl font-bold">{{ __('Already Applied?') }}</h3>
+                <p class="text-muted-foreground">{{ __('Track the status of your application') }}</p>
                 <a href="{{ route('incubation.status') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-6">
-                    Check Application Status
+                    {{ __('Check Application Status') }}
                 </a>
             </div>
         </div>

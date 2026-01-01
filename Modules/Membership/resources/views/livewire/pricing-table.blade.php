@@ -25,10 +25,10 @@ new class extends Component {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                Choose Your Plan
+                {{ __('Choose Your Plan') }}
             </h2>
             <p class="text-lg text-gray-600 dark:text-gray-400">
-                Select the perfect membership plan for your coworking needs
+                {{ __('Select the perfect membership plan for your coworking needs') }}
             </p>
         </div>
 
@@ -36,7 +36,7 @@ new class extends Component {
             @if(isset($plans[$planType->value]) && $plans[$planType->value]->isNotEmpty())
                 <div class="mb-12">
                     <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6">
-                        {{ $planType->getLabel() }} Plans
+                        {{ $planType->getLabel() }} {{ __('Plans') }}
                     </h3>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -85,7 +85,7 @@ new class extends Component {
                                             <div class="flex items-center text-sm">
                                                 <x-heroicon-s-check-circle class="w-5 h-5 text-green-500 mr-2" />
                                                 <span class="text-gray-700 dark:text-gray-300">
-                                                    Meeting Room Access ({{ $plan->meeting_hours_included }}h included)
+                                                    {{ __('Meeting Room Access (') }}{{ $plan->meeting_hours_included }}{{ __('h included)') }}
                                                 </span>
                                             </div>
                                         @endif
@@ -94,7 +94,7 @@ new class extends Component {
                                             <div class="flex items-center text-sm">
                                                 <x-heroicon-s-check-circle class="w-5 h-5 text-green-500 mr-2" />
                                                 <span class="text-gray-700 dark:text-gray-300">
-                                                    Private Desk
+                                                    {{ __('Private Desk') }}
                                                 </span>
                                             </div>
                                         @endif
@@ -103,7 +103,7 @@ new class extends Component {
                                             <div class="flex items-center text-sm">
                                                 <x-heroicon-s-check-circle class="w-5 h-5 text-green-500 mr-2" />
                                                 <span class="text-gray-700 dark:text-gray-300">
-                                                    Locker Access
+                                                    {{ __('Locker Access') }}
                                                 </span>
                                             </div>
                                         @endif
@@ -112,7 +112,7 @@ new class extends Component {
                                             <div class="flex items-center text-sm">
                                                 <x-heroicon-s-check-circle class="w-5 h-5 text-green-500 mr-2" />
                                                 <span class="text-gray-700 dark:text-gray-300">
-                                                    {{ $plan->guest_passes }} Guest Pass{{ $plan->guest_passes > 1 ? 'es' : '' }}
+                                                    {{ $plan->guest_passes }} {{ __('Guest Pass') }}{{ $plan->guest_passes > 1 ? 'es' : '' }}
                                                 </span>
                                             </div>
                                         @endif
@@ -120,7 +120,7 @@ new class extends Component {
 
                                     @if($plan->max_members && $plan->current_members >= $plan->max_members)
                                         <button disabled class="w-full bg-gray-300 text-gray-500 font-semibold py-3 px-6 rounded-lg cursor-not-allowed">
-                                            Sold Out
+                                            {{ __('Sold Out') }}
                                         </button>
                                     @else
                                         <a href="{{ route('register') }}?plan={{ $plan->id }}" 
@@ -131,7 +131,7 @@ new class extends Component {
 
                                     @if($plan->max_members)
                                         <p class="text-xs text-gray-500 dark:text-gray-400 text-center mt-2">
-                                            {{ $plan->current_members }}/{{ $plan->max_members }} spots taken
+                                            {{ $plan->current_members }}/{{ $plan->max_members }} {{ __('spots taken') }}
                                         </p>
                                     @endif
                                 </div>

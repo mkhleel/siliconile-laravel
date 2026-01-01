@@ -121,14 +121,14 @@ new #[Layout('layouts.app')] class extends Component {
 <div>
     {{-- Hero Section --}}
     <x-sections.hero
-        title="Events & <span class='text-primary'>Workshops</span>"
-        subtitle="Join our vibrant community events, workshops, and networking sessions. Connect with fellow entrepreneurs, learn from experts, and grow your startup."
+        title="{{ __('Events & <span class=') }}"text-primary'>Workshops</span>"
+        subtitle="{{ __('Join our vibrant community events, workshops, and networking sessions. Connect with fellow entrepreneurs, learn from experts, and grow your startup.') }}"
     />
 
     {{-- Main Content --}}
     <div class="py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {{-- Featured Events Section --}}
+            {{-- {{ __('Featured Events') }} Section --}}
             @if($this->featuredEvents->isNotEmpty() && $this->timeFilter === 'upcoming' && !$search)
                 <div class="mb-12 bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl overflow-hidden">
                     <div class="px-8 py-12">
@@ -162,14 +162,14 @@ new #[Layout('layouts.app')] class extends Component {
         <div class="flex-1">
             <flux:input
                 wire:model.live.debounce.300ms="search"
-                placeholder="Search events..."
+                placeholder="{{ __('Search events...') }}"
                 icon="magnifying-glass"
             />
         </div>
 
         {{-- Type Filter --}}
         <div class="w-full md:w-48">
-            <flux:select wire:model.live="type" placeholder="All Types">
+            <flux:select wire:model.live="type" placeholder="{{ __('All Types') }}">
                 <flux:select.option value="">All Types</flux:select.option>
                 @foreach($this->getTypeOptions() as $value => $label)
                     <flux:select.option value="{{ $value }}">{{ $label }}</flux:select.option>
@@ -200,12 +200,12 @@ new #[Layout('layouts.app')] class extends Component {
     @if($this->events->isEmpty())
         <div class="text-center py-16">
             <x-heroicon-o-calendar class="mx-auto h-16 w-16 text-muted-foreground" />
-            <h3 class="mt-4 text-lg font-semibold text-foreground">No events found</h3>
+            <h3 class="mt-4 text-lg font-semibold text-foreground">{{ __('No events found') }}</h3>
             <p class="mt-2 text-muted-foreground">
                 @if($search || $type)
-                    Try adjusting your filters or search terms.
+                    {{ __('Try adjusting your filters or search terms.') }}
                 @else
-                    Check back later for upcoming events.
+                    {{ __('Check back later for upcoming events.') }}
                 @endif
             </p>
             @if($search || $type || $timeFilter !== 'upcoming')
@@ -243,7 +243,7 @@ new #[Layout('layouts.app')] class extends Component {
 
                             {{-- Type Badge --}}
                             <div class="absolute top-3 right-3">
-                                <span class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-{{ $event->type->getColor() }}-100 text-{{ $event->type->getColor() }}-800 dark:bg-{{ $event->type->getColor() }}-900/20 dark:text-{{ $event->type->getColor() }}-400">
+                                <span class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-{{ $event->type->getColor() }}-100 text-{{ $event->type->getColor() }}{{ __('-800 dark:bg-') }}{{ $event->type->getColor() }}{{ __('-900/20 dark:text-') }}{{ $event->type->getColor() }}-400">
                                     {{ $event->type->getLabel() }}
                                 </span>
                             </div>

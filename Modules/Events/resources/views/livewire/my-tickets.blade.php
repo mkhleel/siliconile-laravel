@@ -10,7 +10,7 @@ use Modules\Events\Enums\AttendeeStatus;
 use Modules\Events\Models\Attendee;
 
 /**
- * My Tickets Component
+ * {{ __('My Tickets') }} Component
  *
  * Displays all tickets for the authenticated user.
  */
@@ -77,7 +77,7 @@ new #[Layout('components.layouts.app')] class extends Component {
             <h1 class="text-2xl font-bold text-foreground">My Tickets</h1>
             <a href="{{ route('events.index') }}" wire:navigate
                class="text-primary hover:text-primary text-sm font-medium">
-                Browse Events →
+                {{ __('{{ __('Browse Events') }} →') }}
             </a>
         </div>
 
@@ -86,17 +86,17 @@ new #[Layout('components.layouts.app')] class extends Component {
             <button wire:click="$set('filter', 'upcoming')"
                     class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors
                            {{ $filter === 'upcoming' ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground' }}">
-                Upcoming ({{ $this->ticketCounts['upcoming'] }})
+                {{ __('Upcoming (') }}{{ $this->ticketCounts['upcoming'] }})
             </button>
             <button wire:click="$set('filter', 'past')"
                     class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors
                            {{ $filter === 'past' ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground' }}">
-                Past ({{ $this->ticketCounts['past'] }})
+                {{ __('Past (') }}{{ $this->ticketCounts['past'] }})
             </button>
             <button wire:click="$set('filter', 'all')"
                     class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors
                            {{ $filter === 'all' ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground' }}">
-                All ({{ $this->ticketCounts['all'] }})
+                {{ __('All (') }}{{ $this->ticketCounts['all'] }})
             </button>
         </div>
 
@@ -104,14 +104,14 @@ new #[Layout('components.layouts.app')] class extends Component {
         @if($this->tickets->isEmpty())
             <div class="text-center py-16 bg-card rounded-xl shadow-sm border border-border">
                 <x-heroicon-o-ticket class="mx-auto h-16 w-16 text-muted-foreground" />
-                <h3 class="mt-4 text-lg font-semibold text-foreground">No tickets found</h3>
+                <h3 class="mt-4 text-lg font-semibold text-foreground">{{ __('No tickets found') }}</h3>
                 <p class="mt-2 text-muted-foreground">
                     @if($filter === 'upcoming')
-                        You don't have any upcoming event tickets.
+                        {{ __('You don\'t have any upcoming event tickets.') }}
                     @elseif($filter === 'past')
-                        You haven't attended any events yet.
+                        {{ __('You haven\'t attended any events yet.') }}
                     @else
-                        You haven't registered for any events.
+                        {{ __('You haven\'t registered for any events.') }}
                     @endif
                 </p>
                 <a href="{{ route('events.index') }}" wire:navigate

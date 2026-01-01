@@ -60,7 +60,7 @@ class extends Component {
     <div class="bg-muted/30 border-b">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <nav class="flex items-center space-x-2 text-sm">
-                <a href="{{ route('home') }}" class="text-muted-foreground hover:text-primary transition-colors">Home</a>
+                <a href="{{ route('home') }}" class="text-muted-foreground hover:text-primary transition-colors">{{ __('Home') }}</a>
                 <span class="text-muted-foreground">/</span>
                 <a href="{{ route('spaces') }}" class="text-muted-foreground hover:text-primary transition-colors">Spaces</a>
                 <span class="text-muted-foreground">/</span>
@@ -107,7 +107,7 @@ class extends Component {
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
-                            <span>Up to {{ $space->capacity }} {{ Str::plural('person', $space->capacity) }}</span>
+                            <span>{{ __('Up to') }} {{ $space->capacity }} {{ Str::plural('person', $space->capacity) }}</span>
                         </div>
                         @endif
                         
@@ -135,7 +135,7 @@ class extends Component {
                 <!-- Description -->
                 @if($space->description)
                 <div class="prose prose-gray dark:prose-invert max-w-none">
-                    <h2 class="text-xl font-semibold mb-4">About This Space</h2>
+                    <h2 class="text-xl font-semibold mb-4">{{ __('About This Space') }}</h2>
                     {!! nl2br(e($space->description)) !!}
                 </div>
                 @endif
@@ -161,7 +161,7 @@ class extends Component {
                 </div>
                 @endif
 
-                <!-- Booking Guidelines -->
+                <!-- {{ __('Booking Guidelines') }} -->
                 <div class="bg-muted/30 rounded-xl p-6 space-y-4">
                     <h2 class="text-xl font-semibold">Booking Guidelines</h2>
                     <ul class="space-y-2 text-sm text-muted-foreground">
@@ -170,7 +170,7 @@ class extends Component {
                             <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <span>Minimum booking duration: {{ $space->min_booking_minutes }} minutes</span>
+                            <span>{{ __('Minimum booking duration:') }} {{ $space->min_booking_minutes }} minutes</span>
                         </li>
                         @endif
                         @if($space->max_booking_minutes)
@@ -178,7 +178,7 @@ class extends Component {
                             <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <span>Maximum booking duration: {{ floor($space->max_booking_minutes / 60) }} hours</span>
+                            <span>{{ __('Maximum booking duration:') }} {{ floor($space->max_booking_minutes / 60) }} hours</span>
                         </li>
                         @endif
                         @if($space->buffer_minutes)
@@ -186,7 +186,7 @@ class extends Component {
                             <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <span>{{ $space->buffer_minutes }} minutes buffer between bookings for setup/cleanup</span>
+                            <span>{{ $space->buffer_minutes }} {{ __('minutes buffer between bookings for setup/cleanup') }}</span>
                         </li>
                         @endif
                         @if($space->requires_approval)
@@ -194,14 +194,14 @@ class extends Component {
                             <svg class="w-5 h-5 text-yellow-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                             </svg>
-                            <span>Bookings require admin approval before confirmation</span>
+                            <span>{{ __('Bookings require admin approval before confirmation') }}</span>
                         </li>
                         @endif
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <span>Cancellations must be made at least 24 hours in advance</span>
+                            <span>{{ __('Cancellations must be made at least 24 hours in advance') }}</span>
                         </li>
                     </ul>
                 </div>
@@ -217,15 +217,15 @@ class extends Component {
                             <div class="flex items-baseline gap-2">
                                 @if($space->hourly_rate)
                                 <span class="text-3xl font-bold text-foreground">{{ $space->currency ?? 'EGP' }} {{ number_format($space->hourly_rate, 0) }}</span>
-                                <span class="text-muted-foreground">/hour</span>
+                                <span class="text-muted-foreground">{{ __('/hour') }}</span>
                                 @elseif($space->daily_rate)
                                 <span class="text-3xl font-bold text-foreground">{{ $space->currency ?? 'EGP' }} {{ number_format($space->daily_rate, 0) }}</span>
-                                <span class="text-muted-foreground">/day</span>
+                                <span class="text-muted-foreground">{{ __('/day') }}</span>
                                 @elseif($space->monthly_rate)
                                 <span class="text-3xl font-bold text-foreground">{{ $space->currency ?? 'EGP' }} {{ number_format($space->monthly_rate, 0) }}</span>
-                                <span class="text-muted-foreground">/month</span>
+                                <span class="text-muted-foreground">{{ __('/month') }}</span>
                                 @else
-                                <span class="text-xl font-medium text-foreground">Contact for pricing</span>
+                                <span class="text-xl font-medium text-foreground">{{ __('Contact for pricing') }}</span>
                                 @endif
                             </div>
                             
@@ -234,19 +234,19 @@ class extends Component {
                             <div class="mt-4 pt-4 border-t border-primary/10 space-y-2 text-sm">
                                 @if($space->hourly_rate)
                                 <div class="flex justify-between">
-                                    <span class="text-muted-foreground">Hourly rate</span>
+                                    <span class="text-muted-foreground">{{ __('Hourly rate') }}</span>
                                     <span class="font-medium">{{ $space->currency ?? 'EGP' }} {{ number_format($space->hourly_rate, 0) }}</span>
                                 </div>
                                 @endif
                                 @if($space->daily_rate)
                                 <div class="flex justify-between">
-                                    <span class="text-muted-foreground">Daily rate</span>
+                                    <span class="text-muted-foreground">{{ __('Daily rate') }}</span>
                                     <span class="font-medium">{{ $space->currency ?? 'EGP' }} {{ number_format($space->daily_rate, 0) }}</span>
                                 </div>
                                 @endif
                                 @if($space->monthly_rate)
                                 <div class="flex justify-between">
-                                    <span class="text-muted-foreground">Monthly rate</span>
+                                    <span class="text-muted-foreground">{{ __('Monthly rate') }}</span>
                                     <span class="font-medium">{{ $space->currency ?? 'EGP' }} {{ number_format($space->monthly_rate, 0) }}</span>
                                 </div>
                                 @endif
@@ -257,7 +257,7 @@ class extends Component {
                         <!-- Booking Form -->
                         <div class="p-6 space-y-4">
                             <div>
-                                <label for="date" class="block text-sm font-medium mb-2">Select Date</label>
+                                <label for="date" class="block text-sm font-medium mb-2">{{ __('Select Date') }}</label>
                                 <x-ui.input 
                                     type="date" 
                                     wire:model="selectedDate" 
@@ -268,7 +268,7 @@ class extends Component {
 
                             <div class="grid grid-cols-2 gap-3">
                                 <div>
-                                    <label for="startTime" class="block text-sm font-medium mb-2">Start Time</label>
+                                    <label for="startTime" class="block text-sm font-medium mb-2">{{ __('Start Time') }}</label>
                                     <x-ui.select wire:model="startTime" class="w-full">
                                         <option value="">Select</option>
                                         @for($hour = 8; $hour <= 22; $hour++)
@@ -278,7 +278,7 @@ class extends Component {
                                     </x-ui.select>
                                 </div>
                                 <div>
-                                    <label for="endTime" class="block text-sm font-medium mb-2">End Time</label>
+                                    <label for="endTime" class="block text-sm font-medium mb-2">{{ __('End Time') }}</label>
                                     <x-ui.select wire:model="endTime" class="w-full">
                                         <option value="">Select</option>
                                         @for($hour = 8; $hour <= 23; $hour++)
@@ -310,16 +310,16 @@ class extends Component {
                             @endauth
 
                             <p class="text-xs text-center text-muted-foreground">
-                                No payment required until booking is confirmed
+                                {{ __('No payment required until booking is confirmed') }}
                             </p>
                         </div>
                     </x-ui.card>
 
                     <!-- Help Card -->
                     <div class="mt-6 p-4 rounded-xl bg-muted/30 text-center">
-                        <p class="text-sm text-muted-foreground mb-2">Need help choosing?</p>
+                        <p class="text-sm text-muted-foreground mb-2">{{ __('Need help choosing?') }}</p>
                         <a href="{{ route('contact') }}" class="text-sm font-medium text-primary hover:underline">
-                            Contact our team →
+                            {{ __('Contact our team →') }}
                         </a>
                     </div>
                 </div>
@@ -337,7 +337,7 @@ class extends Component {
     @endphp
 
     @if($relatedSpaces->count() > 0)
-    <x-sections.content title="Similar Spaces" class="bg-muted/30">
+    <x-sections.content title="{{ __('Similar Spaces') }}" class="bg-muted/30">
         <div class="grid md:grid-cols-3 gap-6">
             @foreach($relatedSpaces as $relatedSpace)
             <x-cards.space-card :space="$relatedSpace" />

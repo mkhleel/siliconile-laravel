@@ -1,5 +1,5 @@
 <x-cms::layouts.master>
-    <h1>Hello World</h1>
+    <h1>{{ __('Hello World') }}</h1>
 
-    <p>Module: {!! config('cms.name') !!}</p>
+    <p>{{ __('Module:') }} {!! config('cms.name') !!}</p>
 </x-cms::layouts.master>

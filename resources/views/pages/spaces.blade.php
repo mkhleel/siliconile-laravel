@@ -47,15 +47,15 @@ class extends Component
 
 <main class="flex-1">
     <x-sections.hero
-        title="Book a <span class='text-primary'>Space</span>"
-        subtitle="Reserve meeting rooms, private offices, or hot desks for your next project. Flexible booking options to fit your schedule."
+        title="{{ __('Book a <span class=') }}"text-primary'>Space</span>"
+        subtitle="{{ __('Reserve meeting rooms, private offices, or hot desks for your next project. Flexible booking options to fit your schedule.') }}"
     />
 
     <!-- Filters Section -->
     <section class="py-8 border-b">
         <div class="container px-4 md:px-6">
             <div class="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-                <h2 class="text-2xl font-bold">Available Spaces</h2>
+                <h2 class="text-2xl font-bold">{{ __('Available Spaces') }}</h2>
                 <div class="flex flex-col sm:flex-row gap-4">
                     <div class="w-full sm:w-48">
                         <select
@@ -106,7 +106,7 @@ class extends Component
                 <!-- Fallback sample spaces if none in database -->
                 <x-cards.space-card
                     name="Hot Desk"
-                    description="Flexible workspace in our open-plan area. Perfect for independent work or casual collaboration."
+                    description="{{ __('Flexible workspace in our open-plan area. Perfect for independent work or casual collaboration.') }}"
                     type="Hot Desk"
                     :capacity="1"
                     hourlyRate="50 EGP"
@@ -118,7 +118,7 @@ class extends Component
 
                 <x-cards.space-card
                     name="Meeting Room - Small"
-                    description="Intimate meeting room perfect for client calls, interviews, or small team discussions."
+                    description="{{ __('Intimate meeting room perfect for client calls, interviews, or small team discussions.') }}"
                     type="Meeting Room"
                     :capacity="4"
                     hourlyRate="100 EGP"
@@ -130,7 +130,7 @@ class extends Component
 
                 <x-cards.space-card
                     name="Meeting Room - Large"
-                    description="Spacious conference room for team meetings, workshops, or presentations."
+                    description="{{ __('Spacious conference room for team meetings, workshops, or presentations.') }}"
                     type="Meeting Room"
                     :capacity="12"
                     hourlyRate="200 EGP"
@@ -142,7 +142,7 @@ class extends Component
 
                 <x-cards.space-card
                     name="Private Office - 2 Person"
-                    description="Enclosed office space for focused work. Ideal for freelancers or small teams."
+                    description="{{ __('Enclosed office space for focused work. Ideal for freelancers or small teams.') }}"
                     type="Private Office"
                     :capacity="2"
                     dailyRate="300 EGP"
@@ -153,7 +153,7 @@ class extends Component
 
                 <x-cards.space-card
                     name="Private Office - 4 Person"
-                    description="Team office with private space for collaboration and focused work."
+                    description="{{ __('Team office with private space for collaboration and focused work.') }}"
                     type="Private Office"
                     :capacity="4"
                     dailyRate="500 EGP"
@@ -164,7 +164,7 @@ class extends Component
 
                 <x-cards.space-card
                     name="Event Space"
-                    description="Large multi-purpose space for workshops, networking events, or presentations."
+                    description="{{ __('Large multi-purpose space for workshops, networking events, or presentations.') }}"
                     type="Event Space"
                     :capacity="50"
                     hourlyRate="500 EGP"
@@ -180,8 +180,8 @@ class extends Component
                 <svg class="h-16 w-16 text-muted-foreground mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                <h3 class="text-lg font-semibold mb-2">No spaces found</h3>
-                <p class="text-muted-foreground mb-4">Try adjusting your filters to see more results.</p>
+                <h3 class="text-lg font-semibold mb-2">{{ __('No spaces found') }}</h3>
+                <p class="text-muted-foreground mb-4">{{ __('Try adjusting your filters to see more results.') }}</p>
                 <x-ui.button wire:click="$set('selectedType', ''); $set('selectedCapacity', 0)" variant="outline">
                     Clear Filters
                 </x-ui.button>
@@ -190,45 +190,45 @@ class extends Component
     </x-sections.content>
 
     <!-- Booking Process Section -->
-    <x-sections.content :muted="true" title="How Booking Works" subtitle="Simple steps to reserve your space">
+    <x-sections.content :muted="true" title="{{ __('How Booking Works') }}" subtitle="{{ __('Simple steps to reserve your space') }}">
         <div class="grid gap-8 md:grid-cols-4">
             <div class="text-center space-y-4">
                 <div class="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center mx-auto text-2xl font-bold">
                     1
                 </div>
-                <h3 class="font-semibold">Choose Your Space</h3>
-                <p class="text-sm text-muted-foreground">Browse our available rooms and select the one that fits your needs.</p>
+                <h3 class="font-semibold">{{ __('Choose Your Space') }}</h3>
+                <p class="text-sm text-muted-foreground">{{ __('Browse our available rooms and select the one that fits your needs.') }}</p>
             </div>
 
             <div class="text-center space-y-4">
                 <div class="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center mx-auto text-2xl font-bold">
                     2
                 </div>
-                <h3 class="font-semibold">Pick Date & Time</h3>
-                <p class="text-sm text-muted-foreground">Select your preferred date and time slot from the available options.</p>
+                <h3 class="font-semibold">{{ __('Pick Date & Time') }}</h3>
+                <p class="text-sm text-muted-foreground">{{ __('Select your preferred date and time slot from the available options.') }}</p>
             </div>
 
             <div class="text-center space-y-4">
                 <div class="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center mx-auto text-2xl font-bold">
                     3
                 </div>
-                <h3 class="font-semibold">Confirm & Pay</h3>
-                <p class="text-sm text-muted-foreground">Review your booking details and complete the payment securely.</p>
+                <h3 class="font-semibold">{{ __('Confirm & Pay') }}</h3>
+                <p class="text-sm text-muted-foreground">{{ __('Review your booking details and complete the payment securely.') }}</p>
             </div>
 
             <div class="text-center space-y-4">
                 <div class="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center mx-auto text-2xl font-bold">
                     4
                 </div>
-                <h3 class="font-semibold">Show Up & Work</h3>
-                <p class="text-sm text-muted-foreground">Arrive at your booked time and enjoy your productive workspace.</p>
+                <h3 class="font-semibold">{{ __('Show Up & Work') }}</h3>
+                <p class="text-sm text-muted-foreground">{{ __('Arrive at your booked time and enjoy your productive workspace.') }}</p>
             </div>
         </div>
     </x-sections.content>
 
     <x-sections.cta
-        title="Need a Custom Solution?"
-        subtitle="We can accommodate special requests for events, team offsites, or long-term arrangements."
+        title="{{ __('Need a Custom Solution?') }}"
+        subtitle="{{ __('We can accommodate special requests for events, team offsites, or long-term arrangements.') }}"
         primaryAction="Contact Us"
         :primaryUrl="route('contact')"
         secondaryAction="View Pricing"

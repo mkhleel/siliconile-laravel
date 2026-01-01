@@ -380,8 +380,8 @@ new #[Layout('layouts.app')] class extends Component {
             <div class="flex items-center justify-between">
                 @php
                     $steps = [
-                        1 => 'Select Tickets',
-                        2 => auth()->check() ? 'Payment' : 'Your Details',
+                        1 => '{{ __('Select Tickets') }}',
+                        2 => auth()->check() ? 'Payment' : '{{ __('Your Details') }}',
                         3 => auth()->check() ? 'Confirmation' : ($this->isFreeOrder ? 'Confirmation' : 'Payment'),
                         4 => 'Confirmation',
                     ];
@@ -434,7 +434,7 @@ new #[Layout('layouts.app')] class extends Component {
                                         {{-- Sale Period --}}
                                         @if($ticket->sale_end_date)
                                             <p class="text-xs text-warning-600 mt-2">
-                                                Sales end {{ $ticket->sale_end_date->format('M j, Y') }}
+                                                {{ __('Sales end') }} {{ $ticket->sale_end_date->format('M j, Y') }}
                                             </p>
                                         @endif
                                     </div>
@@ -478,7 +478,7 @@ new #[Layout('layouts.app')] class extends Component {
                                             </button>
                                         </div>
                                     @else
-                                        <span class="text-danger-600 font-medium">Sold Out</span>
+                                        <span class="text-danger-600 font-medium">{{ __('Sold Out') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -496,15 +496,15 @@ new #[Layout('layouts.app')] class extends Component {
                         <div class="grid md:grid-cols-2 gap-4">
                             <flux:input
                                 wire:model="guestName"
-                                label="Full Name"
-                                placeholder="John Doe"
+                                label="{{ __('Full Name') }}"
+                                placeholder="{{ __('John Doe') }}"
                                 required
                             />
 
                             <flux:input
                                 wire:model="guestEmail"
                                 type="email"
-                                label="Email Address"
+                                label="{{ __('Email Address') }}"
                                 placeholder="john@example.com"
                                 required
                             />
@@ -514,27 +514,27 @@ new #[Layout('layouts.app')] class extends Component {
                             <flux:input
                                 wire:model="guestPhone"
                                 type="tel"
-                                label="Phone Number"
+                                label="{{ __('Phone Number') }}"
                                 placeholder="+249 123 456 789"
                             />
 
                             <flux:input
                                 wire:model="companyName"
-                                label="Company/Organization"
-                                placeholder="Acme Inc."
+                                label="{{ __('Company/Organization') }}"
+                                placeholder="{{ __('Acme Inc.') }}"
                             />
                         </div>
 
                         <flux:input
                             wire:model="jobTitle"
-                            label="Job Title"
-                            placeholder="Software Developer"
+                            label="{{ __('Job Title') }}"
+                            placeholder="{{ __('Software Developer') }}"
                         />
 
                         <flux:textarea
                             wire:model="specialRequirements"
-                            label="Special Requirements"
-                            placeholder="Dietary requirements, accessibility needs, etc."
+                            label="{{ __('Special Requirements') }}"
+                            placeholder="{{ __('Dietary requirements, accessibility needs, etc.') }}"
                             rows="3"
                         />
                     </div>
@@ -544,7 +544,7 @@ new #[Layout('layouts.app')] class extends Component {
             {{-- Step 3: Payment --}}
             @if($currentStep === 3 && !$this->isFreeOrder)
                 <div class="p-6">
-                    <h2 class="text-xl font-semibold text-foreground mb-6">Payment Method</h2>
+                    <h2 class="text-xl font-semibold text-foreground mb-6">{{ __('Payment Method') }}</h2>
 
                     @error('payment')
                         <div class="mb-4 p-4 bg-danger-50 text-danger-700 rounded-lg">
@@ -557,8 +557,8 @@ new #[Layout('layouts.app')] class extends Component {
                             <input type="radio" wire:model="paymentMethod" value="paytabs" class="sr-only" />
                             <div class="flex items-center">
                                 <div class="flex-1">
-                                    <span class="font-semibold text-foreground">Credit/Debit Card</span>
-                                    <p class="text-sm text-muted-foreground">Pay securely with your card via Paytabs</p>
+                                    <span class="font-semibold text-foreground">{{ __('Credit/Debit Card') }}</span>
+                                    <p class="text-sm text-muted-foreground">{{ __('Pay securely with your card via Paytabs') }}</p>
                                 </div>
                                 <div class="w-6 h-6 border-2 rounded-full {{ $paymentMethod === 'paytabs' ? 'border-primary bg-primary' : 'border-border' }}">
                                     @if($paymentMethod === 'paytabs')
@@ -572,8 +572,8 @@ new #[Layout('layouts.app')] class extends Component {
                             <input type="radio" wire:model="paymentMethod" value="bank_transfer" class="sr-only" />
                             <div class="flex items-center">
                                 <div class="flex-1">
-                                    <span class="font-semibold text-foreground">Bank Transfer</span>
-                                    <p class="text-sm text-muted-foreground">Pay via bank transfer (manual confirmation)</p>
+                                    <span class="font-semibold text-foreground">{{ __('Bank Transfer') }}</span>
+                                    <p class="text-sm text-muted-foreground">{{ __('Pay via bank transfer (manual confirmation)') }}</p>
                                 </div>
                                 <div class="w-6 h-6 border-2 rounded-full {{ $paymentMethod === 'bank_transfer' ? 'border-primary bg-primary' : 'border-border' }}">
                                     @if($paymentMethod === 'bank_transfer')
@@ -593,13 +593,13 @@ new #[Layout('layouts.app')] class extends Component {
                         <x-heroicon-o-check-circle class="w-10 h-10 text-success-600" />
                     </div>
 
-                    <h2 class="text-2xl font-bold text-foreground mb-2">Registration Complete!</h2>
+                    <h2 class="text-2xl font-bold text-foreground mb-2">{{ __('Registration Complete!') }}</h2>
                     <p class="text-muted-foreground mb-6">
                         Your tickets have been sent to <strong>{{ $guestEmail ?? auth()->user()?->email }}</strong>
                     </p>
 
                     <div class="bg-muted rounded-lg p-6 mb-6 text-left">
-                        <h3 class="font-semibold text-foreground mb-4">Your Tickets</h3>
+                        <h3 class="font-semibold text-foreground mb-4">{{ __('Your Tickets') }}</h3>
                         @foreach($createdAttendees as $attendee)
                             <div class="flex items-center justify-between py-2 border-b border-border last:border-0">
                                 <div>
@@ -618,13 +618,13 @@ new #[Layout('layouts.app')] class extends Component {
                         </a>
                         <a href="{{ route('events.my-tickets') }}" wire:navigate
                            class="px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-colors">
-                            View My Tickets
+                            {{ __('View My Tickets') }}
                         </a>
                     </div>
                 </div>
             @endif
 
-            {{-- Order Summary & Navigation --}}
+            {{-- {{ __('Order Summary') }} & Navigation --}}
             @if($currentStep < 4)
                 <div class="border-t border-border p-6">
                     {{-- Order Summary --}}
@@ -646,7 +646,7 @@ new #[Layout('layouts.app')] class extends Component {
                                 </div>
                             @endforeach
                             <div class="border-t border-border mt-3 pt-3 flex justify-between font-semibold">
-                                <span class="text-foreground">Total</span>
+                                <span class="text-foreground">{{ __('Total') }}</span>
                                 <span class="text-foreground">
                                     @if($this->isFreeOrder)
                                         Free

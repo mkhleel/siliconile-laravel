@@ -27,9 +27,9 @@ class extends Component {
     <div class="bg-muted/30 border-b">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <nav class="flex items-center space-x-2 text-sm">
-                <a href="{{ route('home') }}" class="text-muted-foreground hover:text-primary transition-colors">Home</a>
+                <a href="{{ route('home') }}" class="text-muted-foreground hover:text-primary transition-colors">{{ __('Home') }}</a>
                 <span class="text-muted-foreground">/</span>
-                <a href="{{ route('events') }}" class="text-muted-foreground hover:text-primary transition-colors">Events</a>
+                <a href="{{ route('events') }}" class="text-muted-foreground hover:text-primary transition-colors">{{ __('Events') }}</a>
                 <span class="text-muted-foreground">/</span>
                 <span class="text-foreground font-medium line-clamp-1">{{ $event->title }}</span>
             </nav>
@@ -96,7 +96,7 @@ class extends Component {
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <span>{{ $event->reading_time }} min read</span>
+                                <span>{{ $event->reading_time }} {{ __('min read') }}</span>
                             </div>
                             @endif
                         </div>
@@ -200,7 +200,7 @@ class extends Component {
                     @if($event->tags && $event->tags->count() > 0)
                     <div class="mt-8 pt-8 border-t">
                         <div class="flex flex-wrap items-center gap-2">
-                            <span class="text-sm font-medium text-muted-foreground">Tags:</span>
+                            <span class="text-sm font-medium text-muted-foreground">{{ __('Tags:') }}</span>
                             @foreach($event->tags as $tag)
                             <x-ui.badge variant="secondary">{{ $tag->name }}</x-ui.badge>
                             @endforeach
@@ -211,12 +211,12 @@ class extends Component {
                     <!-- Share Buttons -->
                     <div class="mt-8 pt-8 border-t">
                         <div class="flex items-center gap-4">
-                            <span class="text-sm font-medium text-muted-foreground">Share:</span>
+                            <span class="text-sm font-medium text-muted-foreground">{{ __('Share:') }}</span>
                             <div class="flex gap-2">
-                                <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}&text={{ urlencode($event->title) }}" 
+                                <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}&text={{ urlencode($event->title) }}{{ __('" 
                                    target="_blank" 
                                    rel="noopener noreferrer"
-                                   class="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors">
+                                   class="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors">') }}
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                                     </svg>
@@ -256,14 +256,14 @@ class extends Component {
                         @if($event->author)
                         <x-ui.card>
                             <div class="p-6">
-                                <h3 class="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">Posted by</h3>
+                                <h3 class="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">{{ __('Posted by') }}</h3>
                                 <div class="flex items-center gap-4">
                                     <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                                         <span class="text-lg font-semibold text-primary">{{ substr($event->author->name, 0, 1) }}</span>
                                     </div>
                                     <div>
                                         <p class="font-medium">{{ $event->author->name }}</p>
-                                        <p class="text-sm text-muted-foreground">Team Member</p>
+                                        <p class="text-sm text-muted-foreground">{{ __('Team Member') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -278,15 +278,15 @@ class extends Component {
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                     </svg>
                                 </div>
-                                <h3 class="font-semibold mb-2">Join Our Community</h3>
-                                <p class="text-sm text-muted-foreground mb-4">Be part of Luxor's most innovative startup ecosystem</p>
+                                <h3 class="font-semibold mb-2">{{ __('Join Our Community') }}</h3>
+                                <p class="text-sm text-muted-foreground mb-4">{{ __('Be part of Luxor\'s most innovative startup ecosystem') }}</p>
                                 <a href="{{ route('apply') }}">
                                     <x-ui.button class="w-full">Apply Now</x-ui.button>
                                 </a>
                             </div>
                         </x-ui.card>
 
-                        <!-- Related Events -->
+                        <!-- {{ __('Related Events') }} -->
                         @php
                             $relatedEvents = \Modules\Cms\Models\Post::published()
                                 ->where('id', '!=', $event->id)
@@ -334,7 +334,7 @@ class extends Component {
     @endphp
 
     @if($moreEvents->count() > 0)
-    <x-sections.content title="More Events" class="bg-muted/30">
+    <x-sections.content title="{{ __('More Events') }}" class="bg-muted/30">
         <div class="grid md:grid-cols-3 gap-6">
             @foreach($moreEvents as $moreEvent)
             <x-cards.event-card :event="$moreEvent" />

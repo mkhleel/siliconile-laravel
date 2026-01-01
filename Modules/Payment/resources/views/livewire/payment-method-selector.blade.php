@@ -10,7 +10,7 @@
     @endforeach
 
     <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h2 class="text-2xl font-bold mb-6 text-gray-800">Payment Details</h2>
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">{{ __('Payment Details') }}</h2>
 
         @if($isProcessing)
             <div class="flex items-center justify-center py-8">
@@ -32,7 +32,7 @@
 
         <div class="bg-gray-50 p-4 rounded-md mb-6">
             <div class="flex justify-between items-center">
-                <span class="text-sm text-gray-500">Amount</span>
+                <span class="text-sm text-gray-500">{{ __('Amount') }}</span>
                 <span class="text-lg font-bold">{!! formatCurrency($amount, 2) !!}</span>
             </div>
         </div>
@@ -40,7 +40,7 @@
         <form wire:submit="processPayment">
             @if(count(app(\Modules\Payment\Services\PaymentService::class)->getAvailableGateways()) > 0)
                 <div class="mb-6">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Select Payment Method</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">{{ __('Select Payment Method') }}</label>
 
                     <div class="grid gap-4 grid-cols-1 sm:grid-cols-2">
                         @foreach(app(\Modules\Payment\Services\PaymentService::class)->getAvailableGateways() as $identifier => $gateway)
@@ -67,7 +67,7 @@
                 </div>
             @else
                 <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6" role="alert">
-                    <p>No payment methods are currently available.</p>
+                    <p>{{ __('No payment methods are currently available.') }}</p>
                 </div>
             @endif
 
@@ -80,7 +80,7 @@
                 {{ count($availableGateways) === 0 ? 'disabled' : '' }}
                 wire:loading.attr="disabled"
                 wire:loading.class="opacity-75">
-                <span wire:loading.remove>Pay Now</span>
+                <span wire:loading.remove>{{ __('Pay Now') }}</span>
                 <span wire:loading>Processing...</span>
             </button>
         </form>

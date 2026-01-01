@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
-use Modules\Events\Enums\AttendeeStatus;
+use Modules\{{ __('Events') }}\Enums\AttendeeStatus;
 use Modules\Events\Enums\EventStatus;
 use Modules\Events\Models\Event;
 use Modules\Events\Models\TicketType;
@@ -170,7 +170,7 @@ new #[Layout('layouts.app')] class extends Component {
                                 <x-heroicon-o-video-camera class="w-5 h-5 mr-2 text-primary-400" />
                                 <div>
                                     <div class="font-semibold text-white">Online Event</div>
-                                    <div class="text-sm">Join from anywhere</div>
+                                    <div class="text-sm">{{ __('Join from anywhere') }}</div>
                                 </div>
                             @else
                                 <x-heroicon-o-map-pin class="w-5 h-5 mr-2 text-primary-400" />
@@ -225,17 +225,17 @@ new #[Layout('layouts.app')] class extends Component {
                             @if($this->isSoldOut)
                                 <div class="flex items-center text-danger-600">
                                     <x-heroicon-o-x-circle class="w-5 h-5 mr-2" />
-                                    <span class="font-semibold">Sold Out</span>
+                                    <span class="font-semibold">{{ __('Sold Out') }}</span>
                                 </div>
                             @elseif($this->spotsRemaining !== null && $this->spotsRemaining <= 10)
                                 <div class="flex items-center text-warning-600">
                                     <x-heroicon-o-exclamation-triangle class="w-5 h-5 mr-2" />
-                                    <span class="font-semibold">Only {{ $this->spotsRemaining }} spots left!</span>
+                                    <span class="font-semibold">Only {{ $this->spotsRemaining }} {{ __('spots left!') }}</span>
                                 </div>
                             @else
                                 <div class="flex items-center text-success-600">
                                     <x-heroicon-o-check-circle class="w-5 h-5 mr-2" />
-                                    <span class="font-semibold">Spots Available</span>
+                                    <span class="font-semibold">{{ __('Spots Available') }}</span>
                                 </div>
                             @endif
 
@@ -251,20 +251,20 @@ new #[Layout('layouts.app')] class extends Component {
                         @if($this->isUserRegistered)
                             <div class="text-center py-4 px-6 bg-success-50 rounded-lg">
                                 <x-heroicon-o-check-badge class="w-8 h-8 mx-auto text-success-600 mb-2" />
-                                <p class="text-success-700 font-semibold">You're registered!</p>
+                                <p class="text-success-700 font-semibold">{{ __('You\'re registered!') }}</p>
                                 <a href="{{ route('events.my-tickets') }}" wire:navigate
                                    class="text-sm text-success-600 hover:underline">
-                                    View your ticket →
+                                    {{ __('View your ticket →') }}
                                 </a>
                             </div>
                         @elseif(!$this->isRegistrationOpen)
                             <div class="text-center py-4 px-6 bg-muted rounded-lg">
                                 <p class="text-muted-foreground">
                                     Registration
-                                    @if($event->registration_start_date && $event->registration_start_date->isFuture())
-                                        opens {{ $event->registration_start_date->diffForHumans() }}
+                                    @if($event->registration_start_date && $event->registration_start_date->isFuture(){{ __(')
+                                        opens') }} {{ $event->registration_start_date->diffForHumans() }}
                                     @else
-                                        is closed
+                                        {{ __('is closed') }}
                                     @endif
                                 </p>
                             </div>
@@ -307,7 +307,7 @@ new #[Layout('layouts.app')] class extends Component {
             <div class="flex-1">
                 {{-- Description --}}
                 <section class="mb-12">
-                    <h2 class="text-2xl font-bold text-foreground mb-6">About This Event</h2>
+                    <h2 class="text-2xl font-bold text-foreground mb-6">{{ __('About This Event') }}</h2>
                     <div class="prose prose-lg max-w-none">
                         {!! $event->description !!}
                     </div>
@@ -362,7 +362,7 @@ new #[Layout('layouts.app')] class extends Component {
                 {{-- Ticket Types --}}
                 @if($this->ticketTypes->isNotEmpty())
                     <div class="bg-card rounded-xl shadow-sm border border-border p-6 mb-6">
-                        <h3 class="text-lg font-semibold text-foreground mb-4">Ticket Options</h3>
+                        <h3 class="text-lg font-semibold text-foreground mb-4">{{ __('Ticket Options') }}</h3>
                         <div class="space-y-4">
                             @foreach($this->ticketTypes as $ticket)
                                 <div class="border border-border rounded-lg p-4 {{ !$ticket->is_purchasable ? 'opacity-60' : '' }}">
@@ -439,7 +439,7 @@ new #[Layout('layouts.app')] class extends Component {
         </div>
     </div>
 
-    {{-- Related Events --}}
+    {{-- {{ __('Related Events') }} --}}
     @if($this->relatedEvents->isNotEmpty())
         <div class="bg-muted py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

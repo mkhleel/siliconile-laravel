@@ -35,10 +35,10 @@ new class extends Component
 <div class="max-w-2xl mx-auto py-12 px-4">
     <div class="text-center mb-8">
         <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
-            Application Status
+            {{ __('Application Status') }}
         </h1>
         <p class="mt-2 text-gray-600 dark:text-gray-400">
-            Track your application progress
+            {{ __('Track your application progress') }}
         </p>
     </div>
 
@@ -81,7 +81,7 @@ new class extends Component
                     <x-heroicon-o-calendar class="w-6 h-6 text-yellow-600" />
                     <div>
                         <p class="font-medium text-yellow-800 dark:text-yellow-200">
-                            Interview Scheduled
+                            {{ __('Interview Scheduled') }}
                         </p>
                         <p class="text-sm text-yellow-700 dark:text-yellow-300">
                             {{ $application->interview_scheduled_at->format('l, F j, Y \a\t g:i A') }}
@@ -104,7 +104,7 @@ new class extends Component
     {{-- Status Timeline --}}
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6">
-            Status History
+            {{ __('Status History') }}
         </h3>
 
         <div class="space-y-4">
@@ -154,7 +154,7 @@ new class extends Component
                 </div>
             @empty
                 <p class="text-gray-500 dark:text-gray-400 text-center py-4">
-                    No status updates yet.
+                    {{ __('No status updates yet.') }}
                 </p>
             @endforelse
         </div>
@@ -165,7 +165,7 @@ new class extends Component
         <p>
             Have questions about your application?
             <a href="mailto:incubation@siliconile.com" class="text-primary-600 hover:underline">
-                Contact us
+                {{ __('Contact us') }}
             </a>
         </p>
     </div>

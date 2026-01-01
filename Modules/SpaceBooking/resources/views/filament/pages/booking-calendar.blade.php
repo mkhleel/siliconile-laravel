@@ -229,10 +229,10 @@
 
         {{-- Legend --}}
         <div class="flex flex-wrap items-center gap-4 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
-            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Status:</span>
+            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('Status:') }}</span>
             <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-amber-500"></span>
-                <span class="text-sm text-gray-600 dark:text-gray-400">Pending</span>
+                <span class="text-sm text-gray-600 dark:text-gray-400">{{ __('Pending') }}</span>
             </div>
             <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-green-500"></span>

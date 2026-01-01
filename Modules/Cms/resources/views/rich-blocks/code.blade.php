@@ -24,7 +24,7 @@
             <button 
                 class="copy-button absolute top-2 right-16 text-xs bg-gray-600 text-white px-2 py-1 rounded opacity-75 hover:opacity-100 transition-opacity"
                 onclick="copyCode(this)"
-                title="Copy code"
+                title="{{ __('Copy code') }}"
             >
                 Copy
             </button>

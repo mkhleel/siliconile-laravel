@@ -12,7 +12,7 @@ use Modules\Incubation\Models\Application;
 
 new
 #[Layout('layouts.app')]
-#[Title('Siliconile | Startups & Portfolio')]
+#[Title('Siliconile | Startups & {{ __('Portfolio') }}')]
 class extends Component
 {
     public string $selectedFilter = 'all';
@@ -73,7 +73,7 @@ class extends Component
         <div class="container px-4 md:px-6">
             <div class="max-w-4xl mx-auto text-center space-y-8">
                 <h1 class="text-4xl md:text-6xl font-bold tracking-tight">Our <span class="text-primary">Portfolio</span></h1>
-                <p class="text-xl md:text-2xl text-muted-foreground">Meet the innovative startups that are part of the Siliconile family. These companies are driving digital transformation across Egypt and the MENA region.</p>
+                <p class="text-xl md:text-2xl text-muted-foreground">{{ __('Meet the innovative startups that are part of the Siliconile family. These companies are driving digital transformation across Egypt and the MENA region.') }}</p>
             </div>
         </div>
     </section>
@@ -84,19 +84,19 @@ class extends Component
             <div class="grid gap-8 md:grid-cols-4 text-center mb-16">
                 <div class="space-y-2">
                     <div class="text-4xl md:text-5xl font-bold text-primary">{{ $this->stats['portfolio_count'] }}+</div>
-                    <div class="text-lg font-semibold">Portfolio Companies</div>
+                    <div class="text-lg font-semibold">{{ __('Portfolio Companies') }}</div>
                 </div>
                 <div class="space-y-2">
                     <div class="text-4xl md:text-5xl font-bold text-primary">{{ $this->stats['total_funding'] }}</div>
-                    <div class="text-lg font-semibold">Total Funding Raised</div>
+                    <div class="text-lg font-semibold">{{ __('Total Funding Raised') }}</div>
                 </div>
                 <div class="space-y-2">
                     <div class="text-4xl md:text-5xl font-bold text-primary">{{ $this->stats['jobs_created'] }}</div>
-                    <div class="text-lg font-semibold">Jobs Created</div>
+                    <div class="text-lg font-semibold">{{ __('Jobs Created') }}</div>
                 </div>
                 <div class="space-y-2">
                     <div class="text-4xl md:text-5xl font-bold text-primary">{{ $this->stats['success_rate'] }}</div>
-                    <div class="text-lg font-semibold">Success Rate</div>
+                    <div class="text-lg font-semibold">{{ __('Success Rate') }}</div>
                 </div>
             </div>
         </div>
@@ -112,13 +112,13 @@ class extends Component
                         wire:click="setFilter('all')"
                         class="px-4 py-2 rounded-full text-sm font-medium transition-colors {{ $selectedFilter === 'all' ? 'bg-primary text-primary-foreground' : 'bg-background hover:bg-muted' }}"
                     >
-                        All Startups
+                        {{ __('All Startups') }}
                     </button>
                     <button
                         wire:click="setFilter('current')"
                         class="px-4 py-2 rounded-full text-sm font-medium transition-colors {{ $selectedFilter === 'current' ? 'bg-primary text-primary-foreground' : 'bg-background hover:bg-muted' }}"
                     >
-                        Current Cohort
+                        {{ __('Current Cohort') }}
                     </button>
                     <button
                         wire:click="setFilter('graduated')"
@@ -147,7 +147,7 @@ class extends Component
                         <input
                             type="text"
                             wire:model.live.debounce.300ms="search"
-                            placeholder="Search startups..."
+                            placeholder="{{ __('Search startups...') }}"
                             class="pl-10 pr-4 py-2 rounded-md border border-input bg-background text-sm w-64"
                         >
                     </div>
@@ -162,8 +162,8 @@ class extends Component
             @if($this->startups->isEmpty())
                 {{-- Empty State with Sample Data --}}
                 <div class="text-center space-y-4 mb-16">
-                    <h2 class="text-3xl md:text-5xl font-bold">Featured Startups</h2>
-                    <p class="text-xl text-muted-foreground max-w-2xl mx-auto">Discover the innovative companies building the future of technology in Egypt</p>
+                    <h2 class="text-3xl md:text-5xl font-bold">{{ __('Featured Startups') }}</h2>
+                    <p class="text-xl text-muted-foreground max-w-2xl mx-auto">{{ __('Discover the innovative companies building the future of technology in Egypt') }}</p>
                 </div>
 
                 <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -211,7 +211,7 @@ class extends Component
                 {{-- Real Data --}}
                 <div class="text-center space-y-4 mb-16">
                     <h2 class="text-3xl md:text-5xl font-bold">{{ $selectedFilter === 'graduated' ? 'Graduated Startups' : ($selectedFilter === 'current' ? 'Current Cohort' : 'All Startups') }}</h2>
-                    <p class="text-xl text-muted-foreground max-w-2xl mx-auto">{{ $this->startups->count() }} startups building the future</p>
+                    <p class="text-xl text-muted-foreground max-w-2xl mx-auto">{{ $this->startups->count() }} {{ __('startups building the future') }}</p>
                 </div>
 
                 <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -228,7 +228,7 @@ class extends Component
                                 </span>
                                 @else
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100">
-                                    Active
+                                    {{ __('Active') }}
                                 </span>
                                 @endif
                             </div>
@@ -272,12 +272,12 @@ class extends Component
         </div>
     </section>
 
-    {{-- Success Stories Section --}}
+    {{-- {{ __('Success Stories') }} Section --}}
     <section class="py-20 bg-muted/50">
         <div class="container px-4 md:px-6">
             <div class="text-center space-y-4 mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold">Success Stories</h2>
-                <p class="text-xl text-muted-foreground max-w-2xl mx-auto">Hear from founders who transformed their ideas into successful businesses</p>
+                <p class="text-xl text-muted-foreground max-w-2xl mx-auto">{{ __('Hear from founders who transformed their ideas into successful businesses') }}</p>
             </div>
 
             <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -288,15 +288,15 @@ class extends Component
                         </div>
                         <div>
                             <div class="font-semibold">Ahmed Mohamed</div>
-                            <div class="text-sm text-muted-foreground">Founder, TechFlow Solutions</div>
+                            <div class="text-sm text-muted-foreground">{{ __('Founder, TechFlow Solutions') }}</div>
                         </div>
                     </div>
-                    <p class="text-muted-foreground italic">"The mentorship and network access at Siliconile were invaluable. We went from a prototype to raising our Series A in just 18 months."</p>
+                    <p class="text-muted-foreground italic">{{ __('"The mentorship and network access at Siliconile were invaluable. We went from a prototype to raising our Series A in just 18 months."') }}</p>
                     <div class="flex items-center space-x-2 text-sm text-primary">
                         <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                         </svg>
-                        <span>Cohort 2022</span>
+                        <span>{{ __('Cohort 2022') }}</span>
                     </div>
                 </div>
 
@@ -307,15 +307,15 @@ class extends Component
                         </div>
                         <div>
                             <div class="font-semibold">Sara Hassan</div>
-                            <div class="text-sm text-muted-foreground">Co-founder, EduTech Egypt</div>
+                            <div class="text-sm text-muted-foreground">{{ __('Co-founder, EduTech Egypt') }}</div>
                         </div>
                     </div>
-                    <p class="text-muted-foreground italic">"Being part of the Siliconile community opened doors we didn't know existed. The connections and support system are second to none."</p>
+                    <p class="text-muted-foreground italic">{{ __('"Being part of the Siliconile community opened doors we didn\'t know existed. The connections and support system are second to none."') }}</p>
                     <div class="flex items-center space-x-2 text-sm text-primary">
                         <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                         </svg>
-                        <span>Cohort 2023</span>
+                        <span>{{ __('Cohort 2023') }}</span>
                     </div>
                 </div>
 
@@ -326,15 +326,15 @@ class extends Component
                         </div>
                         <div>
                             <div class="font-semibold">Mohamed Khaled</div>
-                            <div class="text-sm text-muted-foreground">Founder, AgriSmart</div>
+                            <div class="text-sm text-muted-foreground">{{ __('Founder, AgriSmart') }}</div>
                         </div>
                     </div>
-                    <p class="text-muted-foreground italic">"From farm to funding - Siliconile helped us understand our market and build a product farmers actually need. Won the Egypt Startup Awards 2024!"</p>
+                    <p class="text-muted-foreground italic">{{ __('"From farm to funding - Siliconile helped us understand our market and build a product farmers actually need. Won the Egypt Startup Awards 2024!"') }}</p>
                     <div class="flex items-center space-x-2 text-sm text-primary">
                         <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                         </svg>
-                        <span>Cohort 2024</span>
+                        <span>{{ __('Cohort 2024') }}</span>
                     </div>
                 </div>
             </div>
@@ -345,14 +345,14 @@ class extends Component
     <section class="py-20 bg-primary text-primary-foreground">
         <div class="container px-4 md:px-6">
             <div class="max-w-3xl mx-auto text-center space-y-6">
-                <h2 class="text-3xl md:text-4xl font-bold">Join Our Portfolio</h2>
-                <p class="text-xl opacity-90">Ready to transform your startup idea into reality? Apply to our next cohort and become part of the Siliconile family.</p>
+                <h2 class="text-3xl md:text-4xl font-bold">{{ __('Join Our Portfolio') }}</h2>
+                <p class="text-xl opacity-90">{{ __('Ready to transform your startup idea into reality? Apply to our next cohort and become part of the Siliconile family.') }}</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="{{ route('programs') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-white text-primary hover:bg-white/90 h-11 px-8">
-                        View Programs
+                        {{ __('View Programs') }}
                     </a>
                     <a href="{{ route('contact') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors border border-white/30 hover:bg-white/10 h-11 px-8">
-                        Contact Us
+                        {{ __('Contact Us') }}
                     </a>
                 </div>
             </div>

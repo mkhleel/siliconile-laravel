@@ -186,7 +186,7 @@
 
             <div class="ticket-qr">
                 <div class="qr-code">
-                    <img src="data:image/svg+xml;base64,{{ $qrCode }}" alt="QR Code">
+                    <img src="data:image/svg+xml;base64,{{ $qrCode }}" alt="{{ __('QR Code') }}">
                 </div>
                 <div class="reference">{{ $attendee->reference_no }}</div>
             </div>
@@ -194,9 +194,9 @@
 
         {{-- Footer --}}
         <div class="ticket-footer">
-            <p>Present this QR code at the venue for check-in</p>
+            <p>{{ __('Present this QR code at the venue for check-in') }}</p>
             <p style="margin-top: 5px; font-size: 10px;">
-                This ticket is non-transferable. Valid only for the named attendee.
+                {{ __('This ticket is non-transferable. Valid only for the named attendee.') }}
             </p>
         </div>
     </div>

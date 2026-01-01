@@ -25,41 +25,41 @@ class extends Component
                 </div>
 
                 <div class="space-y-4">
-                    <h1 class="text-3xl md:text-4xl font-bold">Application Submitted!</h1>
+                    <h1 class="text-3xl md:text-4xl font-bold">{{ __('Application Submitted!') }}</h1>
                     <p class="text-xl text-muted-foreground">
-                        Thank you for applying to Siliconile. We've received your application and will review it shortly.
+                        {{ __('Thank you for applying to Siliconile. We\'ve received your application and will review it shortly.') }}
                     </p>
                 </div>
 
                 <x-ui.card class="text-left">
-                    <h2 class="text-lg font-semibold mb-4">What happens next?</h2>
+                    <h2 class="text-lg font-semibold mb-4">{{ __('What happens next?') }}</h2>
                     <ul class="space-y-4">
                         <li class="flex items-start gap-4">
                             <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-sm font-semibold text-primary">1</div>
                             <div>
-                                <h3 class="font-medium">Application Review</h3>
-                                <p class="text-sm text-muted-foreground">Our team will review your application within 3-5 business days.</p>
+                                <h3 class="font-medium">{{ __('Application Review') }}</h3>
+                                <p class="text-sm text-muted-foreground">{{ __('Our team will review your application within 3-5 business days.') }}</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
                             <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-sm font-semibold text-primary">2</div>
                             <div>
-                                <h3 class="font-medium">Interview (if selected)</h3>
-                                <p class="text-sm text-muted-foreground">We may schedule a brief interview to learn more about your goals.</p>
+                                <h3 class="font-medium">{{ __('Interview (if selected)') }}</h3>
+                                <p class="text-sm text-muted-foreground">{{ __('We may schedule a brief interview to learn more about your goals.') }}</p>
                             </div>
                         </li>
                         <li class="flex items-start gap-4">
                             <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-sm font-semibold text-primary">3</div>
                             <div>
-                                <h3 class="font-medium">Welcome to Siliconile!</h3>
-                                <p class="text-sm text-muted-foreground">Once approved, you'll receive your membership details and onboarding information.</p>
+                                <h3 class="font-medium">{{ __('Welcome to Siliconile!') }}</h3>
+                                <p class="text-sm text-muted-foreground">{{ __('Once approved, you\'ll receive your membership details and onboarding information.') }}</p>
                             </div>
                         </li>
                     </ul>
                 </x-ui.card>
 
                 <p class="text-sm text-muted-foreground">
-                    Check your email for a confirmation message. If you have any questions, feel free to <a href="{{ route('contact') }}" class="text-primary hover:underline">contact us</a>.
+                    Check your email for a confirmation message. If you have any questions, feel free to <a href="{{ route('contact') }}" class="text-primary hover:underline">{{ __('contact us') }}</a>.
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">

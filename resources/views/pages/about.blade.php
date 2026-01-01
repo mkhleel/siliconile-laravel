@@ -23,8 +23,8 @@ class extends Component {
             About <span class="text-primary">Siliconile</span>
           </h1>
           <p class="text-xl md:text-2xl text-muted-foreground">
-            We're on a mission to transform Luxor into Egypt's leading tech innovation hub, 
-            empowering entrepreneurs to build world-class startups.
+            {{ __('We\'re on a mission to transform Luxor into Egypt\'s leading tech innovation hub, 
+            empowering entrepreneurs to build world-class startups.') }}
           </p>
         </div>
       </div>
@@ -41,10 +41,10 @@ class extends Component {
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                 </svg>
               </div>
-              <h2 class="text-3xl md:text-4xl font-bold">Our Mission</h2>
+              <h2 class="text-3xl md:text-4xl font-bold">{{ __('Our Mission') }}</h2>
               <p class="text-lg text-muted-foreground">
-                To democratize entrepreneurship in Egypt by providing world-class incubation services, 
-                mentorship, and resources that enable innovative startups to scale globally while staying rooted in their community.
+                {{ __('To democratize entrepreneurship in Egypt by providing world-class incubation services, 
+                mentorship, and resources that enable innovative startups to scale globally while staying rooted in their community.') }}
               </p>
             </div>
           </div>
@@ -56,11 +56,11 @@ class extends Component {
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
                 </svg>
               </div>
-              <h2 class="text-3xl md:text-4xl font-bold">Our Vision</h2>
+              <h2 class="text-3xl md:text-4xl font-bold">{{ __('Our Vision') }}</h2>
               <p class="text-lg text-muted-foreground">
-                To establish Luxor as a recognized tech startup ecosystem that attracts talent, 
+                {{ __('To establish Luxor as a recognized tech startup ecosystem that attracts talent, 
                 investment, and innovation from across the Middle East and North Africa, 
-                contributing to Egypt's digital transformation.
+                contributing to Egypt\'s digital transformation.') }}
               </p>
             </div>
           </div>
@@ -72,9 +72,9 @@ class extends Component {
     <section class="py-20 bg-muted/50">
       <div class="container px-4 md:px-6">
         <div class="text-center space-y-4 mb-16">
-          <h2 class="text-3xl md:text-5xl font-bold">Our Core Values</h2>
+          <h2 class="text-3xl md:text-5xl font-bold">{{ __('Our Core Values') }}</h2>
           <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
-            The principles that guide everything we do at Siliconile
+            {{ __('The principles that guide everything we do at Siliconile') }}
           </p>
         </div>
 
@@ -86,11 +86,11 @@ class extends Component {
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>
               </div>
-              <h3 class="text-2xl font-semibold leading-none tracking-tight">Community First</h3>
+              <h3 class="text-2xl font-semibold leading-none tracking-tight">{{ __('Community First') }}</h3>
             </div>
             <div class="p-6 pt-0">
               <p class="text-muted-foreground">
-                Building a supportive ecosystem where entrepreneurs can thrive together.
+                {{ __('Building a supportive ecosystem where entrepreneurs can thrive together.') }}
               </p>
             </div>
           </div>
@@ -106,7 +106,7 @@ class extends Component {
             </div>
             <div class="p-6 pt-0">
               <p class="text-muted-foreground">
-                Striving for the highest standards in everything we deliver.
+                {{ __('Striving for the highest standards in everything we deliver.') }}
               </p>
             </div>
           </div>
@@ -122,7 +122,7 @@ class extends Component {
             </div>
             <div class="p-6 pt-0">
               <p class="text-muted-foreground">
-                Encouraging creative thinking and groundbreaking solutions.
+                {{ __('Encouraging creative thinking and groundbreaking solutions.') }}
               </p>
             </div>
           </div>
@@ -138,7 +138,7 @@ class extends Component {
             </div>
             <div class="p-6 pt-0">
               <p class="text-muted-foreground">
-                Creating meaningful change in our community and beyond.
+                {{ __('Creating meaningful change in our community and beyond.') }}
               </p>
             </div>
           </div>
@@ -150,18 +150,18 @@ class extends Component {
     <section class="py-20 md:py-32">
       <div class="container px-4 md:px-6">
         <div class="max-w-4xl mx-auto text-center space-y-8">
-          <h2 class="text-3xl md:text-5xl font-bold">Join Our Journey</h2>
+          <h2 class="text-3xl md:text-5xl font-bold">{{ __('Join Our Journey') }}</h2>
           <p class="text-xl text-muted-foreground">
-            Be part of Luxor's tech revolution. Apply to our programs or visit our coworking space today.
+            {{ __('Be part of Luxor\'s tech revolution. Apply to our programs or visit our coworking space today.') }}
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="contact.html" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-lg font-medium ring-offset-background transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-md px-8 py-6">
-              Get Started
+              {{ __('Get Started') }}
               <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
               </svg>
             </a>
-            <a href="programs.html" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-lg font-medium ring-offset-background transition-colors border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 rounded-md px-8 py-6">View Programs</a>
+            <a href="programs.html" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-lg font-medium ring-offset-background transition-colors border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 rounded-md px-8 py-6">{{ __('View Programs') }}</a>
           </div>
         </div>
       </div>

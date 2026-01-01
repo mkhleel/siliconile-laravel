@@ -34,7 +34,7 @@
             <!-- Square logo (default - at top) -->
             <img 
                 src="{{ asset('theme/assets/images/siliconile.svg') }}" 
-                alt="Siliconile Logo" 
+                alt="{{ __('Siliconile Logo') }}" 
                 class="w-auto transition-all duration-300"
                 :class="scrolled ? 'h-0 opacity-0 w-0' : 'h-20 md:ps-5 rtl:md:pe-5 rtl:md:ps-0 opacity-100'"
             >

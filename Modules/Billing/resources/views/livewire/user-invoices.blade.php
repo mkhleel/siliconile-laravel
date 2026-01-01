@@ -50,7 +50,7 @@ new class extends Component {
 <div class="space-y-6">
     {{-- Summary Cards --}}
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {{-- Total Invoices --}}
+        {{-- {{ __('Total Invoices') }} --}}
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
             <div class="flex items-center gap-3">
                 <div class="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
@@ -70,7 +70,7 @@ new class extends Component {
                     <x-heroicon-o-clock class="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
                 </div>
                 <div>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">Awaiting Payment</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">{{ __('Awaiting Payment') }}</p>
                     <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ $unpaidCount }}</p>
                 </div>
             </div>
@@ -93,13 +93,13 @@ new class extends Component {
     {{-- Invoices List --}}
     <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Recent Invoices</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ __('Recent Invoices') }}</h3>
         </div>
 
         @if($invoices->isEmpty())
             <div class="p-8 text-center">
                 <x-heroicon-o-document-text class="w-12 h-12 mx-auto text-gray-400 dark:text-gray-600" />
-                <p class="mt-4 text-gray-500 dark:text-gray-400">No invoices found.</p>
+                <p class="mt-4 text-gray-500 dark:text-gray-400">{{ __('No invoices found.') }}</p>
             </div>
         @else
             <div class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -123,9 +123,9 @@ new class extends Component {
                                     </span>
                                 </div>
                                 <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                                    Issued: {{ $invoice->issue_date?->format('M d, Y') ?? 'Draft' }}
+                                    {{ __('Issued:') }} {{ $invoice->issue_date?->format('M d, Y') ?? 'Draft' }}
                                     @if($invoice->due_date)
-                                        • Due: {{ $invoice->due_date->format('M d, Y') }}
+                                        {{ __('• Due:') }} {{ $invoice->due_date->format('M d, Y') }}
                                     @endif
                                 </p>
                             </div>

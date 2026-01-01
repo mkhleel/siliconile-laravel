@@ -98,7 +98,7 @@ new #[Layout('components.layouts.app')] class extends Component {
 
                 @if($attendee->checked_in_at)
                     <p class="text-sm text-muted-foreground mt-2">
-                        Checked in at {{ $attendee->checked_in_at->format('g:i A \o\n M j, Y') }}
+                        {{ __('Checked in at') }} {{ $attendee->checked_in_at->format('g:i A \o\n M j, Y') }}
                     </p>
                 @endif
             </div>
@@ -109,7 +109,7 @@ new #[Layout('components.layouts.app')] class extends Component {
                     {!! $this->getQrCodeSvg() !!}
                 </div>
                 <p class="text-sm text-muted-foreground">
-                    Scan this QR code at the event for check-in
+                    {{ __('Scan this QR code at the event for check-in') }}
                 </p>
             </div>
 
@@ -117,19 +117,19 @@ new #[Layout('components.layouts.app')] class extends Component {
             <div class="border-t border-border p-6">
                 <div class="grid grid-cols-2 gap-6">
                     <div>
-                        <span class="text-xs text-muted-foreground uppercase tracking-wide">Ticket Type</span>
+                        <span class="text-xs text-muted-foreground uppercase tracking-wide">{{ __('Ticket Type') }}</span>
                         <p class="font-semibold text-foreground mt-1">{{ $attendee->ticketType->name }}</p>
                     </div>
                     <div>
-                        <span class="text-xs text-muted-foreground uppercase tracking-wide">Reference Number</span>
+                        <span class="text-xs text-muted-foreground uppercase tracking-wide">{{ __('Reference Number') }}</span>
                         <p class="font-mono font-semibold text-foreground mt-1">{{ $attendee->reference_no }}</p>
                     </div>
                     <div>
-                        <span class="text-xs text-muted-foreground uppercase tracking-wide">Attendee Name</span>
+                        <span class="text-xs text-muted-foreground uppercase tracking-wide">{{ __('Attendee Name') }}</span>
                         <p class="font-semibold text-foreground mt-1">{{ $attendee->name }}</p>
                     </div>
                     <div>
-                        <span class="text-xs text-muted-foreground uppercase tracking-wide">Email</span>
+                        <span class="text-xs text-muted-foreground uppercase tracking-wide">{{ __('Email') }}</span>
                         <p class="font-semibold text-foreground mt-1">{{ $attendee->email }}</p>
                     </div>
                 </div>
@@ -141,7 +141,7 @@ new #[Layout('components.layouts.app')] class extends Component {
                         @if($attendee->event->location_type->value === 'online')
                             <x-heroicon-o-video-camera class="w-5 h-5 text-muted-foreground mr-3 mt-0.5" />
                             <div>
-                                <p class="font-semibold text-foreground">Online Event</p>
+                                <p class="font-semibold text-foreground">{{ __('Online Event') }}</p>
                                 @if($attendee->event->location_link && $attendee->status === \Modules\Events\Enums\AttendeeStatus::Confirmed)
                                     <a href="{{ $attendee->event->location_link }}" target="_blank"
                                        class="text-primary hover:underline text-sm mt-1 inline-block">
@@ -165,7 +165,7 @@ new #[Layout('components.layouts.app')] class extends Component {
                     </div>
                 </div>
 
-                {{-- Special Requirements --}}
+                {{-- {{ __('Special Requirements') }} --}}
                 @if($attendee->special_requirements)
                     <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
                         <span class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">Special Requirements</span>
@@ -196,17 +196,17 @@ new #[Layout('components.layouts.app')] class extends Component {
 
         {{-- Add to Calendar --}}
         <div class="mt-6 text-center">
-            <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">Add to your calendar</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">{{ __('Add to your calendar') }}</p>
             <div class="flex justify-center space-x-4">
                 <a href="#" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                    <span class="sr-only">Google Calendar</span>
+                    <span class="sr-only">{{ __('Google Calendar') }}</span>
                     {{-- Google Calendar Icon --}}
                     <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M19.5 3h-15A1.5 1.5 0 003 4.5v15A1.5 1.5 0 004.5 21h15a1.5 1.5 0 001.5-1.5v-15A1.5 1.5 0 0019.5 3zM8 17.5a1 1 0 110-2 1 1 0 010 2zm0-4a1 1 0 110-2 1 1 0 010 2zm4 4a1 1 0 110-2 1 1 0 010 2zm0-4a1 1 0 110-2 1 1 0 010 2zm4 4a1 1 0 110-2 1 1 0 010 2zm0-4a1 1 0 110-2 1 1 0 010 2zm2-5H6V6h12v2.5z"/>
                     </svg>
                 </a>
                 <a href="#" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                    <span class="sr-only">Apple Calendar</span>
+                    <span class="sr-only">{{ __('Apple Calendar') }}</span>
                     {{-- Apple Calendar Icon --}}
                     <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M17 2c-.55 0-1 .45-1 1v1H8V3c0-.55-.45-1-1-1s-1 .45-1 1v1H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-2V3c0-.55-.45-1-1-1zM4 20V9h16v11H4z"/>

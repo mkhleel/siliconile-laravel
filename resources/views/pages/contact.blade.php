@@ -44,8 +44,8 @@ class extends Component {
 <div>
     <!-- Hero Section -->
     <x-sections.hero 
-        title="Get in <span class='text-primary'>Touch</span>"
-        subtitle="Ready to start your entrepreneurial journey? We'd love to hear from you. Let's discuss how Siliconile can help turn your idea into reality."
+        title="{{ __('Get in <span class=') }}"text-primary'>Touch</span>"
+        subtitle="{{ __('Ready to start your entrepreneurial journey? We') }}"d love to hear from you. Let's discuss how Siliconile can help turn your idea into reality."
     />
 
     <section class="py-16 md:py-24">
@@ -53,8 +53,8 @@ class extends Component {
             <div class="grid lg:grid-cols-2 gap-12">
                 <!-- Contact Form -->
                 <x-ui.card class="p-6 lg:p-8">
-                    <h2 class="text-2xl font-semibold mb-2">Send us a Message</h2>
-                    <p class="text-sm text-muted-foreground mb-6">Fill out the form below and we'll get back to you within 24 hours.</p>
+                    <h2 class="text-2xl font-semibold mb-2">{{ __('Send us a Message') }}</h2>
+                    <p class="text-sm text-muted-foreground mb-6">{{ __('Fill out the form below and we\'ll get back to you within 24 hours.') }}</p>
 
                     @if($submitted)
                     <div class="p-6 rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 text-center">
@@ -63,33 +63,33 @@ class extends Component {
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
-                        <h3 class="font-semibold text-green-800 dark:text-green-200 mb-2">Message Sent Successfully!</h3>
-                        <p class="text-sm text-green-700 dark:text-green-300 mb-4">Thank you for reaching out. We'll get back to you within 24 hours.</p>
+                        <h3 class="font-semibold text-green-800 dark:text-green-200 mb-2">{{ __('Message Sent Successfully!') }}</h3>
+                        <p class="text-sm text-green-700 dark:text-green-300 mb-4">{{ __('Thank you for reaching out. We\'ll get back to you within 24 hours.') }}</p>
                         <button wire:click="$set('submitted', false)" class="text-sm text-primary hover:underline">
-                            Send another message
+                            {{ __('Send another message') }}
                         </button>
                     </div>
                     @else
                     <form wire:submit="submit" class="space-y-6">
                         <div class="grid gap-4 md:grid-cols-2">
                             <div class="space-y-2">
-                                <label for="name" class="text-sm font-medium">Full Name *</label>
+                                <label for="name" class="text-sm font-medium">{{ __('Full Name *') }}</label>
                                 <x-ui.input 
                                     wire:model="name" 
                                     type="text" 
                                     id="name" 
-                                    placeholder="Enter your full name"
+                                    placeholder="{{ __('Enter your full name') }}"
                                     class="w-full"
                                 />
                                 @error('name') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
                             </div>
                             <div class="space-y-2">
-                                <label for="email" class="text-sm font-medium">Email Address *</label>
+                                <label for="email" class="text-sm font-medium">{{ __('{{ __('Email') }} {{ __('Address') }} *') }}</label>
                                 <x-ui.input 
                                     wire:model="email" 
                                     type="email" 
                                     id="email" 
-                                    placeholder="Enter your email"
+                                    placeholder="{{ __('Enter your email') }}"
                                     class="w-full"
                                 />
                                 @error('email') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
@@ -97,19 +97,19 @@ class extends Component {
                         </div>
 
                         <div class="space-y-2">
-                            <label for="company" class="text-sm font-medium">Company/Startup Name</label>
+                            <label for="company" class="text-sm font-medium">{{ __('Company/Startup Name') }}</label>
                             <x-ui.input 
                                 wire:model="company" 
                                 type="text" 
                                 id="company" 
-                                placeholder="Enter your company name"
+                                placeholder="{{ __('Enter your company name') }}"
                                 class="w-full"
                             />
                             @error('company') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
                         </div>
 
                         <div class="space-y-2">
-                            <label for="inquiryType" class="text-sm font-medium">Inquiry Type *</label>
+                            <label for="inquiryType" class="text-sm font-medium">{{ __('Inquiry Type *') }}</label>
                             <x-ui.select wire:model="inquiryType" id="inquiryType" class="w-full">
                                 <option value="general">General Inquiry</option>
                                 <option value="incubation">Incubation Program</option>
@@ -121,11 +121,11 @@ class extends Component {
                         </div>
 
                         <div class="space-y-2">
-                            <label for="message" class="text-sm font-medium">Message *</label>
+                            <label for="message" class="text-sm font-medium">{{ __('Message *') }}</label>
                             <x-ui.textarea 
                                 wire:model="message" 
                                 id="message" 
-                                placeholder="Tell us about your project or inquiry..." 
+                                placeholder="{{ __('Tell us about your project or inquiry...') }}" 
                                 rows="6"
                                 class="w-full"
                             />
@@ -134,7 +134,7 @@ class extends Component {
 
                         <x-ui.button type="submit" class="w-full" wire:loading.attr="disabled">
                             <span wire:loading.remove>
-                                Send Message
+                                {{ __('Send Message') }}
                                 <svg class="ml-2 h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                                 </svg>
@@ -151,7 +151,7 @@ class extends Component {
                     @endif
                 </x-ui.card>
 
-                <!-- Contact Information -->
+                <!-- {{ __('Contact Information') }} -->
                 <div class="space-y-8">
                     <div>
                         <h2 class="text-2xl font-bold mb-6">Contact Information</h2>
@@ -165,7 +165,7 @@ class extends Component {
                                 </div>
                                 <div>
                                     <h3 class="font-semibold mb-1">Address</h3>
-                                    <p class="text-muted-foreground">Luxor, Egypt</p>
+                                    <p class="text-muted-foreground">{{ __('Luxor, Egypt') }}</p>
                                 </div>
                             </div>
 
@@ -190,7 +190,7 @@ class extends Component {
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold mb-1">Phone</h3>
+                                    <h3 class="font-semibold mb-1">{{ __('Phone') }}</h3>
                                     <a href="tel:+201117650004" class="text-muted-foreground hover:text-primary transition-colors">
                                         +20 111 765 0004
                                     </a>
@@ -204,9 +204,9 @@ class extends Component {
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold mb-1">Office Hours</h3>
-                                    <p class="text-muted-foreground">Sunday - Thursday: 9:00 AM - 6:00 PM</p>
-                                    <p class="text-muted-foreground">Friday & Saturday: Closed</p>
+                                    <h3 class="font-semibold mb-1">{{ __('Office Hours') }}</h3>
+                                    <p class="text-muted-foreground">{{ __('Sunday - Thursday: 9:00 AM - 6:00 PM') }}</p>
+                                    <p class="text-muted-foreground">{{ __('Friday & Saturday: Closed') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -214,7 +214,7 @@ class extends Component {
 
                     <!-- Social Links -->
                     <div>
-                        <h3 class="font-semibold mb-4">Follow Us</h3>
+                        <h3 class="font-semibold mb-4">{{ __('Follow Us') }}</h3>
                         <div class="flex gap-3">
                             <a href="#" class="w-10 h-10 rounded-lg bg-muted flex items-center justify-center hover:bg-primary/10 hover:text-primary transition-colors">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -248,7 +248,7 @@ class extends Component {
                             </svg>
                             <p class="text-sm text-muted-foreground">Luxor, Egypt</p>
                             <a href="https://maps.google.com/?q=Luxor,Egypt" target="_blank" rel="noopener noreferrer" class="text-sm text-primary hover:underline mt-2 inline-block">
-                                View on Google Maps →
+                                {{ __('View on Google Maps →') }}
                             </a>
                         </div>
                     </div>
@@ -259,9 +259,9 @@ class extends Component {
 
     <!-- CTA Section -->
     <x-sections.cta 
-        title="Ready to Transform Your Startup Idea?"
-        description="Join Siliconile's incubator program and get access to mentorship, funding opportunities, and a vibrant community of entrepreneurs."
-        buttonText="Apply Now"
+        title="{{ __('Ready to Transform Your Startup Idea?') }}"
+        description="{{ __('Join Siliconile') }}"s incubator program and get access to mentorship, funding opportunities, and a vibrant community of entrepreneurs."
+        buttonText="{{ __('Apply Now') }}"
         buttonUrl="{{ route('apply') }}"
     />
 </div>

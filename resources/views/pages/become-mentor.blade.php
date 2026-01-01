@@ -21,7 +21,7 @@ class extends Component
 
     public int $totalSteps = 3;
 
-    // Step 1: Personal Information
+    // Step 1: {{ __('Personal Information') }}
     #[Validate('required|string|max:255')]
     public string $name = '';
 
@@ -46,7 +46,7 @@ class extends Component
     #[Validate('nullable|url|max:500')]
     public string $websiteUrl = '';
 
-    // Step 2: Expertise & Experience
+    // Step 2: {{ __('Expertise & Experience') }}
     #[Validate('required|string|max:2000')]
     public string $bio = '';
 
@@ -176,7 +176,7 @@ class extends Component
 
             Notification::make()
                 ->success()
-                ->title('Application Submitted!')
+                ->title('{{ __('Application Submitted!') }}')
                 ->body('Thank you for applying. We will review your application and get back to you soon.')
                 ->send();
 
@@ -239,7 +239,7 @@ class extends Component
         <div class="container px-4 md:px-6">
             <div class="max-w-3xl mx-auto text-center space-y-6">
                 <h1 class="text-3xl md:text-5xl font-bold tracking-tight">Become a <span class="text-primary">Mentor</span></h1>
-                <p class="text-lg md:text-xl text-muted-foreground">Share your expertise and help shape the next generation of successful startups in Egypt and the MENA region.</p>
+                <p class="text-lg md:text-xl text-muted-foreground">{{ __('Share your expertise and help shape the next generation of successful startups in Egypt and the MENA region.') }}</p>
             </div>
         </div>
     </section>
@@ -258,34 +258,34 @@ class extends Component
                 <div class="space-y-4">
                     <h2 class="text-2xl md:text-3xl font-bold">Application Submitted!</h2>
                     <p class="text-lg text-muted-foreground">
-                        Thank you for your interest in becoming a mentor at Siliconile. We've received your application and will review it shortly.
+                        {{ __('Thank you for your interest in becoming a mentor at Siliconile. We\'ve received your application and will review it shortly.') }}
                     </p>
                 </div>
 
                 <div class="rounded-lg border bg-card p-6 text-left space-y-4">
-                    <h3 class="font-semibold">What happens next?</h3>
+                    <h3 class="font-semibold">{{ __('What happens next?') }}</h3>
                     <ul class="space-y-3 text-sm text-muted-foreground">
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-xs font-semibold text-primary">1</span>
-                            <span>Our team will review your application within 5-7 business days</span>
+                            <span>{{ __('Our team will review your application within 5-7 business days') }}</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-xs font-semibold text-primary">2</span>
-                            <span>If selected, we'll schedule a brief introductory call</span>
+                            <span>{{ __('If selected, we\'ll schedule a brief introductory call') }}</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-xs font-semibold text-primary">3</span>
-                            <span>Once approved, you'll be matched with startups based on your expertise</span>
+                            <span>{{ __('Once approved, you\'ll be matched with startups based on your expertise') }}</span>
                         </li>
                     </ul>
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="{{ route('home') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8">
-                        Back to Home
+                        {{ __('Back to Home') }}
                     </a>
                     <a href="{{ route('programs') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors border border-input bg-background hover:bg-accent h-11 px-8">
-                        View Programs
+                        {{ __('View Programs') }}
                     </a>
                 </div>
             </div>
@@ -329,18 +329,18 @@ class extends Component
                         <div class="space-y-6">
                             <div class="space-y-2">
                                 <h2 class="text-xl font-semibold">Personal Information</h2>
-                                <p class="text-sm text-muted-foreground">Tell us about yourself</p>
+                                <p class="text-sm text-muted-foreground">{{ __('Tell us about yourself') }}</p>
                             </div>
 
                             <div class="grid gap-4 md:grid-cols-2">
                                 <div class="space-y-2">
-                                    <label class="text-sm font-medium">Full Name *</label>
-                                    <input type="text" wire:model="name" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="John Doe">
+                                    <label class="text-sm font-medium">{{ __('Full Name *') }}</label>
+                                    <input type="text" wire:model="name" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('John Doe') }}">
                                     @error('name') <p class="text-sm text-destructive">{{ $message }}</p> @enderror
                                 </div>
 
                                 <div class="space-y-2">
-                                    <label class="text-sm font-medium">Email Address *</label>
+                                    <label class="text-sm font-medium">{{ __('Email {{ __('Add') }}ress *') }}</label>
                                     <input type="email" wire:model="email" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="john@example.com">
                                     @error('email') <p class="text-sm text-destructive">{{ $message }}</p> @enderror
                                 </div>
@@ -348,24 +348,24 @@ class extends Component
 
                             <div class="grid gap-4 md:grid-cols-2">
                                 <div class="space-y-2">
-                                    <label class="text-sm font-medium">Job Title *</label>
-                                    <input type="text" wire:model="title" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="CEO, CTO, Founder...">
+                                    <label class="text-sm font-medium">{{ __('Job Title *') }}</label>
+                                    <input type="text" wire:model="title" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('CEO, CTO, Founder...') }}">
                                     @error('title') <p class="text-sm text-destructive">{{ $message }}</p> @enderror
                                 </div>
 
                                 <div class="space-y-2">
                                     <label class="text-sm font-medium">Company</label>
-                                    <input type="text" wire:model="company" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Your company name">
+                                    <input type="text" wire:model="company" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('Your company name') }}">
                                 </div>
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">Phone Number</label>
-                                <input type="tel" wire:model="phone" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="+20 1XX XXX XXXX">
+                                <label class="text-sm font-medium">{{ __('Phone Number') }}</label>
+                                <input type="tel" wire:model="phone" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('+20 1XX XXX XXXX') }}">
                             </div>
 
                             <div class="space-y-4">
-                                <label class="text-sm font-medium">Social Links</label>
+                                <label class="text-sm font-medium">{{ __('Social Links') }}</label>
                                 <div class="space-y-3">
                                     <div class="flex items-center gap-3">
                                         <svg class="h-5 w-5 text-muted-foreground shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -389,18 +389,18 @@ class extends Component
                         <div class="space-y-6">
                             <div class="space-y-2">
                                 <h2 class="text-xl font-semibold">Expertise & Experience</h2>
-                                <p class="text-sm text-muted-foreground">Share your areas of expertise and what you can offer</p>
+                                <p class="text-sm text-muted-foreground">{{ __('Share your areas of expertise and what you can offer') }}</p>
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">Bio / Introduction *</label>
-                                <textarea wire:model="bio" rows="4" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Tell startups about yourself, your background, and what makes you a great mentor..."></textarea>
-                                <p class="text-xs text-muted-foreground">{{ strlen($bio) }}/2000 characters</p>
+                                <label class="text-sm font-medium">{{ __('Bio / Introduction *') }}</label>
+                                <textarea wire:model="bio" rows="4" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('Tell startups about yourself, your background, and what makes you a great mentor...') }}"></textarea>
+                                <p class="text-xs text-muted-foreground">{{ strlen($bio) }}{{ __('/2000 characters') }}</p>
                                 @error('bio') <p class="text-sm text-destructive">{{ $message }}</p> @enderror
                             </div>
 
                             <div class="space-y-3">
-                                <label class="text-sm font-medium">Areas of Expertise *</label>
+                                <label class="text-sm font-medium">{{ __('Areas of Expertise *') }}</label>
                                 <div class="flex flex-wrap gap-2">
                                     @foreach($this->getExpertiseOptions() as $option)
                                     <button type="button" wire:click="toggleExpertise('{{ $option }}')" class="px-3 py-1.5 rounded-full text-sm border transition-colors {{ in_array($option, $expertise) ? 'bg-primary text-primary-foreground border-primary' : 'bg-background hover:bg-muted border-input' }}">
@@ -410,7 +410,7 @@ class extends Component
                                 </div>
 
                                 <div class="flex gap-2">
-                                    <input type="text" wire:model="customExpertise" wire:keydown.enter.prevent="addExpertise" class="flex h-9 flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Add custom expertise...">
+                                    <input type="text" wire:model="customExpertise" wire:keydown.enter.prevent="addExpertise" class="flex h-9 flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('Add custom expertise...') }}">
                                     <button type="button" wire:click="addExpertise" class="px-4 h-9 rounded-md bg-muted hover:bg-muted/80 text-sm font-medium">Add</button>
                                 </div>
 
@@ -431,13 +431,13 @@ class extends Component
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">Previous Mentoring Experience</label>
-                                <textarea wire:model="experience" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Have you mentored startups before? Tell us about it..."></textarea>
+                                <label class="text-sm font-medium">{{ __('{{ __('Previous') }} Mentoring Experience') }}</label>
+                                <textarea wire:model="experience" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('Have you mentored startups before? Tell us about it...') }}"></textarea>
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">Why do you want to be a mentor?</label>
-                                <textarea wire:model="motivation" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="What motivates you to mentor early-stage startups?"></textarea>
+                                <label class="text-sm font-medium">{{ __('Why do you want to be a mentor?') }}</label>
+                                <textarea wire:model="motivation" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('What motivates you to mentor early-stage startups?') }}"></textarea>
                             </div>
                         </div>
                         @endif
@@ -447,11 +447,11 @@ class extends Component
                         <div class="space-y-6">
                             <div class="space-y-2">
                                 <h2 class="text-xl font-semibold">Availability</h2>
-                                <p class="text-sm text-muted-foreground">Let us know when you're available for mentoring sessions</p>
+                                <p class="text-sm text-muted-foreground">{{ __('Let us know when you\'re available for mentoring sessions') }}</p>
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">Profile Photo</label>
+                                <label class="text-sm font-medium">{{ __('Profile Photo') }}</label>
                                 <div class="flex items-center gap-4">
                                     @if($profilePhoto)
                                     <img src="{{ $profilePhoto->temporaryUrl() }}" class="w-16 h-16 rounded-full object-cover">
@@ -462,21 +462,21 @@ class extends Component
                                     @endif
                                     <input type="file" wire:model="profilePhoto" accept="image/*" class="text-sm">
                                 </div>
-                                <p class="text-xs text-muted-foreground">Upload a professional photo (optional)</p>
+                                <p class="text-xs text-muted-foreground">{{ __('Upload a professional photo (optional)') }}</p>
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">Maximum Sessions Per Week *</label>
+                                <label class="text-sm font-medium">{{ __('Maximum Sessions Per Week *') }}</label>
                                 <select wire:model="maxSessionsPerWeek" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
                                     @for($i = 1; $i <= 10; $i++)
                                     <option value="{{ $i }}">{{ $i }} {{ $i === 1 ? 'session' : 'sessions' }}</option>
                                     @endfor
                                 </select>
-                                <p class="text-xs text-muted-foreground">Each session is typically 30-60 minutes</p>
+                                <p class="text-xs text-muted-foreground">{{ __('Each session is typically 30-60 minutes') }}</p>
                             </div>
 
                             <div class="space-y-3">
-                                <label class="text-sm font-medium">Available Days</label>
+                                <label class="text-sm font-medium">{{ __('Available Days') }}</label>
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                                     @foreach(['monday' => 'Monday', 'tuesday' => 'Tuesday', 'wednesday' => 'Wednesday', 'thursday' => 'Thursday', 'friday' => 'Friday', 'saturday' => 'Saturday', 'sunday' => 'Sunday'] as $key => $day)
                                     <label class="flex items-center gap-2 p-3 rounded-lg border cursor-pointer hover:bg-muted/50 {{ $availability[$key] ? 'border-primary bg-primary/5' : '' }}">
@@ -488,7 +488,7 @@ class extends Component
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">Preferred Time</label>
+                                <label class="text-sm font-medium">{{ __('Preferred Time') }}</label>
                                 <select wire:model="preferredTime" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
                                     <option value="flexible">Flexible</option>
                                     <option value="morning">Morning (9 AM - 12 PM)</option>
@@ -501,7 +501,7 @@ class extends Component
                                 <label class="flex items-start gap-3 cursor-pointer">
                                     <input type="checkbox" wire:model="agreedToTerms" class="mt-1 rounded">
                                     <span class="text-sm">
-                                        I agree to the <a href="#" class="text-primary hover:underline">Mentor Terms & Conditions</a> and commit to providing quality mentorship to startups in the Siliconile program.
+                                        I agree to the <a href="#" class="text-primary hover:underline">{{ __('Mentor Terms & Conditions') }}</a> and commit to providing quality mentorship to startups in the Siliconile program.
                                     </span>
                                 </label>
                                 @error('agreedToTerms') <p class="text-sm text-destructive mt-2">{{ $message }}</p> @enderror
@@ -522,12 +522,12 @@ class extends Component
 
                             @if($currentStep < $totalSteps)
                             <button type="button" wire:click="nextStep" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6">
-                                Next
+                                {{ __('Next') }}
                                 <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                             </button>
                             @else
                             <button type="submit" wire:loading.attr="disabled" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6">
-                                <span wire:loading.remove>Submit Application</span>
+                                <span wire:loading.remove>{{ __('Submit Application') }}</span>
                                 <span wire:loading>Submitting...</span>
                             </button>
                             @endif
@@ -544,31 +544,31 @@ class extends Component
     <section class="py-16 bg-muted/50">
         <div class="container px-4 md:px-6">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-2xl font-bold mb-8 text-center">Why Become a Mentor?</h2>
+                <h2 class="text-2xl font-bold mb-8 text-center">{{ __('Why Become a Mentor?') }}</h2>
 
                 <div class="grid gap-6 md:grid-cols-3">
                     <div class="rounded-lg border bg-card p-6 text-center space-y-3">
                         <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
                             <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
                         </div>
-                        <h3 class="font-semibold">Give Back</h3>
-                        <p class="text-sm text-muted-foreground">Share your experience and help founders avoid common pitfalls</p>
+                        <h3 class="font-semibold">{{ __('Give Back') }}</h3>
+                        <p class="text-sm text-muted-foreground">{{ __('Share your experience and help founders avoid common pitfalls') }}</p>
                     </div>
 
                     <div class="rounded-lg border bg-card p-6 text-center space-y-3">
                         <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
                             <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
                         </div>
-                        <h3 class="font-semibold">Expand Network</h3>
-                        <p class="text-sm text-muted-foreground">Connect with promising startups and fellow industry experts</p>
+                        <h3 class="font-semibold">{{ __('Expand Network') }}</h3>
+                        <p class="text-sm text-muted-foreground">{{ __('Connect with promising startups and fellow industry experts') }}</p>
                     </div>
 
                     <div class="rounded-lg border bg-card p-6 text-center space-y-3">
                         <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
                             <svg class="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
                         </div>
-                        <h3 class="font-semibold">Stay Sharp</h3>
-                        <p class="text-sm text-muted-foreground">Stay connected to the latest trends and innovative ideas</p>
+                        <h3 class="font-semibold">{{ __('Stay Sharp') }}</h3>
+                        <p class="text-sm text-muted-foreground">{{ __('Stay connected to the latest trends and innovative ideas') }}</p>
                     </div>
                 </div>
             </div>

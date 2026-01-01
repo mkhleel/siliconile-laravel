@@ -16,7 +16,7 @@ use Modules\Incubation\Models\Cohort;
 
 new
 #[Layout('layouts.app')]
-#[Title('Apply to Startup Incubation Program | Siliconile')]
+#[Title('Apply to Startup {{ __('Incubation Program') }} | Siliconile')]
 class extends Component
 {
     use WithFileUploads;
@@ -28,12 +28,12 @@ class extends Component
     // Cohort Selection
     public ?int $cohortId = null;
 
-    // Step 1: Founder Information
+    // Step 1: {{ __('Founder Information') }}
     #[Validate('required|string|max:255')]
-    public string $founderName = '';
+    public string $founder{{ __('Name') }} = '';
 
     #[Validate('required|email|max:255')]
-    public string $founderEmail = '';
+    public string $founder{{ __('Email') }} = '';
 
     #[Validate('nullable|string|max:50')]
     public string $founderPhone = '';
@@ -47,7 +47,7 @@ class extends Component
     // Co-founders
     public array $coFounders = [];
 
-    // Step 2: Startup Information
+    // Step 2: {{ __('Startup Information') }}
     #[Validate('required|string|max:255')]
     public string $startupName = '';
 
@@ -115,7 +115,7 @@ class extends Component
         $this->cohortId = request()->query('cohort') ? (int) request()->query('cohort') : null;
     }
 
-    public function getOpenCohortsProperty()
+    public function get{{ __('Open') }}CohortsProperty()
     {
         return Cohort::where('status', 'active')
             ->where('application_end_date', '>', now())
@@ -309,7 +309,7 @@ class extends Component
         <div class="container px-4 md:px-6">
             <div class="max-w-3xl mx-auto text-center space-y-4">
                 <h1 class="text-3xl md:text-4xl font-bold tracking-tight">Apply to the <span class="text-primary">Incubation Program</span></h1>
-                <p class="text-lg text-muted-foreground">Take the first step towards accelerating your startup's growth. Join our program and get access to mentorship, funding, and a supportive community.</p>
+                <p class="text-lg text-muted-foreground">{{ __('Take the first step towards accelerating your startup\'s growth. Join our program and get access to mentorship, funding, and a supportive community.') }}</p>
             </div>
         </div>
     </section>
@@ -326,46 +326,46 @@ class extends Component
                 </div>
 
                 <div class="space-y-4">
-                    <h2 class="text-2xl md:text-3xl font-bold">Application Submitted Successfully!</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold">{{ __('Application Submitted Successfully!') }}</h2>
                     <p class="text-lg text-muted-foreground">
-                        Thank you for applying to the Siliconile Incubation Program. We've received your application and will review it carefully.
+                        {{ __('Thank you for applying to the Siliconile Incubation Program. We\'ve received your application and will review it carefully.') }}
                     </p>
                 </div>
 
                 <div class="rounded-lg border bg-primary/5 p-6 space-y-4">
                     <div class="text-center">
-                        <p class="text-sm text-muted-foreground mb-2">Your Application Code</p>
+                        <p class="text-sm text-muted-foreground mb-2">{{ __('Your Application Code') }}</p>
                         <p class="text-2xl font-mono font-bold text-primary">{{ $applicationCode }}</p>
                     </div>
                     <p class="text-sm text-muted-foreground">
-                        <strong>Important:</strong> Save this code! You'll need it to check your application status.
+                        <strong>{{ __('Important:') }}</strong> Save this code! You'll need it to check your application status.
                     </p>
                 </div>
 
                 <div class="rounded-lg border bg-card p-6 text-left space-y-4">
-                    <h3 class="font-semibold">What happens next?</h3>
+                    <h3 class="font-semibold">{{ __('What happens next?') }}</h3>
                     <ul class="space-y-3 text-sm text-muted-foreground">
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-xs font-semibold text-primary">1</span>
-                            <span><strong>Application Review</strong> - Our team will review your application within 7-10 business days</span>
+                            <span><strong>{{ __('Application Review') }}</strong> - Our team will review your application within 7-10 business days</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-xs font-semibold text-primary">2</span>
-                            <span><strong>Interview Invitation</strong> - If shortlisted, you'll be invited for a virtual interview</span>
+                            <span><strong>{{ __('Interview Invitation') }}</strong> - If shortlisted, you'll be invited for a virtual interview</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-xs font-semibold text-primary">3</span>
-                            <span><strong>Final Selection</strong> - Selected startups will be notified and onboarded to the program</span>
+                            <span><strong>{{ __('Final Selection') }}</strong> - Selected startups will be notified and onboarded to the program</span>
                         </li>
                     </ul>
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="{{ route('incubation.status') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8">
-                        Track Application Status
+                        {{ __('Track Application Status') }}
                     </a>
                     <a href="{{ route('programs') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors border border-input bg-background hover:bg-accent h-11 px-8">
-                        Back to Programs
+                        {{ __('Back to Programs') }}
                     </a>
                 </div>
             </div>
@@ -408,16 +408,16 @@ class extends Component
                         @if($currentStep === 1)
                         <div class="space-y-6">
                             <div class="space-y-2">
-                                <h2 class="text-xl font-semibold">Select Program & Founder Information</h2>
-                                <p class="text-sm text-muted-foreground">Choose your program and tell us about yourself</p>
+                                <h2 class="text-xl font-semibold">{{ __('Select Program & Founder Information') }}</h2>
+                                <p class="text-sm text-muted-foreground">{{ __('Choose your program and tell us about yourself') }}</p>
                             </div>
 
                             {{-- Cohort Selection --}}
                             <div class="space-y-3">
-                                <label class="text-sm font-medium">Select Program / Cohort *</label>
+                                <label class="text-sm font-medium">{{ __('Select Program / Cohort *') }}</label>
                                 @if($this->openCohorts->isEmpty())
                                 <div class="rounded-lg border border-dashed border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20 p-4">
-                                    <p class="text-sm text-yellow-800 dark:text-yellow-200">No programs are currently accepting applications. Please check back later or <a href="{{ route('programs') }}" class="underline">view our programs</a> for upcoming opportunities.</p>
+                                    <p class="text-sm text-yellow-800 dark:text-yellow-200">No programs are currently accepting applications. Please check back later or <a href="{{ route('programs') }}" class="underline">{{ __('view our programs') }}</a> for upcoming opportunities.</p>
                                 </div>
                                 @else
                                 <div class="grid gap-3">
@@ -431,8 +431,8 @@ class extends Component
                                             </div>
                                             <p class="text-sm text-muted-foreground mt-1">{{ Str::limit($cohort->description, 100) }}</p>
                                             <div class="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                                                <span>Starts: {{ $cohort->start_date->format('M d, Y') }}</span>
-                                                <span>Deadline: {{ $cohort->application_end_date->format('M d, Y') }}</span>
+                                                <span>{{ __('Starts:') }} {{ $cohort->start_date->format('M d, Y') }}</span>
+                                                <span>{{ __('Deadline:') }} {{ $cohort->application_end_date->format('M d, Y') }}</span>
                                             </div>
                                         </div>
                                     </label>
@@ -447,13 +447,13 @@ class extends Component
 
                                 <div class="grid gap-4 md:grid-cols-2">
                                     <div class="space-y-2">
-                                        <label class="text-sm font-medium">Full Name *</label>
-                                        <input type="text" wire:model="founderName" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Your full name">
+                                        <label class="text-sm font-medium">{{ __('Full Name *') }}</label>
+                                        <input type="text" wire:model="founderName" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('Your full name') }}">
                                         @error('founderName') <p class="text-sm text-destructive">{{ $message }}</p> @enderror
                                     </div>
 
                                     <div class="space-y-2">
-                                        <label class="text-sm font-medium">Email Address *</label>
+                                        <label class="text-sm font-medium">{{ __('Email Address *') }}</label>
                                         <input type="email" wire:model="founderEmail" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="your@email.com">
                                         @error('founderEmail') <p class="text-sm text-destructive">{{ $message }}</p> @enderror
                                     </div>
@@ -461,28 +461,28 @@ class extends Component
 
                                 <div class="grid gap-4 md:grid-cols-2 mt-4">
                                     <div class="space-y-2">
-                                        <label class="text-sm font-medium">Phone Number</label>
-                                        <input type="tel" wire:model="founderPhone" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="+20 1XX XXX XXXX">
+                                        <label class="text-sm font-medium">{{ __('Phone Number') }}</label>
+                                        <input type="tel" wire:model="founderPhone" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('+20 1XX XXX XXXX') }}">
                                     </div>
 
                                     <div class="space-y-2">
-                                        <label class="text-sm font-medium">LinkedIn Profile</label>
+                                        <label class="text-sm font-medium">{{ __('LinkedIn Profile') }}</label>
                                         <input type="url" wire:model="founderLinkedin" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="https://linkedin.com/in/yourprofile">
                                     </div>
                                 </div>
 
                                 <div class="space-y-2 mt-4">
-                                    <label class="text-sm font-medium">Brief Bio</label>
-                                    <textarea wire:model="founderBio" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Tell us about your background and relevant experience..."></textarea>
+                                    <label class="text-sm font-medium">{{ __('Brief Bio') }}</label>
+                                    <textarea wire:model="founderBio" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('Tell us about your background and relevant experience...') }}"></textarea>
                                 </div>
                             </div>
 
                             {{-- Co-founders Section --}}
                             <div class="border-t pt-6">
                                 <div class="flex items-center justify-between mb-4">
-                                    <h3 class="text-sm font-medium">Co-founders (Optional)</h3>
+                                    <h3 class="text-sm font-medium">{{ __('Co-founders (Optional)') }}</h3>
                                     @if(count($coFounders) < 4)
-                                    <button type="button" wire:click="addCoFounder" class="text-sm text-primary hover:underline">+ Add Co-founder</button>
+                                    <button type="button" wire:click="addCoFounder" class="text-sm text-primary hover:underline">{{ __('+ Add Co-founder') }}</button>
                                     @endif
                                 </div>
 
@@ -494,11 +494,11 @@ class extends Component
                                     <div class="grid gap-4 md:grid-cols-2 pr-8">
                                         <div class="space-y-2">
                                             <label class="text-sm font-medium">Name</label>
-                                            <input type="text" wire:model="coFounders.{{ $index }}.name" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Co-founder name">
+                                            <input type="text" wire:model="coFounders.{{ $index }}.name" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('Co-founder name') }}">
                                         </div>
                                         <div class="space-y-2">
                                             <label class="text-sm font-medium">Role</label>
-                                            <input type="text" wire:model="coFounders.{{ $index }}.role" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="CTO, CMO, etc.">
+                                            <input type="text" wire:model="coFounders.{{ $index }}.role" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('CTO, CMO, etc.') }}">
                                         </div>
                                         <div class="space-y-2">
                                             <label class="text-sm font-medium">Email</label>
@@ -520,13 +520,13 @@ class extends Component
                         <div class="space-y-6">
                             <div class="space-y-2">
                                 <h2 class="text-xl font-semibold">Startup Information</h2>
-                                <p class="text-sm text-muted-foreground">Tell us about your startup</p>
+                                <p class="text-sm text-muted-foreground">{{ __('Tell us about your startup') }}</p>
                             </div>
 
                             <div class="grid gap-4 md:grid-cols-2">
                                 <div class="space-y-2">
-                                    <label class="text-sm font-medium">Startup Name *</label>
-                                    <input type="text" wire:model="startupName" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Your startup name">
+                                    <label class="text-sm font-medium">{{ __('Startup Name *') }}</label>
+                                    <input type="text" wire:model="startupName" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('Your startup name') }}">
                                     @error('startupName') <p class="text-sm text-destructive">{{ $message }}</p> @enderror
                                 </div>
 
@@ -538,7 +538,7 @@ class extends Component
 
                             <div class="grid gap-4 md:grid-cols-2">
                                 <div class="space-y-2">
-                                    <label class="text-sm font-medium">Industry *</label>
+                                    <label class="text-sm font-medium">{{ __('Industry *') }}</label>
                                     <select wire:model="industry" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
                                         <option value="">Select industry...</option>
                                         @foreach($this->getIndustryOptions() as $option)
@@ -549,7 +549,7 @@ class extends Component
                                 </div>
 
                                 <div class="space-y-2">
-                                    <label class="text-sm font-medium">Stage *</label>
+                                    <label class="text-sm font-medium">{{ __('Stage *') }}</label>
                                     <select wire:model="stage" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
                                         @foreach($this->getStageOptions() as $value => $label)
                                         <option value="{{ $value }}">{{ $label }}</option>
@@ -560,27 +560,27 @@ class extends Component
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">Startup Description *</label>
-                                <textarea wire:model="description" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Describe your startup in a few sentences..."></textarea>
+                                <label class="text-sm font-medium">{{ __('Startup Description *') }}</label>
+                                <textarea wire:model="description" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('Describe your startup in a few sentences...') }}"></textarea>
                                 <p class="text-xs text-muted-foreground">{{ strlen($description) }}/2000</p>
                                 @error('description') <p class="text-sm text-destructive">{{ $message }}</p> @enderror
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">Problem Statement *</label>
-                                <textarea wire:model="problem" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="What problem are you solving? Who experiences this problem?"></textarea>
+                                <label class="text-sm font-medium">{{ __('Problem Statement *') }}</label>
+                                <textarea wire:model="problem" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('What problem are you solving? Who experiences this problem?') }}"></textarea>
                                 @error('problem') <p class="text-sm text-destructive">{{ $message }}</p> @enderror
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">Your Solution *</label>
-                                <textarea wire:model="solution" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="How does your startup solve this problem?"></textarea>
+                                <label class="text-sm font-medium">{{ __('Your Solution *') }}</label>
+                                <textarea wire:model="solution" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('How does your startup solve this problem?') }}"></textarea>
                                 @error('solution') <p class="text-sm text-destructive">{{ $message }}</p> @enderror
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">Unique Value Proposition</label>
-                                <textarea wire:model="uniqueValue" rows="2" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="What makes your solution different from existing alternatives?"></textarea>
+                                <label class="text-sm font-medium">{{ __('Unique Value Proposition') }}</label>
+                                <textarea wire:model="uniqueValue" rows="2" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('What makes your solution different from existing alternatives?') }}"></textarea>
                             </div>
                         </div>
                         @endif
@@ -589,12 +589,12 @@ class extends Component
                         @if($currentStep === 3)
                         <div class="space-y-6">
                             <div class="space-y-2">
-                                <h2 class="text-xl font-semibold">Business Details & Traction</h2>
-                                <p class="text-sm text-muted-foreground">Help us understand your business model and progress</p>
+                                <h2 class="text-xl font-semibold">{{ __('Business Details & Traction') }}</h2>
+                                <p class="text-sm text-muted-foreground">{{ __('Help us understand your business model and progress') }}</p>
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">Business Model</label>
+                                <label class="text-sm font-medium">{{ __('Business Model') }}</label>
                                 <select wire:model="businessModel" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
                                     <option value="">Select business model...</option>
                                     <option value="b2b">B2B (Business to Business)</option>
@@ -609,30 +609,30 @@ class extends Component
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">Current Traction</label>
-                                <textarea wire:model="traction" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Users, customers, partnerships, pilots, etc. Share any metrics you have."></textarea>
+                                <label class="text-sm font-medium">{{ __('Current Traction') }}</label>
+                                <textarea wire:model="traction" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('Users, customers, partnerships, pilots, etc. Share any metrics you have.') }}"></textarea>
                             </div>
 
                             <div class="grid gap-4 md:grid-cols-2">
                                 <div class="space-y-2">
-                                    <label class="text-sm font-medium">Current Revenue (if any)</label>
+                                    <label class="text-sm font-medium">{{ __('Current Revenue (if any)') }}</label>
                                     <input type="text" wire:model="revenue" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="e.g., $5,000/month or Pre-revenue">
                                 </div>
 
                                 <div class="space-y-2">
-                                    <label class="text-sm font-medium">Funding Raised (if any)</label>
+                                    <label class="text-sm font-medium">{{ __('Funding Raised (if any)') }}</label>
                                     <input type="text" wire:model="funding" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="e.g., $50,000 pre-seed or Bootstrapped">
                                 </div>
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">Market Size</label>
-                                <textarea wire:model="marketSize" rows="2" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Describe your target market size (TAM, SAM, SOM if available)"></textarea>
+                                <label class="text-sm font-medium">{{ __('Market Size') }}</label>
+                                <textarea wire:model="marketSize" rows="2" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('Describe your target market size (TAM, SAM, SOM if available)') }}"></textarea>
                             </div>
 
                             <div class="space-y-2">
                                 <label class="text-sm font-medium">Competition</label>
-                                <textarea wire:model="competition" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Who are your main competitors? How do you differentiate?"></textarea>
+                                <textarea wire:model="competition" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('Who are your main competitors? How do you differentiate?') }}"></textarea>
                             </div>
                         </div>
                         @endif
@@ -641,22 +641,22 @@ class extends Component
                         @if($currentStep === 4)
                         <div class="space-y-6">
                             <div class="space-y-2">
-                                <h2 class="text-xl font-semibold">Additional Information</h2>
-                                <p class="text-sm text-muted-foreground">Final details before submitting your application</p>
+                                <h2 class="text-xl font-semibold">{{ __('Additional Information') }}</h2>
+                                <p class="text-sm text-muted-foreground">{{ __('Final details before submitting your application') }}</p>
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">Why are you applying to this program?</label>
-                                <textarea wire:model="whyApply" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="What do you hope to achieve through this program?"></textarea>
+                                <label class="text-sm font-medium">{{ __('Why are you applying to this program?') }}</label>
+                                <textarea wire:model="whyApply" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('What do you hope to achieve through this program?') }}"></textarea>
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">What are your expectations from the program?</label>
-                                <textarea wire:model="expectations" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="Mentorship, funding, network, specific skills..."></textarea>
+                                <label class="text-sm font-medium">{{ __('What are your expectations from the program?') }}</label>
+                                <textarea wire:model="expectations" rows="3" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm" placeholder="{{ __('Mentorship, funding, network, specific skills...') }}"></textarea>
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">Pitch Deck (Optional)</label>
+                                <label class="text-sm font-medium">{{ __('Pitch Deck (Optional)') }}</label>
                                 <div class="flex items-center justify-center w-full">
                                     <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer bg-muted/50 hover:bg-muted">
                                         <div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -665,7 +665,7 @@ class extends Component
                                             <p class="text-sm text-muted-foreground">{{ $pitchDeck->getClientOriginalName() }}</p>
                                             @else
                                             <svg class="h-8 w-8 text-muted-foreground mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
-                                            <p class="text-sm text-muted-foreground">Upload pitch deck (PDF, max 10MB)</p>
+                                            <p class="text-sm text-muted-foreground">{{ __('Upload pitch deck (PDF, max 10MB)') }}</p>
                                             @endif
                                         </div>
                                         <input type="file" wire:model="pitchDeck" class="hidden" accept=".pdf,.ppt,.pptx">
@@ -674,7 +674,7 @@ class extends Component
                             </div>
 
                             <div class="space-y-2">
-                                <label class="text-sm font-medium">How did you hear about us?</label>
+                                <label class="text-sm font-medium">{{ __('How did you hear about us?') }}</label>
                                 <select wire:model="hearAboutUs" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
                                     <option value="">Select option...</option>
                                     <option value="social_media">Social Media</option>
@@ -687,25 +687,25 @@ class extends Component
                                 </select>
                             </div>
 
-                            {{-- Application Summary --}}
+                            {{-- {{ __('Application Summary') }} --}}
                             @if($this->selectedCohort)
                             <div class="rounded-lg border bg-muted/50 p-4 space-y-3">
                                 <h3 class="font-semibold">Application Summary</h3>
                                 <div class="grid gap-2 text-sm">
                                     <div class="flex justify-between">
-                                        <span class="text-muted-foreground">Program:</span>
+                                        <span class="text-muted-foreground">{{ __('Program:') }}</span>
                                         <span class="font-medium">{{ $this->selectedCohort->name }}</span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-muted-foreground">Founder:</span>
+                                        <span class="text-muted-foreground">{{ __('Founder:') }}</span>
                                         <span class="font-medium">{{ $founderName }}</span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-muted-foreground">Startup:</span>
+                                        <span class="text-muted-foreground">{{ __('Startup:') }}</span>
                                         <span class="font-medium">{{ $startupName }}</span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-muted-foreground">Industry:</span>
+                                        <span class="text-muted-foreground">{{ __('Industry:') }}</span>
                                         <span class="font-medium">{{ $industry }}</span>
                                     </div>
                                 </div>
@@ -716,7 +716,7 @@ class extends Component
                                 <label class="flex items-start gap-3 cursor-pointer">
                                     <input type="checkbox" wire:model="agreedToTerms" class="mt-1 rounded">
                                     <span class="text-sm">
-                                        I confirm that all information provided is accurate and I agree to the <a href="#" class="text-primary hover:underline">Terms & Conditions</a> and <a href="#" class="text-primary hover:underline">Privacy Policy</a> of the Siliconile Incubation Program.
+                                        I confirm that all information provided is accurate and I agree to the <a href="#" class="text-primary hover:underline">{{ __('Terms & Conditions') }}</a> and <a href="#" class="text-primary hover:underline">{{ __('Privacy Policy') }}</a> of the Siliconile Incubation Program.
                                     </span>
                                 </label>
                                 @error('agreedToTerms') <p class="text-sm text-destructive mt-2">{{ $message }}</p> @enderror
@@ -729,20 +729,20 @@ class extends Component
                             @if($currentStep > 1)
                             <button type="button" wire:click="previousStep" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors border border-input bg-background hover:bg-accent h-10 px-6">
                                 <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                                Previous
+                                {{ __('Previous') }}
                             </button>
                             @else
                             <div></div>
                             @endif
 
                             @if($currentStep < $totalSteps)
-                            <button type="button" wire:click="nextStep" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6" @if($currentStep === 1 && $this->openCohorts->isEmpty()) disabled @endif>
-                                Next
+                            <button type="button" wire:click="nextStep" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6" @if($currentStep === 1 && $this->{{ __('openCohorts->isEmpty()) disabled') }} @endif{{ __('>
+                                Next') }}
                                 <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                             </button>
                             @else
                             <button type="submit" wire:loading.attr="disabled" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-8">
-                                <span wire:loading.remove>Submit Application</span>
+                                <span wire:loading.remove>{{ __('Submit Application') }}</span>
                                 <span wire:loading>Submitting...</span>
                             </button>
                             @endif
@@ -752,8 +752,8 @@ class extends Component
 
                 {{-- Help Section --}}
                 <div class="mt-8 text-center text-sm text-muted-foreground">
-                    <p>Need help with your application? <a href="{{ route('contact') }}" class="text-primary hover:underline">Contact us</a></p>
-                    <p class="mt-2">Already applied? <a href="{{ route('incubation.status') }}" class="text-primary hover:underline">Check your application status</a></p>
+                    <p>Need help with your application? <a href="{{ route('contact') }}" class="text-primary hover:underline">{{ __('Contact us') }}</a></p>
+                    <p class="mt-2">Already applied? <a href="{{ route('incubation.status') }}" class="text-primary hover:underline">{{ __('Check your application status') }}</a></p>
                 </div>
             </div>
         </div>

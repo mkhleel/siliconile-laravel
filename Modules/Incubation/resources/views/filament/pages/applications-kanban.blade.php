@@ -13,10 +13,10 @@
         <div class="flex items-center justify-between">
             <div>
                 <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
-                    Application Pipeline
+                    {{ __('Application Pipeline') }}
                 </h1>
                 <p class="text-sm text-gray-500 dark:text-gray-400">
-                    Drag and drop applications to change their status
+                    {{ __('Drag and drop applications to change their status') }}
                 </p>
             </div>
             <div class="flex gap-2">
@@ -134,7 +134,7 @@
                                     <a
                                         href="{{ \Modules\Incubation\Filament\Resources\ApplicationResource::getUrl('edit', ['record' => $application]) }}"
                                         class="p-1 text-gray-400 hover:text-primary-600 transition"
-                                        title="Edit"
+                                        title="{{ __('Edit') }}"
                                     >
                                         <x-heroicon-o-pencil class="w-4 h-4" />
                                     </a>
@@ -143,7 +143,7 @@
                         </div>
                     @empty
                         <div class="text-center py-8 text-gray-400 dark:text-gray-500 text-sm">
-                            No applications
+                            {{ __('No applications') }}
                         </div>
                     @endforelse
                 </div>

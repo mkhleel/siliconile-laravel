@@ -42,7 +42,7 @@ new class extends Component {
                     Invoice {{ $invoice->display_number }}
                 </h3>
                 <p class="text-sm text-gray-500 dark:text-gray-400">
-                    Issued: {{ $invoice->issue_date?->format('M d, Y') ?? 'Draft' }}
+                    {{ __('Issued:') }} {{ $invoice->issue_date?->format('M d, Y') ?? 'Draft' }}
                 </p>
             </div>
             <div class="flex items-center gap-3">
@@ -63,7 +63,7 @@ new class extends Component {
 
     {{-- Invoice Details --}}
     <div class="px-6 py-4">
-        {{-- Bill To --}}
+        {{-- {{ __('Bill To') }} --}}
         <div class="mb-6">
             <h4 class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Bill To</h4>
             <p class="text-sm font-medium text-gray-900 dark:text-white">{{ $invoice->billable_name }}</p>
@@ -92,7 +92,7 @@ new class extends Component {
             </div>
         </div>
 
-        {{-- Totals --}}
+        {{-- {{ __('Total') }}s --}}
         <div class="border-t border-gray-200 dark:border-gray-700 pt-4 space-y-2">
             <div class="flex justify-between text-sm">
                 <span class="text-gray-600 dark:text-gray-400">Subtotal</span>

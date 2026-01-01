@@ -3,9 +3,9 @@
     @if(!$this->selectedEvent)
         <div class="text-center py-12">
             <x-heroicon-o-calendar class="mx-auto h-12 w-12 text-gray-400" />
-            <h3 class="mt-2 text-lg font-semibold text-gray-900 dark:text-white">Select an Event</h3>
+            <h3 class="mt-2 text-lg font-semibold text-gray-900 dark:text-white">{{ __('Select an Event') }}</h3>
             <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                Choose an event to start checking in attendees.
+                {{ __('Choose an event to start checking in attendees.') }}
             </p>
 
             <div class="mt-6 max-w-md mx-auto">
@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            {{-- Search Section --}}
+            {{-- {{ __('Search') }} Section --}}
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                     <x-heroicon-o-qr-code class="inline-block w-5 h-5 mr-2" />
@@ -63,7 +63,7 @@
                         <input
                             type="text"
                             wire:model="searchQuery"
-                            placeholder="Scan QR code, enter reference # or search by name/email..."
+                            placeholder="{{ __('Scan QR code, enter reference # or search by name/email...') }}"
                             class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white text-lg py-3"
                             autofocus
                         />
@@ -114,20 +114,20 @@
 
                     <div class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                         <div>
-                            <span class="text-gray-500 dark:text-gray-400">Reference:</span>
+                            <span class="text-gray-500 dark:text-gray-400">{{ __('Reference:') }}</span>
                             <span class="font-mono font-semibold text-gray-900 dark:text-white ml-1">{{ $foundAttendee->reference_no }}</span>
                         </div>
                         <div>
-                            <span class="text-gray-500 dark:text-gray-400">Ticket:</span>
+                            <span class="text-gray-500 dark:text-gray-400">{{ __('Ticket:') }}</span>
                             <span class="font-semibold text-gray-900 dark:text-white ml-1">{{ $foundAttendee->ticketType?->name ?? 'N/A' }}</span>
                         </div>
                         <div>
-                            <span class="text-gray-500 dark:text-gray-400">Registered:</span>
+                            <span class="text-gray-500 dark:text-gray-400">{{ __('Registered:') }}</span>
                             <span class="text-gray-900 dark:text-white ml-1">{{ $foundAttendee->created_at->format('M j, Y') }}</span>
                         </div>
                         @if($foundAttendee->checked_in_at)
                             <div>
-                                <span class="text-gray-500 dark:text-gray-400">Checked In:</span>
+                                <span class="text-gray-500 dark:text-gray-400">{{ __('Checked In:') }}</span>
                                 <span class="text-gray-900 dark:text-white ml-1">{{ $foundAttendee->checked_in_at->format('M j, H:i') }}</span>
                             </div>
                         @endif
@@ -135,7 +135,7 @@
 
                     @if($foundAttendee->special_requirements)
                         <div class="mt-4 p-3 bg-warning-50 dark:bg-warning-900/20 rounded-lg">
-                            <span class="text-warning-800 dark:text-warning-400 font-medium">Special Requirements:</span>
+                            <span class="text-warning-800 dark:text-warning-400 font-medium">{{ __('Special Requirements:') }}</span>
                             <p class="text-warning-700 dark:text-warning-300">{{ $foundAttendee->special_requirements }}</p>
                         </div>
                     @endif

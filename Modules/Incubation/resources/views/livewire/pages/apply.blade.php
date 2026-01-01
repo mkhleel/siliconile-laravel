@@ -21,7 +21,7 @@ new class extends Component
 
     public int $totalSteps = 5;
 
-    // Step 1: Basic Information
+    // Step 1: {{ __('Basic Information') }}
     #[Validate('required|string|max:255')]
     public string $startupName = '';
 
@@ -37,7 +37,7 @@ new class extends Component
     // Step 2: Founders
     public array $founders = [];
 
-    // Step 3: Business Details
+    // Step 3: {{ __('Business Details') }}
     #[Validate('required|string|max:2000')]
     public string $problemStatement = '';
 
@@ -231,10 +231,10 @@ new class extends Component
     {{-- Header --}}
     <div class="mb-8 text-center">
         <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
-            Apply to {{ $cohort->name }}
+            {{ __('Apply to') }} {{ $cohort->name }}
         </h1>
         <p class="mt-2 text-gray-600 dark:text-gray-400">
-            Application deadline: {{ $cohort->application_end_date?->format('F j, Y') ?? 'Rolling basis' }}
+            {{ __('Application deadline:') }} {{ $cohort->application_end_date?->format('F j, Y') ?? 'Rolling basis' }}
         </p>
     </div>
 
@@ -242,7 +242,7 @@ new class extends Component
     <div class="mb-8">
         <div class="flex justify-between mb-2 text-sm text-gray-600 dark:text-gray-400">
             <span>Step {{ $currentStep }} of {{ $totalSteps }}</span>
-            <span>{{ $this->progress }}% Complete</span>
+            <span>{{ $this->progress }}{{ __('% Complete') }}</span>
         </div>
         <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
             <div
@@ -294,8 +294,8 @@ new class extends Component
                 <div class="space-y-4">
                     <flux:input
                         wire:model="startupName"
-                        label="Startup Name"
-                        placeholder="Enter your startup name"
+                        label="{{ __('Startup Name') }}"
+                        placeholder="{{ __('Enter your startup name') }}"
                         required
                     />
 
@@ -303,7 +303,7 @@ new class extends Component
                         <flux:input
                             wire:model="email"
                             type="email"
-                            label="Contact Email"
+                            label="{{ __('Contact Email') }}"
                             placeholder="contact@startup.com"
                             required
                         />
@@ -311,8 +311,8 @@ new class extends Component
                         <flux:input
                             wire:model="phone"
                             type="tel"
-                            label="Phone Number"
-                            placeholder="+249 XXX XXX XXX"
+                            label="{{ __('Phone Number') }}"
+                            placeholder="{{ __('+249 XXX XXX XXX') }}"
                         />
                     </div>
 
@@ -330,7 +330,7 @@ new class extends Component
         @if($currentStep === 2)
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
                 <h2 class="text-xl font-semibold mb-6 text-gray-900 dark:text-white">
-                    Founders & Team
+                    {{ __('Founders & {{ __('Team') }}') }}
                 </h2>
 
                 <div class="space-y-6">
@@ -346,7 +346,7 @@ new class extends Component
                                         wire:click="removeFounder({{ $index }})"
                                         class="text-red-600 hover:text-red-800 text-sm"
                                     >
-                                        Remove
+                                        {{ __('Remove') }}
                                     </button>
                                 @endif
                             </div>
@@ -354,22 +354,22 @@ new class extends Component
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <flux:input
                                     wire:model="founders.{{ $index }}.name"
-                                    label="Full Name"
-                                    placeholder="John Doe"
+                                    label="{{ __('Full Name') }}"
+                                    placeholder="{{ __('John Doe') }}"
                                     required
                                 />
 
                                 <flux:input
                                     wire:model="founders.{{ $index }}.email"
                                     type="email"
-                                    label="Email"
+                                    label="{{ __('Email') }}"
                                     placeholder="john@startup.com"
                                 />
 
                                 <flux:input
                                     wire:model="founders.{{ $index }}.role"
                                     label="Role"
-                                    placeholder="CEO, CTO, etc."
+                                    placeholder="{{ __('CEO, CTO, etc.') }}"
                                 />
 
                                 <flux:input
@@ -383,8 +383,8 @@ new class extends Component
                             <div class="mt-4">
                                 <flux:textarea
                                     wire:model="founders.{{ $index }}.bio"
-                                    label="Short Bio"
-                                    placeholder="Brief background and relevant experience..."
+                                    label="{{ __('Short Bio') }}"
+                                    placeholder="{{ __('Brief background and relevant experience...') }}"
                                     rows="2"
                                 />
                             </div>
@@ -396,7 +396,7 @@ new class extends Component
                         wire:click="addFounder"
                         class="w-full py-2 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg text-gray-600 dark:text-gray-400 hover:border-primary-500 hover:text-primary-500 transition"
                     >
-                        + Add Another Founder
+                        {{ __('+ Add Another Founder') }}
                     </button>
                 </div>
             </div>
@@ -412,16 +412,16 @@ new class extends Component
                 <div class="space-y-4">
                     <flux:textarea
                         wire:model="problemStatement"
-                        label="Problem Statement"
-                        placeholder="What problem are you solving? Who experiences this problem?"
+                        label="{{ __('{{ __('Problem Statement') }}') }}"
+                        placeholder="{{ __('What problem are you solving? Who experiences this problem?') }}"
                         rows="4"
                         required
                     />
 
                     <flux:textarea
                         wire:model="solution"
-                        label="Your Solution"
-                        placeholder="How does your product/service solve this problem?"
+                        label="{{ __('Your Solution') }}"
+                        placeholder="{{ __('How does your product/service solve this problem?') }}"
                         rows="4"
                         required
                     />
@@ -430,12 +430,12 @@ new class extends Component
                         <flux:input
                             wire:model="industry"
                             label="Industry"
-                            placeholder="e.g., FinTech, AgriTech"
+                            placeholder="{{ __('e.g., FinTech, AgriTech') }}"
                         />
 
                         <flux:select
                             wire:model="businessModel"
-                            label="Business Model"
+                            label="{{ __('Business Model') }}"
                         >
                             <option value="">Select...</option>
                             <option value="B2B">B2B</option>
@@ -459,15 +459,15 @@ new class extends Component
 
                     <flux:textarea
                         wire:model="traction"
-                        label="Current Traction"
-                        placeholder="Users, revenue, partnerships, metrics..."
+                        label="{{ __('Current Traction') }}"
+                        placeholder="{{ __('Users, revenue, partnerships, metrics...') }}"
                         rows="3"
                     />
 
                     <flux:textarea
                         wire:model="whyApply"
-                        label="Why Are You Applying?"
-                        placeholder="What do you hope to achieve from this program?"
+                        label="{{ __('Why Are You Applying?') }}"
+                        placeholder="{{ __('What do you hope to achieve from this program?') }}"
                         rows="4"
                         required
                     />
@@ -479,13 +479,13 @@ new class extends Component
         @if($currentStep === 4)
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
                 <h2 class="text-xl font-semibold mb-6 text-gray-900 dark:text-white">
-                    Pitch Materials
+                    {{ __('Pitch Materials') }}
                 </h2>
 
                 <div class="space-y-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            Upload Pitch Deck
+                            {{ __('Upload Pitch Deck') }}
                         </label>
                         <input
                             type="file"
@@ -493,46 +493,46 @@ new class extends Component
                             accept=".pdf,.ppt,.pptx"
                             class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 dark:file:bg-primary-900 dark:file:text-primary-300"
                         />
-                        <p class="mt-1 text-sm text-gray-500">PDF or PowerPoint, max 20MB</p>
+                        <p class="mt-1 text-sm text-gray-500">{{ __('PDF or PowerPoint, max 20MB') }}</p>
                         @error('pitchDeck') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                     </div>
 
-                    <div class="text-center text-gray-500">- OR -</div>
+                    <div class="text-center text-gray-500">{{ __('- OR -') }}</div>
 
                     <flux:input
                         wire:model="pitchDeckUrl"
                         type="url"
-                        label="Pitch Deck URL"
-                        placeholder="Google Slides, Canva, or other link"
+                        label="{{ __('Pitch Deck URL') }}"
+                        placeholder="{{ __('Google Slides, Canva, or other link') }}"
                     />
 
                     <flux:input
                         wire:model="videoPitchUrl"
                         type="url"
-                        label="Video Pitch URL (Optional)"
-                        placeholder="YouTube, Vimeo, or Loom link"
+                        label="{{ __('Video Pitch URL (Optional)') }}"
+                        placeholder="{{ __('YouTube, Vimeo, or Loom link') }}"
                     />
 
                     <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
-                        <h3 class="text-lg font-medium mb-4 text-gray-900 dark:text-white">Social Links</h3>
+                        <h3 class="text-lg font-medium mb-4 text-gray-900 dark:text-white">{{ __('Social Links') }}</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <flux:input
                                 wire:model="socialLinks.linkedin"
                                 type="url"
                                 label="LinkedIn"
-                                placeholder="Company LinkedIn"
+                                placeholder="{{ __('Company LinkedIn') }}"
                             />
                             <flux:input
                                 wire:model="socialLinks.twitter"
                                 type="url"
-                                label="Twitter/X"
+                                label="{{ __('Twitter/X') }}"
                                 placeholder="@handle"
                             />
                             <flux:input
                                 wire:model="socialLinks.facebook"
                                 type="url"
                                 label="Facebook"
-                                placeholder="Facebook page"
+                                placeholder="{{ __('Facebook page') }}"
                             />
                         </div>
                     </div>
@@ -544,7 +544,7 @@ new class extends Component
         @if($currentStep === 5)
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
                 <h2 class="text-xl font-semibold mb-6 text-gray-900 dark:text-white">
-                    Review Your Application
+                    {{ __('Review Your Application') }}
                 </h2>
 
                 <div class="space-y-6">
@@ -559,7 +559,7 @@ new class extends Component
                         <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <h4 class="font-medium text-gray-900 dark:text-white mb-2">Team</h4>
                             <p class="text-lg font-semibold text-primary-600">
-                                {{ count(array_filter($founders, fn($f) => !empty($f['name']))) }} Founder(s)
+                                {{ count(array_filter($founders, fn($f) => !empty($f['name']))) }} {{ __('Founder(s)') }}
                             </p>
                             <p class="text-sm text-gray-600 dark:text-gray-400">
                                 {{ $founders[0]['name'] ?? 'N/A' }}
@@ -590,7 +590,7 @@ new class extends Component
                             />
                             <span class="text-sm text-gray-600 dark:text-gray-400">
                                 I confirm that all information provided is accurate and I agree to the
-                                <a href="#" class="text-primary-600 hover:underline">Terms & Conditions</a>
+                                <a href="#" class="text-primary-600 hover:underline">{{ __('Terms & Conditions') }}</a>
                                 of the incubation program.
                             </span>
                         </label>
@@ -628,7 +628,7 @@ new class extends Component
                     variant="primary"
                     wire:loading.attr="disabled"
                 >
-                    <span wire:loading.remove>Submit Application</span>
+                    <span wire:loading.remove>{{ __('Submit Application') }}</span>
                     <span wire:loading>Submitting...</span>
                 </flux:button>
             @endif

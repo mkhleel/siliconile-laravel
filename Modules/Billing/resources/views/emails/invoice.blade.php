@@ -119,11 +119,11 @@
 
         <table class="summary-table">
             <tr>
-                <td>Issue Date</td>
+                <td>{{ __('Issue Date') }}</td>
                 <td>{{ $invoice->issue_date?->format('F j, Y') }}</td>
             </tr>
             <tr>
-                <td>Due Date</td>
+                <td>{{ __('Due Date') }}</td>
                 <td style="{{ $invoice->isOverdue() ? 'color: #dc2626; font-weight: bold;' : '' }}">
                     {{ $invoice->due_date?->format('F j, Y') }}
                     @if($invoice->isOverdue())
@@ -146,7 +146,7 @@
                 <td>{{ $invoice->currency }} {{ number_format((float)$invoice->tax_amount, 2) }}</td>
             </tr>
             <tr class="total-row">
-                <td>Total</td>
+                <td>{{ __('Total') }}</td>
                 <td>{{ $invoice->currency }} {{ number_format((float)$invoice->total, 2) }}</td>
             </tr>
         </table>
@@ -154,17 +154,17 @@
         @if($invoice->canBePaid())
             <div style="text-align: center;">
                 <a href="{{ route('billing.invoice.pay', $invoice) }}" class="cta-button">
-                    Pay Now
+                    {{ __('Pay Now') }}
                 </a>
             </div>
         @endif
 
-        <p>A PDF copy of your invoice is attached to this email for your records.</p>
+        <p>{{ __('A PDF copy of your invoice is attached to this email for your records.') }}</p>
     </div>
 
     <div class="footer">
-        <p>If you have any questions, please contact us at {{ config('billing.company_email', config('mail.from.address')) }}</p>
-        <p>&copy; {{ date('Y') }} {{ config('app.name', 'Siliconile') }}. All rights reserved.</p>
+        <p>{{ __('If you have any questions, please contact us at') }} {{ config('billing.company_email', config('mail.from.address')) }}</p>
+        <p>&copy; {{ date('Y') }} {{ config('app.name', 'Siliconile') }}{{ __('. All rights reserved.') }}</p>
     </div>
 </body>
 </html>

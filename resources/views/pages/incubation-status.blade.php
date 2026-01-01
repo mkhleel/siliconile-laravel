@@ -11,7 +11,7 @@ use Modules\Incubation\Models\Application;
 
 new
 #[Layout('layouts.app')]
-#[Title('Siliconile | Check Application Status')]
+#[Title('Siliconile | Check {{ __('Application Status') }}')]
 class extends Component
 {
     #[Validate('required|email')]
@@ -91,7 +91,7 @@ class extends Component
         <div class="container px-4 md:px-6">
             <div class="max-w-2xl mx-auto text-center space-y-6">
                 <h1 class="text-3xl md:text-5xl font-bold tracking-tight">Check Your <span class="text-primary">Application Status</span></h1>
-                <p class="text-lg text-muted-foreground">Enter your email and application code to track the progress of your incubation program application.</p>
+                <p class="text-lg text-muted-foreground">{{ __('Enter your email and application code to track the progress of your incubation program application.') }}</p>
             </div>
         </div>
     </section>
@@ -105,12 +105,12 @@ class extends Component
                 <div class="rounded-xl border bg-card shadow-sm p-6 md:p-8">
                     <form wire:submit="checkStatus" class="space-y-6">
                         <div class="space-y-2">
-                            <label for="email" class="text-sm font-medium leading-none">Email Address</label>
+                            <label for="email" class="text-sm font-medium leading-none">{{ __('Email Address') }}</label>
                             <input
                                 type="email"
                                 id="email"
                                 wire:model="email"
-                                placeholder="Enter the email used in your application"
+                                placeholder="{{ __('Enter the email used in your application') }}"
                                 class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                             >
                             @error('email')
@@ -119,16 +119,16 @@ class extends Component
                         </div>
 
                         <div class="space-y-2">
-                            <label for="applicationCode" class="text-sm font-medium leading-none">Application Code</label>
+                            <label for="applicationCode" class="text-sm font-medium leading-none">{{ __('Application Code') }}</label>
                             <input
                                 type="text"
                                 id="applicationCode"
                                 wire:model="applicationCode"
-                                placeholder="e.g., APP12345"
+                                placeholder="{{ __('e.g., APP12345') }}"
                                 class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 uppercase"
                                 maxlength="8"
                             >
-                            <p class="text-xs text-muted-foreground">You received this code in your application confirmation email</p>
+                            <p class="text-xs text-muted-foreground">{{ __('You received this code in your application confirmation email') }}</p>
                             @error('applicationCode')
                             <p class="text-sm text-destructive">{{ $message }}</p>
                             @enderror
@@ -150,7 +150,7 @@ class extends Component
                             class="inline-flex items-center justify-center w-full whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8"
                             wire:loading.attr="disabled"
                         >
-                            <span wire:loading.remove>Check Status</span>
+                            <span wire:loading.remove>{{ __('Check Status') }}</span>
                             <span wire:loading class="flex items-center">
                                 <svg class="animate-spin -ml-1 mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24">
                                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -196,7 +196,7 @@ class extends Component
 
                             <div class="grid grid-cols-2 gap-4 pt-4 border-t">
                                 <div>
-                                    <p class="text-sm text-muted-foreground">Startup Name</p>
+                                    <p class="text-sm text-muted-foreground">{{ __('Startup Name') }}</p>
                                     <p class="font-semibold">{{ $application->startup_name }}</p>
                                 </div>
                                 <div>
@@ -215,12 +215,12 @@ class extends Component
 
                             @if($application->status === ApplicationStatus::INTERVIEW_SCHEDULED && $application->interview_scheduled_at)
                             <div class="rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 p-4">
-                                <h4 class="font-semibold text-purple-800 dark:text-purple-200 mb-2">🗓️ Interview Scheduled</h4>
+                                <h4 class="font-semibold text-purple-800 dark:text-purple-200 mb-2">{{ __('🗓️ Interview Scheduled') }}</h4>
                                 <div class="space-y-1 text-sm">
-                                    <p><strong>Date:</strong> {{ $application->interview_scheduled_at->format('l, F j, Y') }}</p>
-                                    <p><strong>Time:</strong> {{ $application->interview_scheduled_at->format('g:i A') }}</p>
+                                    <p><strong>{{ __('Date:') }}</strong> {{ $application->interview_scheduled_at->format('l, F j, Y') }}</p>
+                                    <p><strong>{{ __('Time:') }}</strong> {{ $application->interview_scheduled_at->format('g:i A') }}</p>
                                     @if($application->interview_location)
-                                    <p><strong>Location:</strong> {{ $application->interview_location }}</p>
+                                    <p><strong>{{ __('Location:') }}</strong> {{ $application->interview_location }}</p>
                                     @endif
                                     @if($application->interview_meeting_link)
                                     <p><a href="{{ $application->interview_meeting_link }}" target="_blank" class="text-primary hover:underline">Join Meeting →</a></p>
@@ -231,17 +231,17 @@ class extends Component
 
                             @if($application->status === ApplicationStatus::ACCEPTED)
                             <div class="rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4">
-                                <h4 class="font-semibold text-green-800 dark:text-green-200 mb-2">🎉 Congratulations!</h4>
-                                <p class="text-sm text-green-700 dark:text-green-300">Your application has been accepted! Check your email for onboarding instructions and next steps.</p>
+                                <h4 class="font-semibold text-green-800 dark:text-green-200 mb-2">{{ __('🎉 Congratulations!') }}</h4>
+                                <p class="text-sm text-green-700 dark:text-green-300">{{ __('Your application has been accepted! Check your email for onboarding instructions and next steps.') }}</p>
                                 @if($application->cohort?->start_date)
-                                <p class="text-sm text-green-700 dark:text-green-300 mt-2"><strong>Program starts:</strong> {{ $application->cohort->start_date->format('F j, Y') }}</p>
+                                <p class="text-sm text-green-700 dark:text-green-300 mt-2"><strong>{{ __('Program starts:') }}</strong> {{ $application->cohort->start_date->format('F j, Y') }}</p>
                                 @endif
                             </div>
                             @endif
 
                             @if($application->status === ApplicationStatus::REJECTED && $application->rejection_reason)
                             <div class="rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4">
-                                <h4 class="font-semibold text-red-800 dark:text-red-200 mb-2">Application Update</h4>
+                                <h4 class="font-semibold text-red-800 dark:text-red-200 mb-2">{{ __('Application Update') }}</h4>
                                 <p class="text-sm text-red-700 dark:text-red-300">{{ $application->rejection_reason }}</p>
                             </div>
                             @endif
@@ -251,7 +251,7 @@ class extends Component
                     {{-- Timeline --}}
                     @if(count($this->statusTimeline) > 0)
                     <div class="rounded-xl border bg-card shadow-sm p-6 md:p-8">
-                        <h3 class="text-lg font-semibold mb-6">Application Timeline</h3>
+                        <h3 class="text-lg font-semibold mb-6">{{ __('Application Timeline') }}</h3>
                         <div class="space-y-4">
                             @foreach($this->statusTimeline as $index => $entry)
                             <div class="flex gap-4">
@@ -280,10 +280,10 @@ class extends Component
                             wire:click="resetSearch"
                             class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-6"
                         >
-                            Check Another Application
+                            {{ __('Check Another Application') }}
                         </button>
                         <a href="{{ route('contact') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6">
-                            Contact Support
+                            {{ __('Contact Support') }}
                         </a>
                     </div>
                 </div>
@@ -296,12 +296,12 @@ class extends Component
     <section class="py-16 bg-muted/50">
         <div class="container px-4 md:px-6">
             <div class="max-w-2xl mx-auto">
-                <h2 class="text-2xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+                <h2 class="text-2xl font-bold mb-8 text-center">{{ __('Frequently Asked Questions') }}</h2>
 
                 <div class="space-y-4">
                     <div class="rounded-lg border bg-card p-4" x-data="{ open: false }">
                         <button @click="open = !open" class="flex w-full items-center justify-between text-left">
-                            <span class="font-medium">Where can I find my application code?</span>
+                            <span class="font-medium">{{ __('Where can I find my application code?') }}</span>
                             <svg :class="{ 'rotate-180': open }" class="h-5 w-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
@@ -313,7 +313,7 @@ class extends Component
 
                     <div class="rounded-lg border bg-card p-4" x-data="{ open: false }">
                         <button @click="open = !open" class="flex w-full items-center justify-between text-left">
-                            <span class="font-medium">How long does the review process take?</span>
+                            <span class="font-medium">{{ __('How long does the review process take?') }}</span>
                             <svg :class="{ 'rotate-180': open }" class="h-5 w-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
@@ -325,7 +325,7 @@ class extends Component
 
                     <div class="rounded-lg border bg-card p-4" x-data="{ open: false }">
                         <button @click="open = !open" class="flex w-full items-center justify-between text-left">
-                            <span class="font-medium">What happens after my interview?</span>
+                            <span class="font-medium">{{ __('What happens after my interview?') }}</span>
                             <svg :class="{ 'rotate-180': open }" class="h-5 w-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
@@ -337,7 +337,7 @@ class extends Component
 
                     <div class="rounded-lg border bg-card p-4" x-data="{ open: false }">
                         <button @click="open = !open" class="flex w-full items-center justify-between text-left">
-                            <span class="font-medium">Can I update my application after submission?</span>
+                            <span class="font-medium">{{ __('Can I update my application after submission?') }}</span>
                             <svg :class="{ 'rotate-180': open }" class="h-5 w-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>

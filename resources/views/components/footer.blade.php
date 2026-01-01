@@ -103,7 +103,7 @@
 
         <div class="mt-8 border-t pt-8 text-center">
             <p class="text-sm text-muted-foreground">
-                © {{ $year }} {{ $companyName }}. {{ __('frontend.footer.copyright') }} Built with ❤️ in Egypt.
+                © {{ $year }} {{ $companyName }}. {{ __('frontend.footer.copyright') }} {{ __('Built with ❤️ in Egypt.') }}
             </p>
         </div>
     </div>

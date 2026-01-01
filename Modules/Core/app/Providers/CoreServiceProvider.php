@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Core\Providers;
 
+use Modules\Core\Console\Commands\ExtractTranslations;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
@@ -73,6 +74,7 @@ final class CoreServiceProvider extends BaseModuleServiceProvider
         return [
             BackupDatabase::class,
             ExtractLangStrings::class,
+            ExtractTranslations::class,
             // \Modules\Core\Console\Commands\DeleteUnusedMediaCommand::class,
         ];
     }

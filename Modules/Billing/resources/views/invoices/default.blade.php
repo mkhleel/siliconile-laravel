@@ -107,7 +107,7 @@
                 </td>
                 <td class="right">
                     @if($company['logo'])
-                    <img src="{{ $company['logo'] }}" alt="Company Logo" class="logo">
+                    <img src="{{ $company['logo'] }}" alt="{{ __('Company Logo') }}" class="logo">
                     @else
                     <h2>{{ $company['name'] }}</h2>
                     @endif
@@ -119,7 +119,7 @@
             <tr>
                 <td style="width: 50%;">
                     <div class="customer-details">
-                        <strong>Billed To:</strong><br>
+                        <strong>{{ __('Billed To:') }}</strong><br>
                         {{ $user->name }}<br>
                         {{ $user->email }}<br>
                         @if($invoice->billing_address)
@@ -131,9 +131,9 @@
                 </td>
                 <td style="width: 50%;" class="right">
                     <div>
-                        <strong>Invoice Date:</strong> {{ $invoice->created_at->format('F j, Y') }}<br>
-                        <strong>Due Date:</strong> {{ $invoice->due_date->format('F j, Y') }}<br>
-                        <strong>Status:</strong> {{ ucfirst($invoice->status) }}<br>
+                        <strong>{{ __('Invoice Date:') }}</strong> {{ $invoice->created_at->format('F j, Y') }}<br>
+                        <strong>{{ __('Due Date:') }}</strong> {{ $invoice->due_date->format('F j, Y') }}<br>
+                        <strong>{{ __('Status:') }}</strong> {{ ucfirst($invoice->status) }}<br>
                     </div>
                 </td>
             </tr>
@@ -143,9 +143,9 @@
             <thead>
                 <tr>
                     <th>Description</th>
-                    <th>Quantity</th>
-                    <th>Unit Price</th>
-                    <th class="right">Amount</th>
+                    <th>{{ __('Quantity') }}</th>
+                    <th>{{ __('Unit Price') }}</th>
+                    <th class="right">{{ __('Amount') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -162,17 +162,17 @@
 
         <table class="totals-table">
             <tr>
-                <td>Subtotal:</td>
+                <td>{{ __('Subtotal:') }}</td>
                 <td class="right">{!! formatCurrency($invoice->amount, 2) !!}</td>
             </tr>
             @if($invoice->tax_amount > 0)
             <tr>
-                <td>Tax:</td>
+                <td>{{ __('Tax:') }}</td>
                 <td class="right">{!! formatCurrency($invoice->tax_amount, 2) !!}</td>
             </tr>
             @endif
             <tr class="total-row">
-                <td>Total:</td>
+                <td>{{ __('Total:') }}</td>
                 <td class="right">{!! formatCurrency($invoice->total_amount, 2) !!}</td>
             </tr>
         </table>
@@ -180,15 +180,15 @@
         <div style="clear: both;"></div>
 
         <div class="payment-info">
-            <h3>Payment Information</h3>
-            <p>Please include the invoice number with your payment.</p>
+            <h3>{{ __('Payment Information') }}</h3>
+            <p>{{ __('Please include the invoice number with your payment.') }}</p>
             
             <div class="payment-details">
                 <p>
-                    <strong>Bank Name:</strong> {{ config('billing.bank_name', 'Bank of Example') }}<br>
-                    <strong>Account Name:</strong> {{ config('billing.account_name', $company['name']) }}<br>
-                    <strong>Account Number:</strong> {{ config('billing.account_number', 'XXXX-XXXX-XXXX-XXXX') }}<br>
-                    <strong>Routing Number:</strong> {{ config('billing.routing_number', 'XXXXXXXXXXXXX') }}<br>
+                    <strong>{{ __('Bank Name:') }}</strong> {{ config('billing.bank_name', 'Bank of Example') }}<br>
+                    <strong>{{ __('Account Name:') }}</strong> {{ config('billing.account_name', $company['name']) }}<br>
+                    <strong>{{ __('Account Number:') }}</strong> {{ config('billing.account_number', 'XXXX-XXXX-XXXX-XXXX') }}<br>
+                    <strong>{{ __('Routing Number:') }}</strong> {{ config('billing.routing_number', 'XXXXXXXXXXXXX') }}<br>
                 </p>
             </div>
         </div>
@@ -205,7 +205,7 @@
                 VAT: {{ $company['vat'] }}
                 @endif
             </p>
-            <p>Thank you for your business!</p>
+            <p>{{ __('Thank you for your business!') }}</p>
         </div>
     </div>
 </body>

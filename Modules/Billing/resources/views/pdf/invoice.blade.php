@@ -242,7 +242,7 @@
                 </div>
                 @if(config('billing.company_vat_number'))
                     <div style="margin-top: 5px; font-size: 10px;">
-                        VAT: {{ config('billing.company_vat_number') }}
+                        {{ __('VAT:') }} {{ config('billing.company_vat_number') }}
                     </div>
                 @endif
             </td>
@@ -258,7 +258,7 @@
         </tr>
     </table>
 
-    <!-- Bill To & Dates -->
+    <!-- {{ __('Bill To') }} & Dates -->
     <table style="width: 100%; margin-bottom: 30px;">
         <tr>
             <td style="width: 50%; vertical-align: top; padding-right: 30px;">
@@ -284,7 +284,7 @@
                         <td style="padding: 8px 15px; border: 1px solid #ddd;">{{ $invoice->issue_date?->format('F j, Y') ?? 'N/A' }}</td>
                     </tr>
                     <tr>
-                        <td style="padding: 8px 15px; background: #f9fafb; font-weight: bold; border: 1px solid #ddd;">Due Date</td>
+                        <td style="padding: 8px 15px; background: #f9fafb; font-weight: bold; border: 1px solid #ddd;">{{ __('Due Date') }}</td>
                         <td style="padding: 8px 15px; border: 1px solid #ddd; {{ $invoice->isOverdue() ? 'color: #dc2626; font-weight: bold;' : '' }}">
                             {{ $invoice->due_date?->format('F j, Y') ?? 'N/A' }}
                             @if($invoice->isOverdue())
@@ -307,9 +307,9 @@
             <tr>
                 <th style="width: 45%;">Description</th>
                 <th style="width: 10%;">Qty</th>
-                <th style="width: 15%;">Unit Price</th>
+                <th style="width: 15%;">{{ __('Unit Price') }}</th>
                 <th style="width: 15%;">Discount</th>
-                <th style="width: 15%;">Total</th>
+                <th style="width: 15%;">{{ __('Total') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -355,13 +355,13 @@
     <!-- Payment Info (if paid) -->
     @if($invoice->status === \Modules\Billing\Enums\InvoiceStatus::PAID)
         <div class="payment-info">
-            <h3>Payment Received</h3>
-            <p><strong>Date:</strong> {{ $invoice->paid_at?->format('F j, Y H:i') }}</p>
+            <h3>{{ __('Payment Received') }}</h3>
+            <p><strong>{{ __('Date:') }}</strong> {{ $invoice->paid_at?->format('F j, Y H:i') }}</p>
             @if($invoice->payment_reference)
-                <p><strong>Reference:</strong> {{ $invoice->payment_reference }}</p>
+                <p><strong>{{ __('Reference:') }}</strong> {{ $invoice->payment_reference }}</p>
             @endif
             @if($invoice->payment_method)
-                <p><strong>Method:</strong> {{ ucfirst(str_replace('_', ' ', $invoice->payment_method)) }}</p>
+                <p><strong>{{ __('Method:') }}</strong> {{ ucfirst(str_replace('_', ' ', $invoice->payment_method)) }}</p>
             @endif
         </div>
     @endif
@@ -377,14 +377,14 @@
     <!-- Terms -->
     @if($invoice->terms)
         <div class="terms-section">
-            <h3 style="margin-bottom: 10px;">Terms & Conditions</h3>
+            <h3 style="margin-bottom: 10px;">{{ __('Terms & Conditions') }}</h3>
             <p>{{ $invoice->terms }}</p>
         </div>
     @endif
 
     <!-- Footer -->
     <div class="footer">
-        <p>Thank you for your business!</p>
+        <p>{{ __('Thank you for your business!') }}</p>
         <p style="margin-top: 5px;">{{ config('app.name', 'Siliconile') }} | {{ config('app.url') }}</p>
     </div>
 </body>
