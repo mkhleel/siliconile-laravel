@@ -86,6 +86,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Supported Locales
+    |--------------------------------------------------------------------------
+    |
+    | The following are the locales supported by the application. This is used
+    | by the SetLocale middleware to validate the requested locale.
+    |
+    */
+
+    'supported_locales' => ['en', 'ar'],
+
+    /*
+    |--------------------------------------------------------------------------
     | Encryption Key
     |--------------------------------------------------------------------------
     |

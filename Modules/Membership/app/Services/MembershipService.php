@@ -6,8 +6,8 @@ namespace Modules\Membership\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Modules\Membership\Enums\MemberType;
+use Modules\Membership\Events\MemberCreated;
 use Modules\Membership\Models\Member;
 
 class MembershipService
@@ -28,6 +28,9 @@ class MembershipService
                 'is_active' => true,
             ], $additionalData));
 
+            // Fire event for new member creation
+            event(new MemberCreated($member));
+
             return $member;
         });
     }
@@ -38,7 +41,7 @@ class MembershipService
     public function generateMemberCode(): string
     {
         do {
-            $code = 'MEM-' . now()->year . '-' . str_pad((string) rand(1, 9999), 4, '0', STR_PAD_LEFT);
+            $code = 'MEM-'.now()->year.'-'.str_pad((string) rand(1, 9999), 4, '0', STR_PAD_LEFT);
         } while (Member::where('member_code', $code)->exists());
 
         return $code;
@@ -85,7 +88,7 @@ class MembershipService
      */
     public function addTeamMember(Member $corporateMember, User $user): Member
     {
-        if (!$corporateMember->isCorporate()) {
+        if (! $corporateMember->isCorporate()) {
             throw new \InvalidArgumentException('Parent member must be a corporate account');
         }
 

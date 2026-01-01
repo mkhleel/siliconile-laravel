@@ -7,9 +7,9 @@
             <div class="space-y-4">
                 <img src="{{ asset('theme/assets/images/logo.svg') }}" alt="{{ $companyName }} Logo" class="h-12 w-auto">
                 <p class="text-sm text-muted-foreground">
-                    Empowering Egypt's next generation of tech startups through innovation, mentorship, and community.
+                    {{ __('frontend.footer.tagline') }}
                 </p>
-                <div class="flex space-x-4">
+                <div class="flex space-x-4 rtl:space-x-reverse">
                     <a href="https://facebook.com/siliconile" target="_blank" class="text-muted-foreground hover:text-primary transition-colors">
                         <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -35,67 +35,67 @@
 
             <!-- Quick Links -->
             <div class="space-y-4">
-                <h3 class="text-lg font-semibold">Quick Links</h3>
+                <h3 class="text-lg font-semibold">{{ __('frontend.footer.quick_links') }}</h3>
                 <ul class="space-y-2">
-                    <li><a href="{{ route('about') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">About Us</a></li>
-                    <li><a href="{{ route('programs') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Programs</a></li>
-                    <li><a href="{{ route('startups') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Our Startups</a></li>
-                    <li><a href="{{ route('events.index') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Events</a></li>
-                    <li><a href="{{ route('contact') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Contact</a></li>
+                    <li><a href="{{ route('about') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">{{ __('frontend.footer.about_us') }}</a></li>
+                    <li><a href="{{ route('programs') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">{{ __('frontend.nav.programs') }}</a></li>
+                    <li><a href="{{ route('startups') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">{{ __('frontend.footer.our_startups') }}</a></li>
+                    <li><a href="{{ route('events.index') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">{{ __('frontend.nav.events') }}</a></li>
+                    <li><a href="{{ route('contact') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">{{ __('frontend.nav.contact') }}</a></li>
                 </ul>
             </div>
 
             <!-- Services -->
             <div class="space-y-4">
-                <h3 class="text-lg font-semibold">Services</h3>
+                <h3 class="text-lg font-semibold">{{ __('frontend.footer.services') }}</h3>
                 <ul class="space-y-2">
-                    <li><a href="{{ route('spaces') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Coworking Spaces</a></li>
-                    <li><a href="{{ route('pricing') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Membership Plans</a></li>
-                    <li><a href="{{ route('programs') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Technical Support</a></li>
-                    <li><a href="{{ route('programs') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Mentorship</a></li>
-                    <li><a href="{{ route('events.index') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">Workshops & Training</a></li>
+                    <li><a href="{{ route('spaces') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">{{ __('frontend.footer.coworking_spaces') }}</a></li>
+                    <li><a href="{{ route('pricing') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">{{ __('frontend.footer.membership_plans') }}</a></li>
+                    <li><a href="{{ route('programs') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">{{ __('frontend.footer.technical_support') }}</a></li>
+                    <li><a href="{{ route('programs') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">{{ __('frontend.footer.mentorship') }}</a></li>
+                    <li><a href="{{ route('events.index') }}" class="text-sm text-muted-foreground hover:text-primary transition-colors">{{ __('frontend.footer.workshops_training') }}</a></li>
                 </ul>
             </div>
 
             <!-- Contact & Newsletter -->
             <div class="space-y-4">
-                <h3 class="text-lg font-semibold">Contact Info</h3>
+                <h3 class="text-lg font-semibold">{{ __('frontend.footer.contact_info') }}</h3>
                 <div class="space-y-2">
-                    <div class="flex items-center space-x-2 text-sm text-muted-foreground">
+                    <div class="flex items-center space-x-2 rtl:space-x-reverse text-sm text-muted-foreground">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                         </svg>
-                        <span>Luxor, Egypt</span>
+                        <span>{{ __('frontend.hero.location') }}</span>
                     </div>
-                    <div class="flex items-center space-x-2 text-sm text-muted-foreground">
+                    <div class="flex items-center space-x-2 rtl:space-x-reverse text-sm text-muted-foreground">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                         </svg>
                         <span>info@siliconile.com</span>
                     </div>
-                    <div class="flex items-center space-x-2 text-sm text-muted-foreground">
+                    <div class="flex items-center space-x-2 rtl:space-x-reverse text-sm text-muted-foreground">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                         </svg>
-                        <span>+20 111 765 0004</span>
+                        <span dir="ltr">+20 111 765 0004</span>
                     </div>
                 </div>
                 
                 <div class="space-y-2">
-                    <h4 class="text-sm font-semibold">Newsletter</h4>
+                    <h4 class="text-sm font-semibold">{{ __('frontend.footer.newsletter') }}</h4>
                     <p class="text-xs text-muted-foreground">
-                        Stay updated with our latest news and events
+                        {{ __('frontend.footer.newsletter_description') }}
                     </p>
-                    <form action="{{ route('newsletter.subscribe') }}" method="POST" class="flex space-x-2">
+                    <form action="{{ route('newsletter.subscribe') }}" method="POST" class="flex space-x-2 rtl:space-x-reverse">
                         @csrf
                         <input 
                             type="email" 
                             name="email" 
-                            placeholder="Enter your email" 
+                            placeholder="{{ __('frontend.footer.email_placeholder') }}" 
                             required
                             class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
-                        <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-9 rounded-md px-3">Subscribe</button>
+                        <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-9 rounded-md px-3">{{ __('frontend.footer.subscribe') }}</button>
                     </form>
                 </div>
             </div>
@@ -103,7 +103,7 @@
 
         <div class="mt-8 border-t pt-8 text-center">
             <p class="text-sm text-muted-foreground">
-                © {{ $year }} {{ $companyName }}. All rights reserved. Built with ❤️ in Egypt.
+                © {{ $year }} {{ $companyName }}. {{ __('frontend.footer.copyright') }} Built with ❤️ in Egypt.
             </p>
         </div>
     </div>

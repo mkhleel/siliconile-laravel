@@ -11,7 +11,7 @@
     'organizer' => null,
     'organizerUrl' => null,
     'price' => null,
-    'currency' => 'USD',
+    'currency' => 'EGP',
     'availability' => 'InStock',
 ])
 

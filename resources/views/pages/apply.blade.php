@@ -168,7 +168,7 @@ class extends Component
             'password' => Hash::make($this->password),
             'type' => match ($this->applicant_type) {
                 'student' => UserType::STUDENT,
-                default => UserType::MEMBER,
+                default => UserType::FREELANCER,
             },
             'application_status' => ApplicationStatus::PENDING,
             'job_title' => $this->job_title,
@@ -192,6 +192,12 @@ class extends Component
             'how_found_us' => $this->how_found_us,
             'marketing_messages_accepted' => $this->marketing_messages_accepted,
         ]);
+
+        // send notification pushover to admin
+        app(Modules\Core\Services\PushoverService::class)->sendHighPriority(
+            'New Membership Application',
+            "A new membership application has been submitted by {$user->name} ({$user->email})."
+        );
 
         session()->flash('success', 'Your application has been submitted successfully! We will review it and get back to you soon.');
 

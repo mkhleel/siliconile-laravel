@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Modules\Membership\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Modules\Membership\Events\MemberCreated;
 use Modules\Membership\Events\SubscriptionActivated;
 use Modules\Membership\Events\SubscriptionExpired;
 use Modules\Membership\Listeners\LogSubscriptionActivated;
 use Modules\Membership\Listeners\LogSubscriptionExpired;
+use Modules\Membership\Listeners\SendMemberCreatedNotification;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array<string, array<int, string>>
      */
     protected $listen = [
+        MemberCreated::class => [
+            SendMemberCreatedNotification::class,
+        ],
         SubscriptionActivated::class => [
             LogSubscriptionActivated::class,
         ],

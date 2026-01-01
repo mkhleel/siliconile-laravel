@@ -24,7 +24,7 @@
 
                 <flux:navlist.group :heading="__('Explore')" class="grid">
                     <flux:navlist.item icon="building-office" :href="route('spaces')" :current="request()->routeIs('spaces*')" wire:navigate>{{ __('Book a Space') }}</flux:navlist.item>
-                    <flux:navlist.item icon="calendar-days" :href="route('events')" :current="request()->routeIs('events*')" wire:navigate>{{ __('Events') }}</flux:navlist.item>
+                    <flux:navlist.item icon="calendar-days" :href="route('events.index')" :current="request()->routeIs('events*')" wire:navigate>{{ __('Events') }}</flux:navlist.item>
                     <flux:navlist.item icon="currency-dollar" :href="route('pricing')" :current="request()->routeIs('pricing')" wire:navigate>{{ __('Pricing') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>

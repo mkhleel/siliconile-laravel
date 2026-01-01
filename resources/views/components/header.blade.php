@@ -2,14 +2,14 @@
 
 @php
     $navItems = [
-        ['route' => 'home', 'label' => 'Home'],
-        ['route' => 'about', 'label' => 'About'],
-        ['route' => 'programs', 'label' => 'Programs'],
-        ['route' => 'startups', 'label' => 'Startups'],
-        ['route' => 'events.index', 'label' => 'Events'],
-        ['route' => 'spaces', 'label' => 'Spaces'],
-        ['route' => 'pricing', 'label' => 'Pricing'],
-        ['route' => 'contact', 'label' => 'Contact'],
+        ['route' => 'home', 'label' => __('frontend.nav.home')],
+        ['route' => 'about', 'label' => __('frontend.nav.about')],
+        ['route' => 'programs', 'label' => __('frontend.nav.programs')],
+        ['route' => 'startups', 'label' => __('frontend.nav.startups')],
+        ['route' => 'events.index', 'label' => __('frontend.nav.events')],
+        ['route' => 'spaces', 'label' => __('frontend.nav.spaces')],
+        ['route' => 'pricing', 'label' => __('frontend.nav.pricing')],
+        ['route' => 'contact', 'label' => __('frontend.nav.contact')],
     ];
 @endphp
 
@@ -30,13 +30,13 @@
     :class="scrolled ? 'bg-background/95 backdrop-blur border-b shadow-sm py-0' : 'bg-transparent py-2'"
 >
     <div class="container flex items-center justify-between px-4 md:px-6 transition-all duration-300" :class="scrolled ? 'h-16' : 'h-20'">
-        <a href="{{ route('home') }}" class="flex items-center space-x-2">
+        <a href="{{ route('home') }}" class="flex items-center space-x-2 rtl:space-x-reverse">
             <!-- Square logo (default - at top) -->
             <img 
                 src="{{ asset('theme/assets/images/siliconile.svg') }}" 
                 alt="Siliconile Logo" 
                 class="w-auto transition-all duration-300"
-                :class="scrolled ? 'h-0 opacity-0 w-0' : 'h-20 md:ps-5 opacity-100'"
+                :class="scrolled ? 'h-0 opacity-0 w-0' : 'h-20 md:ps-5 rtl:md:pe-5 rtl:md:ps-0 opacity-100'"
             >
             <!-- Full logo (scrolled) -->
             <img 
@@ -48,7 +48,7 @@
         </a>
 
         <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex items-center space-x-6 text-sm font-medium">
+        <nav class="hidden lg:flex items-center space-x-6 rtl:space-x-reverse text-sm font-medium">
             @foreach($navItems as $item)
                 <a
                     href="{{ route($item['route']) }}"
@@ -60,23 +60,26 @@
             @endforeach
         </nav>
 
-        <div class="hidden lg:flex items-center space-x-4">
+        <div class="hidden lg:flex items-center space-x-4 rtl:space-x-reverse">
+            {{-- Language Switcher --}}
+            <x-language-switcher />
+            
             @auth
                 <a wire:navigate href="{{ route('member.portal') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
-                    Dashboard
+                    {{ __('frontend.nav.dashboard') }}
                 </a>
                 <form method="POST" action="{{ route('logout') }}" class="inline">
                     @csrf
                     <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
-                        Logout
+                        {{ __('frontend.nav.logout') }}
                     </button>
                 </form>
             @else
                 <a wire:navigate href="{{ route('login') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
-                    Login
+                    {{ __('frontend.nav.login') }}
                 </a>
                 <a wire:navigate href="{{ route('apply') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 rounded-md px-3">
-                    Apply Now
+                    {{ __('frontend.nav.apply_now') }}
                 </a>
             @endauth
         </div>
@@ -104,23 +107,29 @@
                     {{ $item['label'] }}
                 </a>
             @endforeach
+            
+            {{-- Mobile Language Switcher --}}
+            <div class="py-2 border-t">
+                <x-language-switcher class="w-full" />
+            </div>
+            
             <div class="flex flex-col space-y-2 pt-4 border-t">
                 @auth
                     <a href="{{ route('member.portal') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
-                        Dashboard
+                        {{ __('frontend.nav.dashboard') }}
                     </a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="w-full inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
-                            Logout
+                            {{ __('frontend.nav.logout') }}
                         </button>
                     </form>
                 @else
                     <a href="{{ route('login') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
-                        Login
+                        {{ __('frontend.nav.login') }}
                     </a>
                     <a href="{{ route('apply') }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-9 rounded-md px-3">
-                        Apply Now
+                        {{ __('frontend.nav.apply_now') }}
                     </a>
                 @endauth
             </div>

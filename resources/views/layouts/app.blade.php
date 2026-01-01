@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 <head>
     <x-seo-meta 
         :title="$title ?? null"
@@ -16,9 +16,19 @@
 
     @vite(['resources/css/theme.css', 'resources/js/theme.js'])
     
+    {{-- RTL Support --}}
+    @if(app()->getLocale() === 'ar')
+        <style>
+            /* RTL-specific styles */
+            body {
+                font-family: 'Noto Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+            }
+        </style>
+    @endif
+    
     {{ $styles ?? '' }}
 </head>
-<body class="antialiased min-h-screen flex flex-col">
+<body class="antialiased min-h-screen flex flex-col {{ app()->getLocale() === 'ar' ? 'font-arabic' : '' }}">
     <x-header />
 
     <main class="flex-1">

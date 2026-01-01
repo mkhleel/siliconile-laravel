@@ -64,6 +64,7 @@ Route::middleware(['auth', 'verified'])->prefix('member')->name('member.')->grou
 
     // Bookings
     Volt::route('/bookings', 'member.bookings.index')->name('bookings');
+    Volt::route('/bookings/create/{space}', 'member.bookings.create')->name('bookings.create');
     Volt::route('/bookings/{booking}', 'member.bookings.show')->name('bookings.show');
 
     // Orders & Billing

@@ -8,21 +8,21 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'site_name' => env('SEO_SITE_NAME', config('app.name')),
-    'site_title' => env('SEO_SITE_TITLE', config('app.name')),
-    'site_description' => env('SEO_SITE_DESCRIPTION', 'Your site description here.'),
-    'site_keywords' => env('SEO_SITE_KEYWORDS', 'keywords, here'),
-    
+    'site_name' => env('SEO_SITE_NAME', 'Siliconile'),
+    'site_title' => env('SEO_SITE_TITLE', 'Siliconile | Empowering Egypt\'s Next Generation of Tech Startups'),
+    'site_description' => env('SEO_SITE_DESCRIPTION', 'Leading startup incubator in Luxor, Egypt. We provide coworking spaces, funding, technical support, mentorship, and workshops to help tech startups grow and succeed.'),
+    'site_keywords' => env('SEO_SITE_KEYWORDS', 'startup incubator, Egypt, Luxor, tech startups, coworking, funding, mentorship, innovation hub, entrepreneurship'),
+
     /*
     |--------------------------------------------------------------------------
     | Social & Contact Information
     |--------------------------------------------------------------------------
     */
 
-    'company_name' => env('SEO_COMPANY_NAME', config('app.name')),
-    'contact_email' => env('SEO_CONTACT_EMAIL', 'info@' . parse_url(config('app.url'), PHP_URL_HOST)),
+    'company_name' => env('SEO_COMPANY_NAME', 'Siliconile'),
+    'contact_email' => env('SEO_CONTACT_EMAIL', 'info@siliconile.com'),
     'contact_phone' => env('SEO_CONTACT_PHONE', ''),
-    
+
     /*
     |--------------------------------------------------------------------------
     | Social Media Profiles
@@ -47,7 +47,7 @@ return [
     'default_image_width' => env('SEO_DEFAULT_IMAGE_WIDTH', 1200),
     'default_image_height' => env('SEO_DEFAULT_IMAGE_HEIGHT', 630),
     'twitter_card_type' => env('SEO_TWITTER_CARD_TYPE', 'summary_large_image'),
-    
+
     /*
     |--------------------------------------------------------------------------
     | Organization Schema

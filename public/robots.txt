@@ -1,2 +1,24 @@
+# robots.txt for Siliconile
 User-agent: *
-Disallow:
+Disallow: /admin
+Disallow: /storage/private
+Disallow: /api/internal
+Disallow: /vendor
+Disallow: /member
+
+# Allow public storage
+Allow: /storage/public
+
+# Sitemap
+Sitemap: https://siliconile.test/sitemap.xml
+
+# Common crawlers
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /member
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+Disallow: /member

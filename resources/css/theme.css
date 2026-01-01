@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Google Font for Arabic */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100..900&display=swap');
+
 @source '../views';
 /* @source "../assets/js/*.js"; */
 @source '../../Modules/**/resources/views/**/*.blade.php';
@@ -37,6 +40,9 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1400px;
+  
+  /* Font Family */
+  --font-family-arabic: 'Noto Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
 }
 
 @layer base {
@@ -77,6 +83,19 @@
     --color-ring: hsl(195, 100%, 39%);
   }
   
+  /* Arabic/RTL Font */
+  .font-arabic {
+    font-family: var(--font-family-arabic);
+  }
+  
+  /* RTL-specific utilities */
+  [dir="rtl"] {
+    text-align: right;
+  }
+  
+  [dir="rtl"] .space-x-reverse > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 1;
+  }
 }
 @utility container {
   margin-inline: auto;
